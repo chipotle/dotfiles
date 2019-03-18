@@ -1,4 +1,4 @@
-# ZSH Configuration / wm / 2019-Mar-16
+# ZSH Configuration / wm / 2019-Mar-18
 # ====================================
 
 # Setup and zsh options
@@ -34,7 +34,9 @@ precmd() {
 
 # Set prompt
 
-PS1='${vcs_info_msg_0_}%{$fg[yellow]%}%m@%{$fg[green]%}%1~%# %{$reset_color%}'
+# PS1='${vcs_info_msg_0_}%{$fg[green]%}%m@%{$fg[yellow]%}%1~%# %{$reset_color%}'
+PS1='${vcs_info_msg_0_}%{$fg[green]%}%m%#%{$reset_color%} '
+RPS1="%{$fg[yellow]%}%2~%{$reset_color%}"
 
 # Set up a couple functions
 
