@@ -41,7 +41,12 @@ RPS1="%{$fg[yellow]%}%2~%{$reset_color%}"
 # Set up functions
 
 function editdiff() {
-    bbedit `git diff --name-only $1`
+    if [ -n "$1" ]
+    then
+        bbedit `git diff --name-only $1`
+    else
+        bbedit `git diff --name-only HEAD^1`
+    fi
 }
 
 function git_current_branch() {
