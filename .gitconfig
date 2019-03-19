@@ -1,6 +1,10 @@
 [user]
     name = Watts Martin
     email = layotl@gmail.com
+[core]
+    quotepath = false
+[credential]
+    helper = osxkeychain
 [alias]
     co = checkout
     ci = commit
