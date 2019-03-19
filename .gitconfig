@@ -1,0 +1,23 @@
+[user]
+    name = Watts Martin
+    email = layotl@gmail.com
+[alias]
+    co = checkout
+    ci = commit
+    dt = difftool
+    mt = mergetool
+    amend = commit --amend
+    pfwl = push --force-with-lease
+[mergetool "Kaleidoscope"]
+    cmd = ksdiff --merge --output \"$MERGED\" --base \"$BASE\" -- \"$LOCAL\" --snapshot \"$REMOTE\" --snapshot
+    trustexitcode = true
+[mergetool]
+    prompt = false
+[merge]
+    tool = Kaleidoscope
+[difftool "Kaleidoscope"]
+    cmd = ksdiff --partial-changeset --relative-path \"$MERGED\" -- \"$LOCAL\" \"$REMOTE\"
+[difftool]
+    prompt = false
+[diff]
+    tool = Kaleidoscope
