@@ -38,7 +38,7 @@ precmd() {
 PS1='${vcs_info_msg_0_}%{$fg[green]%}%m%#%{$reset_color%} '
 RPS1="%{$fg[yellow]%}%2~%{$reset_color%}"
 
-# Set up a couple functions
+# Set up functions
 
 function editdiff() {
     bbedit `git diff --name-only $1`
@@ -46,6 +46,10 @@ function editdiff() {
 
 function git_current_branch() {
     echo `git branch | grep \* | cut -d ' ' -f2`
+}
+
+function pman() {
+    man -t "$@" | open -f -a Preview
 }
 
 # Set a few aliases
