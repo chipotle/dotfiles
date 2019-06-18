@@ -1,4 +1,4 @@
-# ZSH Configuration / wm / 2019-Mar-18
+# ZSH Configuration / wm / 2019-Jun-18
 # ====================================
 
 # Setup and zsh options
@@ -11,10 +11,14 @@ compinit
 setopt prompt_subst                         # prompt substitution option
 autoload -Uz vcs_info                       # zsh's version control integration
 
-HISTSIZE=1000                               # reasonable history settings
-SAVEHIST=1000
-setopt append_history
+HISTFILE="$HOME/.zsh_history"               # reasonable history settings
+HISTSIZE=5000
+SAVEHIST=5000
 setopt hist_ignore_dups
+setopt hist_expire_dups_first
+setopt hist_verify
+setopt inc_append_history
+setopt share_history
 
 zstyle ":completion:*" menu yes select      # fancy completion menus
 
@@ -34,7 +38,6 @@ precmd() {
 
 # Set prompt
 
-# PS1='${vcs_info_msg_0_}%{$fg[green]%}%m@%{$fg[yellow]%}%1~%# %{$reset_color%}'
 PS1='${vcs_info_msg_0_}%{$fg[green]%}%m%#%{$reset_color%} '
 RPS1="%{$fg[yellow]%}%2~%{$reset_color%}"
 
