@@ -72,3 +72,7 @@ alias gpsup='git push --set-upstream origin $(git_current_branch)'
 export WORKON_HOME=~/src/envs
 export PROJECT_HOME=~/src
 source /usr/local/bin/virtualenvwrapper.sh
+
+# rbenv initialization
+
+eval "$(rbenv init -)"
