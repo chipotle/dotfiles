@@ -15,7 +15,3 @@ export HOMEBREW_MAKE_JOBS=4
 export CFLAGS=-Qunused-arguments
 export CPPFLAGS=-Qunused-arguments
 
-# rbenv
-
-export RBENV_ROOT=/opt/brew/var/rbenv
-if which rbenv > /dev/null; then eval "$(rbenv init -)"; fi

@@ -1,4 +1,4 @@
-# ZSH Configuration / wm / 2019-Jun-18
+# ZSH Configuration / wm / 2019-Jul-21
 # ====================================
 
 # Setup and zsh options
@@ -75,4 +75,5 @@ source /usr/local/bin/virtualenvwrapper.sh
 
 # rbenv initialization
 
+export RBENV_ROOT=/opt/brew/var/rbenv
 eval "$(rbenv init -)"
