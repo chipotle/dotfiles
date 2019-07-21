@@ -1,4 +1,4 @@
-" vimrc - wm - 02 Nov 2017
+" vimrc - wm - 21 Jul 2019
 
 " disable VI compatibility
 set nocompatible
@@ -9,8 +9,17 @@ filetype plugin indent on
 " limit registers to 64K, do not save highlights
 set viminfo=%,'8,/32,:64,<512,s64,h
 
+" set separate swap directory
+set directory^=~/.vim/swap//
+set writebackup
+set nobackup
+set backupcopy=auto
+
 " turn on syntax highlighting
 syntax on
+
+" turn on omnicomplete
+set omnifunc=syntaxcomplete#Complete
 
 " automatically load changed files
 set autoread
@@ -54,7 +63,6 @@ set incsearch
 set hlsearch
 set scrolljump=4
 set scrolloff=2
-set number
 set showcmd
 set title
 
