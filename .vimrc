@@ -77,6 +77,7 @@ let mapleader = ","
 " leader mappings (not plugin-related)
 map <leader>, :nohl<CR>
 map <leader>b :let &background = ( &background == "dark" ? "light" : "dark" )<CR>
+nmap <leader>l :set invnumber<CR>
 
 " mappings to move lines up and down with ctrl-shift-j/k
 nnoremap <C-S-j> :m .+1<CR>==
