@@ -94,12 +94,6 @@ let NERDTreeChDirMode=2
 let NERDTreeAutoDeleteBuffer=1
 map <leader>d :NERDTreeToggle<CR>
 
-" Vim-Workspace
-nnoremap <leader>s :ToggleWorkspace<CR>
-
-" Supertab
-let g:SuperTabDefaultCompletionType = "context"
-
 " EditorConfig
 let g:EditorConfig_exclude_patterns = ['fugitive://.*']
 

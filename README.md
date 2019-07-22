@@ -34,13 +34,11 @@ My current plugin tree, using Vim 8's native manager:
 opt
 ├── TuttiColori-Colorscheme
 ├── alchemist.vim
-├── django.vim
 ├── gruvbox
 ├── jellybeans.vim
-├── vim-colors-solarized
-├── vim-espresso
 ├── vim-one
 ├── vim-rails
+├── vim-solarized8
 └── zenburn
 start
 ├── ctrlp.vim
