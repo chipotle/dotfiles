@@ -1,7 +1,7 @@
 # ZSH Configuration / wm / 2019-Jul-21
 # ====================================
 
-# Setup and zsh options
+# Setup zsh options
 
 bindkey -e                                  # Emacs keybindings
 unsetopt correct_all                        # zsh's autocorrect is weird
@@ -69,7 +69,7 @@ alias gpsup='git push --set-upstream origin $(git_current_branch)'
 
 # Python virtualenv setup
 
-if type "/usr/local/bin/virtualenvwrapper.sh" > /dev/null; then
+if [[ -a /usr/local/bin/virtualenvwrapper.sh ]]; then
     export WORKON_HOME=~/src/envs
     export PROJECT_HOME=~/src
     source /usr/local/bin/virtualenvwrapper.sh
@@ -77,8 +77,16 @@ fi
 
 # rbenv initialization
 
-if type "rbenv" > /dev/null; then
+if [[ -a rbenv ]]; then
     export RBENV_ROOT=/opt/brew/var/rbenv
     eval "$(rbenv init -)"
+fi
+
+# nvm initialization
+
+if [[ -a ~/.nvm ]]; then
+    export NVM_DIR="$HOME/.nvm"
+    [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
+    [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"
 fi
 
