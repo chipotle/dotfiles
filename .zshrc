@@ -1,4 +1,4 @@
-# ZSH Configuration / wm / 2019-Jul-21
+# ZSH Configuration / wm / 2019-Jul-23
 # ====================================
 
 # Setup zsh options
@@ -77,7 +77,7 @@ fi
 
 # rbenv initialization
 
-if [[ -a rbenv ]]; then
+if [[ -a /opt/brew/var/rbenv ]]; then
     export RBENV_ROOT=/opt/brew/var/rbenv
     eval "$(rbenv init -)"
 fi
