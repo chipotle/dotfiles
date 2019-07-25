@@ -58,6 +58,9 @@ set smarttab
 set shiftwidth=4
 set softtabstop=4
 
+" sane line wrapping
+set lbr
+
 " scrolling and UI stuff
 set incsearch
 set hlsearch
@@ -71,7 +74,7 @@ set path+=**
 set wildmenu
 set wildignorecase
 
-" make leader ","
+" set leader to , (comma)
 let mapleader = ","
 
 " leader mappings (not plugin-related)
@@ -101,3 +104,5 @@ let g:EditorConfig_exclude_patterns = ['fugitive://.*']
 " Dash
 nmap <silent> <leader>h <Plug>DashSearch
 
+" CtrlP
+map <C-S-p> :CtrlPBuffer<CR>
