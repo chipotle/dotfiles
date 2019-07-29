@@ -1,4 +1,4 @@
-" vimrc - wm - 21 Jul 2019
+" vimrc - wm - 29 Jul 2019
 
 " disable VI compatibility
 set nocompatible
@@ -89,6 +89,12 @@ inoremap <C-S-j> <Esc>:m .+1<CR>==gi
 inoremap <C-S-k> <Esc>:m .-2<CR>==gi
 vnoremap <C-S-j> :m '>+1<CR>gv=gv
 vnoremap <C-S-k> :m '<-2<CR>gv=gv
+
+" map up/down arrow keys to move by screen line
+noremap <Up> gk
+noremap <Down> gj
+inoremap <Up> <Esc>gki
+inoremap <Down> <Esc>gji
 
 " === Plugin configuration ===
 
