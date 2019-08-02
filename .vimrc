@@ -68,6 +68,7 @@ set scrolljump=4
 set scrolloff=2
 set showcmd
 set title
+set history=200
 
 " file finding and completion
 set path+=**
