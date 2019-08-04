@@ -90,6 +90,11 @@ inoremap <Up> <Esc>gki
 inoremap <Down> <Esc>gji
 
 " === Plugin configuration ===
+" map [b and ]b for buffer navigation
+nnoremap <silent> [b :bprevious<CR>
+nnoremap <silent> ]b :bnext<CR>
+nnoremap <silent> [B :bfirst<CR>
+nnoremap <silent> ]B :blast<CR>
 
 " NERDTree
 let NERDTreeMouseMode=2
