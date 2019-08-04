@@ -79,6 +79,9 @@ set wildignorecase
 let mapleader = ","
 
 " leader mappings (not plugin-related)
+"       ,,  turn off highlighting
+"       ,b  toggle background
+"       ,l  toggle line numbers
 map <leader>, :nohl<CR>
 map <leader>b :let &background = ( &background == "dark" ? "light" : "dark" )<CR>
 nmap <leader>l :set invnumber<CR>
@@ -89,14 +92,13 @@ noremap <Down> gj
 inoremap <Up> <Esc>gki
 inoremap <Down> <Esc>gji
 
-" === Plugin configuration ===
 " map [b and ]b for buffer navigation
 nnoremap <silent> [b :bprevious<CR>
 nnoremap <silent> ]b :bnext<CR>
 nnoremap <silent> [B :bfirst<CR>
 nnoremap <silent> ]B :blast<CR>
 
-" NERDTree
+" NERDTree configuration
 let NERDTreeMouseMode=2
 let NERDTreeChDirMode=2
 let NERDTreeAutoDeleteBuffer=1
@@ -110,3 +112,4 @@ nmap <silent> <leader>h <Plug>DashSearch
 
 " CtrlP
 map <C-S-p> :CtrlPBuffer<CR>
+
