@@ -83,14 +83,6 @@ map <leader>, :nohl<CR>
 map <leader>b :let &background = ( &background == "dark" ? "light" : "dark" )<CR>
 nmap <leader>l :set invnumber<CR>
 
-" mappings to move lines up and down with ctrl-shift-j/k
-nnoremap <C-S-j> :m .+1<CR>==
-nnoremap <C-S-k> :m .-2<CR>==
-inoremap <C-S-j> <Esc>:m .+1<CR>==gi
-inoremap <C-S-k> <Esc>:m .-2<CR>==gi
-vnoremap <C-S-j> :m '>+1<CR>gv=gv
-vnoremap <C-S-k> :m '<-2<CR>gv=gv
-
 " map up/down arrow keys to move by screen line
 noremap <Up> gk
 noremap <Down> gj
