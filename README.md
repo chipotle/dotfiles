@@ -22,32 +22,28 @@ Use `^A^A` for quick switching between panes.
 
 The configuration is relatively minimal and well-commented. The leader key is rebound to comma (`,`). A few basic additions:
 
-* `,b` toggles background between light and dark
-* `,d` toggles NERDTree if it's installed
+* `,,` toggles search highlighting
+* `,b` toggles light/dark background
+* `,l` toggles line number display
 * `,h` looks up the current word with Dash if it's installed
-* `,,` turns off highlighting if it's on
-* Use `C-S-j`/`C-S-k` to move line(s) up and down
 
-My current plugin tree, using Vim 8's native manager:
+The up/down arrows are set to move by display line rather than actual physical line (`gj` and `gk`). Instead of disabling arrow keys, why not just make them slightly more useful?
 
-```
-opt
-├── TuttiColori-Colorscheme
-├── alchemist.vim
-├── gruvbox
-├── jellybeans.vim
-├── vim-one
-├── vim-rails
-├── vim-solarized8
-└── zenburn
-start
-├── ctrlp.vim
-├── dash.vim
-├── editorconfig-vim
-├── emmet-vim
-├── nerdtree
-├── vim-elixir
-├── vim-endwise
-├── vim-fugitive
-└── vim-surround
-```
+My "standard" set of plugins is installed with the `vim-setup.sh` script. I'm trying to keep them relatively minimal, and to stick with ones that enhance rather than override Vim's defaults.
+
+* Color schemes: Solarized8, Vim One, Zenburn, Gruvbox
+* Fugitive
+* Surround
+* Endwise
+* Vim-Rails
+* EditorConfig
+* Dash
+* CtrlP
+
+I've taken [NERDTree][nt] out of my standard rotation for now to try to see if the "native" netrw will work just as well for me. CtrlP may not stick around if I can get used to the Vim Way(tm) for navigating directories and buffers, but it's *really* useful to someone coming from just about any other modern editor.
+
+[Emmet][em] may come back if I do more serious HTML hacking.
+
+[nt]: https://github.com/scrooloose/nerdtree
+[em]: https://github.com/mattn/emmet-vim
+
