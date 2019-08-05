@@ -1,4 +1,4 @@
-" vimrc - wm - 29 Jul 2019
+" vimrc - wm - 05 Aug 2019
 
 " disable VI compatibility
 set nocompatible
@@ -36,6 +36,9 @@ set diffopt+=iwhite
 " Be able to arrow key and backspace across newlines
 set whichwrap=bs<>[]
 
+" Enhance % matching navigation command
+runtime macros/matchit.vim
+
 " Status line
 set statusline=%<
 if exists(':Git')
@@ -63,7 +66,6 @@ set lbr
 
 " scrolling and UI stuff
 set incsearch
-set hlsearch
 set scrolljump=4
 set scrolloff=2
 set showcmd
@@ -78,12 +80,13 @@ set wildignorecase
 " set leader to , (comma)
 let mapleader = ","
 
-" leader mappings (not plugin-related)
-"       ,,  turn off highlighting
-"       ,b  toggle background
-"       ,l  toggle line numbers
-map <leader>, :nohl<CR>
+" ,,  toggle search highlighting
+map <leader>, :set invhlsearch<CR>
+
+" ,b  toggle background
 map <leader>b :let &background = ( &background == "dark" ? "light" : "dark" )<CR>
+
+" ,l  toggle line numbers
 nmap <leader>l :set invnumber<CR>
 
 " map up/down arrow keys to move by screen line
@@ -97,6 +100,9 @@ nnoremap <silent> [b :bprevious<CR>
 nnoremap <silent> ]b :bnext<CR>
 nnoremap <silent> [B :bfirst<CR>
 nnoremap <silent> ]B :blast<CR>
+
+" expand %% to active buffer path on command line
+cnoremap <expr> %% getcmdtype() == ':' ? expand('%:h').'/' : '%%'
 
 " NERDTree configuration
 let NERDTreeMouseMode=2
