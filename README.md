@@ -29,21 +29,29 @@ The configuration is relatively minimal and well-commented. The leader key is re
 
 The up/down arrows are set to move by display line rather than actual physical line (`gj` and `gk`). Instead of disabling arrow keys, why not just make them slightly more useful?
 
-My "standard" set of plugins is installed with the `vim-setup.sh` script. I'm trying to keep them relatively minimal, and to stick with ones that enhance rather than override Vim's defaults.
+#### Plugin installation
 
-* Color schemes: Solarized8, Vim One, Zenburn, Gruvbox
-* Fugitive
-* Surround
-* Endwise
-* Vim-Rails
-* EditorConfig
-* Dash
-* CtrlP
+Run the `vim-setup.sh` script to install plugins under `.vim/pack/bundle`:
 
-I've taken [NERDTree][nt] out of my standard rotation for now to try to see if the "native" netrw will work just as well for me. CtrlP may not stick around if I can get used to the Vim Way(tm) for navigating directories and buffers, but it's *really* useful to someone coming from just about any other modern editor.
+    ├── opt
+    │   ├── gruvbox
+    │   ├── vim-one
+    │   ├── vim-rails
+    │   ├── vim-solarized8
+    │   └── zenburn
+    └── start
+        ├── ctrlp.vim
+        ├── dash.vim
+        ├── editorconfig-vim
+        ├── vim-endwise
+        ├── vim-fugitive
+        └── vim-surround
 
-[Emmet][em] may come back if I do more serious HTML hacking.
+#### Plugin updating
 
-[nt]: https://github.com/scrooloose/nerdtree
-[em]: https://github.com/mattn/emmet-vim
+Run the `update.sh` script. This updates any plugin installed with `git clone`.
+
+#### Plugin philosophy
+
+I'm trying to keep my plugins relatively minimal and as close to The Vim Way(tm) as possible; the guiding principle is to enhance rather than override.
 
