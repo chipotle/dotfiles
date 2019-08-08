@@ -79,6 +79,7 @@ set wildignorecase
 
 " set leader to , (comma)
 let mapleader = ","
+noremap \ ,
 
 " ,,  toggle search highlighting
 map <leader>, :set invhlsearch<CR>
