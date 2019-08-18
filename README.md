@@ -1,9 +1,5 @@
 # .dotfiles
 
-My configuration files, stored on GitHub the way the cool kids do.
-
-## Notes
-
 ### zsh
 
 `.zshrc` contains git integration without using Oh My Zsh.
@@ -20,14 +16,14 @@ Use `^A^A` for quick switching between panes.
 
 ### Vim
 
-The configuration is relatively minimal and well-commented. The leader key is rebound to comma (`,`). A few basic additions:
+The configuration is relatively minimal and well-commented. The leader key is rebound to comma (`,`).
 
 * `,,` toggles search highlighting
 * `,b` toggles light/dark background
 * `,l` toggles line number display
 * `,h` looks up the current word with Dash if it's installed
 
-The up/down arrows are set to move by display line rather than actual physical line (`gj` and `gk`). Instead of disabling arrow keys, why not just make them slightly more useful?
+The up/down arrows are rebound to `gj` and `gk` to move by display line. (Instead of disabling arrow keys, why not just make them more useful?)
 
 #### Plugin installation
 
@@ -36,7 +32,6 @@ Run the `vim-setup.sh` script to install plugins under `.vim/pack/bundle`:
     ├── opt
     │   ├── gruvbox
     │   ├── vim-one
-    │   ├── vim-rails
     │   ├── vim-solarized8
     │   └── zenburn
     └── start
@@ -45,6 +40,7 @@ Run the `vim-setup.sh` script to install plugins under `.vim/pack/bundle`:
         ├── editorconfig-vim
         ├── vim-endwise
         ├── vim-fugitive
+        ├── vim-rails
         └── vim-surround
 
 #### Plugin updating
