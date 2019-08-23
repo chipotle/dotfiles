@@ -1,4 +1,4 @@
-" vimrc - wm - 18 Aug 2019
+" vimrc - wm - 23 Aug 2019
 
 " basics
 set nocompatible
@@ -35,14 +35,10 @@ set whichwrap=bs<>[]
 runtime macros/matchit.vim
 
 " Status line
-set statusline=%<
-if exists(':Git')
-    set statusline+=%{fugitive#statusline()}
-endif
-set statusline+=\ %f\ %m%w
+set statusline=%f\ %y%r%m
 set statusline+=%=
-set statusline+=%y
-set statusline+=\ %c\ %l/%L
+" set statusline+=%{FugitiveStatusline()}
+set statusline+=%c:%l/%L
 set laststatus=2
 
 " sane indenting
