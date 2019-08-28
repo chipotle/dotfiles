@@ -96,11 +96,9 @@ nnoremap <silent> ]B :blast<CR>
 " expand %% to active buffer path on command line
 cnoremap <expr> %% getcmdtype() == ':' ? expand('%:h').'/' : '%%'
 
-" NERDTree configuration
-let NERDTreeMouseMode=2
-let NERDTreeChDirMode=2
-let NERDTreeAutoDeleteBuffer=1
-map <leader>d :NERDTreeToggle<CR>
+" netrw
+let g:netrw_banner = 0
+let g:netrw_liststyle = 3
 
 " EditorConfig
 let g:EditorConfig_exclude_patterns = ['fugitive://.*']

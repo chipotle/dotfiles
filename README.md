@@ -31,9 +31,9 @@ Run the `vim-setup.sh` script to install plugins under `.vim/pack/bundle`:
 
     ├── opt
     │   ├── gruvbox
+    │   ├── space-vim-theme
     │   ├── vim-one
-    │   ├── vim-solarized8
-    │   └── zenburn
+    │   └── vim-solarized8
     └── start
         ├── ctrlp.vim
         ├── dash.vim

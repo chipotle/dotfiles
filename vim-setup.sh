@@ -6,8 +6,8 @@ mkdir -p ~/.vim/pack/bundle/start
 pushd ~/.vim/pack/bundle/opt
 git clone https://github.com/lifepillar/vim-solarized8
 git clone https://github.com/rakr/vim-one
-git clone https://github.com/jnurmine/zenburn
 git clone https://github.com/morhetz/gruvbox 
+git clone https://github.com/liuchengxu/space-vim-theme
 
 cd ../start
 git clone https://github.com/ctrlpvim/ctrlp.vim
