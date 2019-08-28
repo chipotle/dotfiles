@@ -1,4 +1,4 @@
-" vimrc - wm - 23 Aug 2019
+" vimrc - wm - 28 Aug 2019
 
 " basics
 set nocompatible
