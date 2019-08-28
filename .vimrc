@@ -50,7 +50,7 @@ set copyindent
 set expandtab
 set smarttab
 set shiftwidth=4
-set softtabstop=4
+set softtabstop=0
 
 " sane line wrapping
 set lbr
