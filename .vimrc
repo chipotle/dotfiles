@@ -87,6 +87,15 @@ noremap <Down> gj
 inoremap <Up> <Esc>gki
 inoremap <Down> <Esc>gji
 
+" map k and j to do that, too, in Markdown files
+augroup markdown
+    autocmd!
+    au FileType markdown noremap <buffer> k gk
+    au FileType Markdown noremap <buffer> j gj
+    au FileType Markdown noremap <buffer> gk k
+    au FileType Markdown noremap <buffer> gj j
+augroup END
+
 " map [b and ]b for buffer navigation
 nnoremap <silent> [b :bprevious<CR>
 nnoremap <silent> ]b :bnext<CR>
