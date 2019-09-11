@@ -116,5 +116,5 @@ let g:EditorConfig_exclude_patterns = ['fugitive://.*']
 nmap <silent> <leader>h <Plug>DashSearch
 
 " CtrlP
-map <C-S-p> :CtrlPBuffer<CR>
+nmap <C-S-p> :CtrlPBuffer<CR>
 
