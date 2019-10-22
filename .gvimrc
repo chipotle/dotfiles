@@ -5,5 +5,6 @@ set lines=60
 set columns=120
 set linespace=3
 colorscheme space_vim_theme
+let g:netrw_browsex_viewer = "/usr/bin/open"
 
 
