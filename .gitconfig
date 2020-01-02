@@ -12,16 +12,23 @@
     mt = mergetool
     amend = commit --amend
     pfwl = push --force-with-lease
-[mergetool "Kaleidoscope"]
+
+[mergetool "ksdiff"]
     cmd = ksdiff --merge --output \"$MERGED\" --base \"$BASE\" -- \"$LOCAL\" --snapshot \"$REMOTE\" --snapshot
     trustexitcode = true
+[mergetool "smerge"]
+    cmd = smerge mergetool \"$BASE\" \"$LOCAL\" \"$REMOTE\" -o \"$MERGED\"
+    trustExitCode = true
 [mergetool]
     prompt = false
 [merge]
-    tool = Kaleidoscope
-[difftool "Kaleidoscope"]
+    tool = ksdiff
+
+[difftool "ksdiff"]
     cmd = ksdiff --partial-changeset --relative-path \"$MERGED\" -- \"$LOCAL\" \"$REMOTE\"
+[difftool "bbdiff"]
+    cmd = bbdiff --wait --resume \"$LOCAL\" \"$REMOTE\"
 [difftool]
     prompt = false
 [diff]
-    tool = Kaleidoscope
+    tool = bbdiff
