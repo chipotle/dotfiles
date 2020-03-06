@@ -37,7 +37,7 @@ runtime macros/matchit.vim
 " Status line
 set statusline=%f\ %y%r%m
 set statusline+=%=
-set statusline+=%{FugitiveStatusline()}
+" set statusline+=%{FugitiveStatusline()}
 set statusline+=%c:%l/%L
 set laststatus=2
 
