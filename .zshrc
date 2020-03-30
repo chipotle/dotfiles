@@ -77,8 +77,7 @@ fi
 
 # rbenv initialization
 
-if [[ -a /opt/brew/var/rbenv ]]; then
-    export RBENV_ROOT=/opt/brew/var/rbenv
+if [[ -a /opt/brew/bin/rbenv ]]; then
     eval "$(rbenv init -)"
 fi
 
