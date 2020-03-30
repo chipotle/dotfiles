@@ -37,7 +37,7 @@ runtime macros/matchit.vim
 " Status line
 set statusline=%f\ %y%r%m
 set statusline+=%=
-set statusline+=%{FugitiveStatusline()}
+" set statusline+=%{FugitiveStatusline()}
 set statusline+=%c:%l/%L
 set laststatus=2
 
@@ -118,3 +118,5 @@ nmap <silent> <leader>h <Plug>DashSearch
 " CtrlP
 let g:ctrlp_cmd = 'CtrlPMixed'
 
+" Language-specific tweaks
+autocmd Filetype html setlocal shiftwidth=2

@@ -64,7 +64,6 @@ function pman() {
 
 alias ls="ls -F"
 alias mct="mosh watts@coyotetracks.org -- tmux attach -d"
-alias less=most
 alias gpsup='git push --set-upstream origin $(git_current_branch)'
 
 # Python virtualenv setup
