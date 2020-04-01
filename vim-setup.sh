@@ -17,6 +17,7 @@ git clone https://github.com/tpope/vim-endwise
 git clone https://github.com/tpope/vim-rails
 git clone https://github.com/editorconfig/editorconfig-vim
 git clone https://github.com/rizzatti/dash.vim
+git clone https://github.com/preservim/nerdtree
 
 popd
 

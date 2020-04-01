@@ -118,5 +118,8 @@ nmap <silent> <leader>h <Plug>DashSearch
 " CtrlP
 let g:ctrlp_cmd = 'CtrlPMixed'
 
+" NERDTree
+nmap <leader>d :NERDTreeToggle<CR>
+
 " Language-specific tweaks
 autocmd Filetype html setlocal shiftwidth=2
