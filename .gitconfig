@@ -10,8 +10,15 @@
     ci = commit
     dt = difftool
     mt = mergetool
+    dtv = ditfftool -t gvimdiff2
+    dtk = difftool -t ksdiff
+    dtb = difftool -t bbdiff
+    mtv = mergetool -t gvimdiff
+    mtk = mergetool -t ksdiff
     amend = commit --amend
     pfwl = push --force-with-lease
+[color]
+    ui = auto
 
 [mergetool "ksdiff"]
     cmd = ksdiff --merge --output \"$MERGED\" --base \"$BASE\" -- \"$LOCAL\" --snapshot \"$REMOTE\" --snapshot
@@ -31,4 +38,5 @@
 [difftool]
     prompt = false
 [diff]
-    tool = bbdiff
+    tool = ksdiff
+
