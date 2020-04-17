@@ -20,6 +20,7 @@ The configuration is relatively minimal and well-commented. The leader key is re
 
 * `,,` toggles search highlighting
 * `,b` toggles light/dark background
+* `,d` toggles the NERDTree directory tree
 * `,l` toggles line number display
 * `,h` looks up the current word with Dash if it's installed
 
@@ -38,6 +39,7 @@ Run the `vim-setup.sh` script to install plugins under `.vim/pack/bundle`:
         ├── ctrlp.vim
         ├── dash.vim
         ├── editorconfig-vim
+        ├── nerdtree
         ├── vim-endwise
         ├── vim-fugitive
         ├── vim-rails
@@ -49,5 +51,5 @@ Run the `update.sh` script. This updates any plugin installed with `git clone`.
 
 #### Plugin philosophy
 
-I'm trying to keep my plugins relatively minimal and as close to The Vim Way(tm) as possible; the guiding principle is to enhance rather than override.
+I'm trying to keep my plugins relatively minimal and as close to The Vim Way(tm) as possible; the guiding principle is to enhance rather than override. (NERDTree is arguably the exception to the rule I keep going back and forth on.)
 
