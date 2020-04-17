@@ -1,5 +1,3 @@
-" vimrc - wm - 28 Aug 2019
-
 " basics
 set nocompatible
 filetype plugin indent on
@@ -37,8 +35,8 @@ runtime macros/matchit.vim
 " Status line
 set statusline=%f\ %y%r%m
 set statusline+=%=
-" set statusline+=%{FugitiveStatusline()}
-set statusline+=%c:%l/%L
+set statusline+=%{FugitiveStatusline()}\ 
+set statusline+=%c:%l
 set laststatus=2
 
 " sane indenting
