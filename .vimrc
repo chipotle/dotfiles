@@ -23,9 +23,6 @@ set autoread
 " mouse support
 set mouse=a
 
-" ignore whitespace in diff mode
-set diffopt+=iwhite
-
 " Be able to arrow key and backspace across newlines
 set whichwrap=bs<>[]
 
