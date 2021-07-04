@@ -24,9 +24,9 @@ zstyle ":completion:*" menu yes select      # fancy completion menus
 
 # Configure vcs_info
 
-zstyle ":vcs_info:*" enable git svn
-zstyle ":vcs_info:*" formats "(%s:%b%u%c)"
-zstyle ":vcs_info:*" actionformats "(%s:%b%u%c|%a)"
+zstyle ":vcs_info:*" enable git
+zstyle ":vcs_info:*" formats "(%b%u%c)"
+zstyle ":vcs_info:*" actionformats "(%b%u%c|%a)"
 zstyle ":vcs_info:*" check-for-changes true
 zstyle ":vcs_info:*" check-for-staged-changes true
 zstyle ":vcs_info:*" stagedstr "%{$fg[red]%}^%{$reset_color%}"
@@ -38,8 +38,8 @@ precmd() {
 
 # Set prompt
 
-PS1='${vcs_info_msg_0_}%{$fg[green]%}%m%#%{$reset_color%} '
-RPS1="%{$fg[yellow]%}%2~%{$reset_color%}"
+PS1='${vcs_info_msg_0_}%{$fg[green]%}%m:%2~%#%{$reset_color%} '
+# RPS1="%{$fg[yellow]%}%2~%{$reset_color%}"
 
 # Set up functions
 
@@ -85,8 +85,8 @@ fi
 if [[ -a ~/.nvm ]]; then
     export NVM_DIR="$HOME/.nvm"
     [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
-    # [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"
 fi
 
-export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
-
+if [[ -a ~/.yarn ]]; then
+    export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
+fi
