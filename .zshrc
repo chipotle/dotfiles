@@ -10,17 +10,19 @@ autoload -U compinit                        # smart completion module
 compinit
 setopt prompt_subst                         # prompt substitution option
 autoload -Uz vcs_info                       # zsh's version control integration
+zstyle ":completion:*" menu yes select      # fancy completion menus
 
-HISTFILE="$HOME/.zsh_history"               # reasonable history settings
-HISTSIZE=5000
-SAVEHIST=5000
+# Setup history
+
+HISTFILE="$HOME/.zsh_history"
+HISTSIZE=2000
+SAVEHIST=2000
 setopt hist_ignore_dups
 setopt hist_expire_dups_first
 setopt hist_verify
 setopt inc_append_history
 setopt share_history
 
-zstyle ":completion:*" menu yes select      # fancy completion menus
 
 # Configure vcs_info
 
@@ -66,7 +68,7 @@ alias ls="ls -FG"
 alias mct="mosh watts@coyotetracks.org -- tmux attach -d"
 alias gpsup='git push --set-upstream origin $(git_current_branch)'
 
-# Python virtualenv setup
+# Python virtualenv setup (disabled)
 
 # if [[ -a /usr/local/bin/virtualenvwrapper.sh ]]; then
 #     export WORKON_HOME=~/src/envs
@@ -76,8 +78,14 @@ alias gpsup='git push --set-upstream origin $(git_current_branch)'
 
 # rbenv initialization
 
-if [[ -a /usr/local/bin/rbenv ]]; then
+if [[ `command -v rbenv` ]]; then
     eval "$(rbenv init -)"
+fi
+
+# Use bat (cat replacement) with MAN if present
+
+if [[ `command -v bat` ]]; then
+    export MANPAGER="sh -c 'col -bx | bat -l man -p'"
 fi
 
 # nvm initialization
