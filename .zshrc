@@ -62,7 +62,7 @@ function pman() {
 
 # Set a few aliases
 
-alias ls="ls -F"
+alias ls="ls -FG"
 alias mct="mosh watts@coyotetracks.org -- tmux attach -d"
 alias gpsup='git push --set-upstream origin $(git_current_branch)'
 
