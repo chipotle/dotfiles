@@ -68,11 +68,11 @@ alias gpsup='git push --set-upstream origin $(git_current_branch)'
 
 # Python virtualenv setup
 
-if [[ -a /usr/local/bin/virtualenvwrapper.sh ]]; then
-    export WORKON_HOME=~/src/envs
-    export PROJECT_HOME=~/src
-    source /usr/local/bin/virtualenvwrapper.sh
-fi
+# if [[ -a /usr/local/bin/virtualenvwrapper.sh ]]; then
+#     export WORKON_HOME=~/src/envs
+#     export PROJECT_HOME=~/src
+#     source /usr/local/bin/virtualenvwrapper.sh
+# fi
 
 # rbenv initialization
 
