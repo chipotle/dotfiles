@@ -24,7 +24,8 @@ set autoread
 set mouse=a
 
 " ignore whitespace in diff mode
-set diffopt+=iwhite
+" MacOS goes bitchy bitchy bitch about this, so commenting it out
+" set diffopt+=iwhite
 
 " Be able to arrow key and backspace across newlines
 set whichwrap=bs<>[]
