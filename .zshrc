@@ -76,7 +76,7 @@ fi
 
 # rbenv initialization
 
-if [[ -a /opt/brew/bin/rbenv ]]; then
+if [[ -a /usr/local/bin/rbenv ]]; then
     eval "$(rbenv init -)"
 fi
 
