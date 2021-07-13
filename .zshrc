@@ -9,7 +9,7 @@ setopt prompt_subst                         # prompt substitution option
 autoload -Uz vcs_info                       # zsh's version control integration
 zstyle ":completion:*" menu yes select      # fancy completion menus
 
-# Setup history
+# History options
 
 HISTFILE="$HOME/.zsh_history"
 HISTSIZE=2000
@@ -21,7 +21,7 @@ setopt inc_append_history
 setopt share_history
 
 
-# Configure vcs_info
+# Git integration
 
 zstyle ":vcs_info:*" enable git
 zstyle ":vcs_info:*" formats "(%b%u%c)"
@@ -35,12 +35,21 @@ precmd() {
     vcs_info
 }
 
-# Set prompt
+# Prompt
 
 PS1='${vcs_info_msg_0_}%{$fg[green]%}%m:%2~%#%{$reset_color%} '
 # RPS1="%{$fg[yellow]%}%2~%{$reset_color%}"
 
-# Set up functions
+# Environment variables and aliases
+
+export EDITOR=vim
+export VISUAL=vim
+
+alias ls="ls -FG"
+alias mct="mosh watts@coyotetracks.org -- tmux attach -d"
+alias gpsup='git push --set-upstream origin $(git_current_branch)'
+
+# Functions
 
 function editdiff() {
     if [ -n "$1" ]
@@ -55,14 +64,7 @@ function git_current_branch() {
     echo `git branch | grep \* | cut -d ' ' -f2`
 }
 
-# Set a few aliases
-
-alias ls="ls -FG"
-alias mct="mosh watts@coyotetracks.org -- tmux attach -d"
-alias gpsup='git push --set-upstream origin $(git_current_branch)'
-
-
-# Use bat (cat replacement) with MAN if present
+# Use bat (cat replacement) if present
 
 if [[ `command -v bat` ]]; then
     export MANPAGER="sh -c 'col -bx | bat -l man -p'"
