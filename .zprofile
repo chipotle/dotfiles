@@ -1,9 +1,13 @@
-# Basic stuff
+# Editor setup
 
 export EDITOR=vim
-export VISUAL=vim
+if [[ `command -v bbedit` ]]; then
+    export VISUAL=bbedit
+else
+    export VISUAL=vim
+fi
 
-# Homebrew config
+# Homebrew config - test for both standard install locations
 
 if [[ -a /opt/homebrew ]]; then
     eval $(/opt/homebrew/bin/brew shellenv)
@@ -17,4 +21,29 @@ if [[ `command -v brew` ]]; then
     if [[ `command -v bat` ]]; then
         export HOMEBREW_BAT=1
     fi
+fi
+
+# Python virtualenv setup (disabled)
+
+# if [[ -a /usr/local/bin/virtualenvwrapper.sh ]]; then
+#     export WORKON_HOME=~/src/envs
+#     export PROJECT_HOME=~/src
+#     source /usr/local/bin/virtualenvwrapper.sh
+# fi
+
+# rbenv initialization
+
+if [[ `command -v rbenv` ]]; then
+    eval "$(rbenv init -)"
+fi
+
+# nvm initialization
+
+if [[ -a ~/.nvm ]]; then
+    export NVM_DIR="$HOME/.nvm"
+    [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
+fi
+
+if [[ -a ~/.yarn ]]; then
+    export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
 fi

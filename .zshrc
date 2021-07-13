@@ -1,6 +1,3 @@
-# ZSH Configuration / wm / 2019-Jul-23
-# ====================================
-
 # Setup zsh options
 
 bindkey -e                                  # Emacs keybindings
@@ -58,43 +55,15 @@ function git_current_branch() {
     echo `git branch | grep \* | cut -d ' ' -f2`
 }
 
-function pman() {
-    man -t "$@" | open -f -a Preview
-}
-
 # Set a few aliases
 
 alias ls="ls -FG"
 alias mct="mosh watts@coyotetracks.org -- tmux attach -d"
 alias gpsup='git push --set-upstream origin $(git_current_branch)'
 
-# Python virtualenv setup (disabled)
-
-# if [[ -a /usr/local/bin/virtualenvwrapper.sh ]]; then
-#     export WORKON_HOME=~/src/envs
-#     export PROJECT_HOME=~/src
-#     source /usr/local/bin/virtualenvwrapper.sh
-# fi
-
-# rbenv initialization
-
-if [[ `command -v rbenv` ]]; then
-    eval "$(rbenv init -)"
-fi
 
 # Use bat (cat replacement) with MAN if present
 
 if [[ `command -v bat` ]]; then
     export MANPAGER="sh -c 'col -bx | bat -l man -p'"
-fi
-
-# nvm initialization
-
-if [[ -a ~/.nvm ]]; then
-    export NVM_DIR="$HOME/.nvm"
-    [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
-fi
-
-if [[ -a ~/.yarn ]]; then
-    export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
 fi
