@@ -2,9 +2,7 @@
 
 ## zsh
 
-`.zshrc` contains git integration without using Oh My Zsh.
-
-`.zshenv` has no PATH info, because that's not the best way to set your path on macOS. Use `/etc/paths` and `/etc/paths.d/` for that, so non-shell programs pick up changes.
+This contains `.zshrc` and `.zshenv`, set up to work (hopefully) on both macOS and Linux.
 
 ## tmux
 
