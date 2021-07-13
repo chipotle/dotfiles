@@ -1,11 +1,7 @@
 # Editor setup
 
 export EDITOR=vim
-if [[ `command -v bbedit` ]]; then
-    export VISUAL="bbedit -w --new-window"
-else
-    export VISUAL=vim
-fi
+export VISUAL=vim
 
 # Homebrew config - test for both standard install locations
 
