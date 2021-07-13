@@ -2,7 +2,7 @@
 
 export EDITOR=vim
 if [[ `command -v bbedit` ]]; then
-    export VISUAL=bbedit
+    export VISUAL="bbedit -w --new-window"
 else
     export VISUAL=vim
 fi
