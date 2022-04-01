@@ -32,3 +32,10 @@ fi
 if [[ -a ~/.yarn ]]; then
     export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
 fi
+
+# pipx virtual environment
+
+if [[ -a ~/.local/bin ]]; then
+    export PATH="$PATH:$HOME/.local/bin"
+fi
+

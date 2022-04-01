@@ -3,8 +3,6 @@
     email = layotl@gmail.com
 [core]
     quotepath = false
-[credential]
-    helper = osxkeychain
 [alias]
     co = checkout
     ci = commit
@@ -20,12 +18,14 @@
 [color]
     ui = auto
 
+[credential]
+    helper = osxkeychain
+[credential "https://github.com"]
+    useHttpPath = true
+
 [mergetool "ksdiff"]
     cmd = ksdiff --merge --output \"$MERGED\" --base \"$BASE\" -- \"$LOCAL\" --snapshot \"$REMOTE\" --snapshot
     trustexitcode = true
-[mergetool "smerge"]
-    cmd = smerge mergetool \"$BASE\" \"$LOCAL\" \"$REMOTE\" -o \"$MERGED\"
-    trustExitCode = true
 [mergetool]
     prompt = false
 [merge]
