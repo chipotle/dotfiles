@@ -9,6 +9,7 @@ fi
 if [[ `command -v brew` ]]; then
     export HOMEBREW_AUTO_UPDATE_SECS=3600
     export HOMEBREW_EDITOR=bbedit
+    export HOMEBREW_NO_ENV_HINTS=1
     if [[ `command -v bat` ]]; then
         export HOMEBREW_BAT=1
     fi
