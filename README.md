@@ -2,7 +2,7 @@
 
 ## zsh
 
-This contains `.zshrc` and `.zshenv`, set up to work (hopefully) on both macOS and Linux.
+This contains `.zshrc` and `.zprofile`, set up to work (hopefully) on both macOS and Linux.
 
 ## tmux
 
@@ -14,7 +14,7 @@ Use `^A^A` for quick switching between panes.
 
 ## Vim
 
-The configuration is relatively minimal and well-commented. The leader key is rebound to comma (`,`).
+The configuration is minimal and well-commented. The leader key is rebound to comma (`,`).
 
 * `,,` toggles search highlighting
 * `,b` toggles light/dark background
