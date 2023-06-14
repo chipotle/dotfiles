@@ -47,10 +47,6 @@ Run the `vim-setup.sh` script to install plugins under `.vim/pack/bundle`:
 
 Run the `update.sh` script. This updates any plugin installed with `git clone`.
 
-### Plugin philosophy
-
-I'm trying to keep my plugins relatively minimal and as close to The Vim Way(tm) as possible; the guiding principle is to enhance rather than override. (NERDTree is arguably the exception to the rule I keep going back and forth on.)
-
 ## Coyote New.terminal
 
 This is a terminal settings file for macOS's terminal, using the [Molokai][] color scheme.
