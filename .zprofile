@@ -40,3 +40,8 @@ if [[ -a ~/.local/bin ]]; then
     export PATH="$PATH:$HOME/.local/bin"
 fi
 
+# Emacs bin directory
+
+if [[ -a ~/.emacs.d/bin ]]; then
+    export PATH="$PATH:$HOME/.emacs.d/bin"
+fi
