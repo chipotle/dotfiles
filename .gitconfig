@@ -8,10 +8,10 @@
     ci = commit
     dt = difftool
     mt = mergetool
-    dtv = ditfftool -t gvimdiff2
+    dtv = difftool -t vimdiff2
     dtk = difftool -t ksdiff
     dtb = difftool -t bbdiff
-    mtv = mergetool -t gvimdiff
+    mtv = mergetool -t vimdiff
     mtk = mergetool -t ksdiff
     amend = commit --amend
     pfwl = push --force-with-lease
@@ -29,16 +29,16 @@
 [mergetool]
     prompt = false
 [merge]
-    tool = ksdiff
+    tool = vimdiff
 
 [difftool "ksdiff"]
     cmd = ksdiff --partial-changeset --relative-path \"$MERGED\" -- \"$LOCAL\" \"$REMOTE\"
 [difftool "bbdiff"]
-    cmd = bbdiff --wait --resume \"$LOCAL\" \"$REMOTE\"
+    cmd = bbdiff --wait --resume --text-files-only \"$LOCAL\" \"$REMOTE\"
 [difftool]
     prompt = false
 [diff]
-    tool = ksdiff
+    tool = bbdiff
 
 [filter "lfs"]
 	smudge = git-lfs smudge -- %f
