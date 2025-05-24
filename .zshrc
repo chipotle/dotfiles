@@ -69,7 +69,26 @@ function git_current_branch() {
 
 if [[ `command -v bat` ]]; then
     export MANPAGER="sh -c 'col -bx | bat -l man -p'"
+    export BAT_THEME="Dracula"
     batdiff() {
         git diff --name-only --diff-filter=d | xargs bat --diff
     }
 fi
+
+
+# Herd injected NVM configuration
+export NVM_DIR="/Users/watts/Library/Application Support/Herd/config/nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+
+[[ -f "/Applications/Herd.app/Contents/Resources/config/shell/zshrc.zsh" ]] && builtin source "/Applications/Herd.app/Contents/Resources/config/shell/zshrc.zsh"
+
+# Herd injected PHP 8.3 configuration.
+export HERD_PHP_83_INI_SCAN_DIR="/Users/watts/Library/Application Support/Herd/config/php/83/"
+
+
+# Herd injected PHP binary.
+export PATH="/Users/watts/Library/Application Support/Herd/bin/":$PATH
+
+
+# Herd injected PHP 8.4 configuration.
+export HERD_PHP_84_INI_SCAN_DIR="/Users/watts/Library/Application Support/Herd/config/php/84/"
