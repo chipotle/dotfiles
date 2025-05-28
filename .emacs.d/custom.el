@@ -6,13 +6,17 @@
  ;; If there is more than one, they won't work right.
  '(apropos-sort-by-scores t)
  '(custom-enabled-themes '(modus-operandi-tinted))
- '(markdown-asymmetric-header t)
  '(modus-themes-to-toggle '(modus-operandi-tinted modus-vivendi-tinted))
  '(modus-themes-variable-pitch-ui t)
  '(package-selected-packages
-   '(cape corfu eldoc-box embark-consult magit marginalia markdown-mode
-          mood-line orderless php-mode vertico web-mode yaml-mode))
+   '(cape corfu dashboard doom-modeline eldoc-box emacs-dashboard
+          embark-consult json-mode ligature magit marginalia
+          markdown-mode mood-line orderless php-mode typescript-mode
+          vertico visual-fill-column web-mode yaml-mode))
  '(ring-bell-function 'ignore)
+ '(safe-local-variable-values
+   '((web-mode-indent-style . 2) (web-mode-block-padding . 2)
+     (web-mode-script-padding . 2) (web-mode-style-padding . 2)))
  '(sentence-end-double-space nil)
  '(tool-bar-mode nil)
  '(visible-bell t))

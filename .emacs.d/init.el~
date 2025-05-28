@@ -51,6 +51,7 @@
 (global-so-long-mode 1)
 (global-visual-line-mode t)
 (column-number-mode t)
+(add-hook 'speedbar-mode-hook (lambda () (display-line-numbers-mode -1)))
 
 ;; set up dictionary server
 (keymap-set global-map "M-#" #'dictionary-lookup-definition)
@@ -119,7 +120,8 @@
 (global-display-line-numbers-mode)
 (setq-default
  display-line-numbers-grow-only t
- display-line-numbers-width 2)
+ display-line-numbers-width 2
+ fill-column 78)
 
 ;; === Package Stuff ===
 
@@ -310,7 +312,7 @@
 
 ;; eglot
 (use-package eglot
-  :hook (prog-mode . eglot-ensure)
+  :hook ((javascript-mode typescript-mode php-mode) . eglot-ensure)
   :config
   (add-to-list 'eglot-server-programs
                `(php-mode . ,(eglot-alternatives
@@ -319,8 +321,10 @@
 
 ;; markdown
 (use-package markdown-mode
+  :init (setq markdown-command '("pandoc" "--from=markdown" "--to=html5"))
   :custom
   (markdown-italic-underscore t)
+  (markdown-asymmetric-header t)
   (markdown-open-command "/usr/local/bin/mark"))
 
 ;; yaml
@@ -328,25 +332,69 @@
   :mode
   ("\\.yml\\'" . yaml-mode))
 
+;; typescript
+(use-package typescript-mode)
+
 ;; eldoc-box (prettier documentation popups)
 (use-package eldoc-box
   :hook (eglot-managed-mode-hook #'eldoc-box-hover-mode)
-  :bind (("M-?" . eldoc-box-help-at-point)
-         :map eglot-mode-map
-         ("M-?" . eldoc-box-eglot-help-at-point)))
+  :bind (("C-h ." . eldoc-box-help-at-point)))
 
-;; mood-line (better modeline)
-(use-package mood-line
-  :config
-  (mood-line-mode)
-  :custom
-  (mood-line-glyph-alist mood-line-glyphs-unicode))
+;; doom-modeline
+(use-package nerd-icons)
+(use-package doom-modeline
+  :hook (after-init . doom-modeline-mode))
 
 ;; editorconfig
 (add-hook 'prog-mode-hook #'editorconfig-mode)
 
 ;; magit
 (use-package magit)
+
+;; dashboard
+(use-package dashboard
+  :config
+  (dashboard-setup-startup-hook))
+(setq dashboard-items '(( recents . 10)
+                        (projects . 5)))
+(setq dashboard-startupify-list '(dashboard-insert-banner
+                                  dashboard-insert-newline
+                                  dashboard-insert-banner-title
+                                  dashboard-insert-newline
+                                  dashboard-insert-init-info
+                                  dashboard-insert-items))
+
+
+;; ligatures, maybe
+(use-package ligature
+  :config
+  (ligature-set-ligatures 'prog-mode '("<!---" "--->" "<!--" "<==>" "-->"
+                                       "->>" "-<<" "/==" "||>" "||=" "|->"
+                                       "&=" "&^=" "===" "==>" "=>>" "=<<"
+                                       "=/=" ">->" ">=>" ">>-" ">>=" "<--"
+                                       "<->" "<-<" "<||" "<|>" "<=" "<=="
+                                       "<=>" "<=<" "<<-" "<<=" ">&=" "<&-"
+                                       "&>>" "&>" "->" "-<" "!=" "/=" "|="
+                                       "|>" "==" "=>" ">-" ">=" "<-" "<|"
+                                       "<~" "~=" "~>" "'''" "\"\"\""
+                                       ":=" ":>" ":<" ";;"
+                                       "?=" "**" "***"
+                                       "*>" "*/" "-=" "*=" "+=" "%="
+                                       "#:" "#!" "#?" "#="
+                                       "/*" "/>" "///" "//" "/**" "$(" ">&"
+                                       "<&" "&&" "$>" ".." ".="
+                                       "+>" "=:=" "=!=" ">:" ">>" "<(" ">>>"
+                                       "<(" "<:" "<*" "<*>" "<$" "<$>" "<+"
+                                       "<+>" "<>" "<<" "<<<" "</" "</>" "^="
+                                       "%%"))
+  (ligature-set-ligatures 't '("##" "###" "####" "++" "+++" "--" "---" "..."
+                               "::" ":::" "!!" "!!!" "?:" "??"))
+  (global-ligature-mode t))
+
+;; visual-fill-column
+(use-package visual-fill-column
+  :init
+  (add-hook 'text-mode-hook #'visual-fill-column-mode))
 
 ;; TODO see how Crafted Emacs adds recent files to startup screen
 ;; investigate Treemacs
