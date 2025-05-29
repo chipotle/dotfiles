@@ -299,7 +299,9 @@
    ("\\.phtml\\'" . web-mode)
    ("\\.tpl\\'" . web-mode)
    ("\\.erb\\'" . web-mode)
-   ("\\.mustache\\'" . web-mode)))
+   ("\\.mustache\\'" . web-mode))
+  :bind (:map web-mode-map
+              ("C-c C-v" . browse-url-of-file)))
 
 (setq web-mode-engines-alist
       '(("django" . "\\.html\\'")) ;; for Tera templates
