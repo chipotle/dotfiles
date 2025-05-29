@@ -92,5 +92,7 @@ export PATH="/Users/watts/Library/Application Support/Herd/bin/":$PATH
 # Herd injected PHP 8.4 configuration.
 export HERD_PHP_84_INI_SCAN_DIR="/Users/watts/Library/Application Support/Herd/config/php/84/"
 
-source /opt/homebrew/opt/chruby/share/chruby/chruby.sh
-source /opt/homebrew/opt/chruby/share/chruby/auto.sh
+if [[ -d "/opt/homebrew/opt/chruby" ]]; then
+    source /opt/homebrew/opt/chruby/share/chruby/chruby.sh
+    source /opt/homebrew/opt/chruby/share/chruby/auto.sh
+fi
