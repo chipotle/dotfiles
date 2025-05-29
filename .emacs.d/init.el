@@ -398,6 +398,11 @@
   :init
   (add-hook 'text-mode-hook #'visual-fill-column-mode))
 
+(use-package flymake-markdownlint
+  :init
+  (add-hook 'markdown-mode-hook 'flymake-markdownlint-setup)
+  (add-hook 'markdown-mode-hook #'flymake-mode))
+
 ;; TODO: investigate Treemacs
 ;; investigate treesitter modes (Crafted Emacs again?)
 ;; install and configure yasnippet
