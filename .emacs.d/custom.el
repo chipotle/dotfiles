@@ -9,10 +9,10 @@
  '(modus-themes-to-toggle '(modus-operandi-tinted modus-vivendi-tinted))
  '(modus-themes-variable-pitch-ui t)
  '(package-selected-packages
-   '(cape corfu dashboard doom-modeline eldoc-box emacs-dashboard
-          embark-consult json-mode ligature magit marginalia
-          markdown-mode mood-line orderless php-mode typescript-mode
-          vertico visual-fill-column web-mode yaml-mode))
+   '(cape corfu dashboard doom-modeline eldoc-box embark-consult
+          flymake-markdownlint json-mode ligature magit marginalia
+          markdown-mode mood-line orderless php-mode typescript-mode vertico
+          visual-fill-column web-mode yaml-mode yasnippet))
  '(ring-bell-function 'ignore)
  '(safe-local-variable-values
    '((web-mode-indent-style . 2) (web-mode-block-padding . 2)

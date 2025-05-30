@@ -120,8 +120,7 @@
 (global-display-line-numbers-mode)
 (setq-default
  display-line-numbers-grow-only t
- display-line-numbers-width 2
- fill-column 78)
+ display-line-numbers-width 2)
 
 ;; === Package Stuff ===
 
@@ -141,10 +140,6 @@
   (vertico-cycle t)
   :init
   (vertico-mode))
-
-;; (use-package savehist
-;;   :init
-;;   (savehist-mode))
 
 (use-package marginalia
   :after vertico
@@ -328,6 +323,10 @@
   (markdown-italic-underscore t)
   (markdown-asymmetric-header t)
   (markdown-open-command "/usr/local/bin/mark"))
+(use-package flymake-markdownlint
+  :init
+  (add-hook 'markdown-mode-hook 'flymake-markdownlint-setup)
+  (add-hook 'markdown-mode-hook #'flymake-mode))
 
 ;; yaml
 (use-package yaml-mode
@@ -370,41 +369,38 @@
 ;; ligatures, maybe
 (use-package ligature
   :config
-  (ligature-set-ligatures 'prog-mode '("<!---" "--->" "<!--" "<==>" "-->"
-                                       "->>" "-<<" "/==" "||>" "||=" "|->"
-                                       "&=" "&^=" "===" "==>" "=>>" "=<<"
-                                       "=/=" ">->" ">=>" ">>-" ">>=" "<--"
-                                       "<->" "<-<" "<||" "<|>" "<=" "<=="
-                                       "<=>" "<=<" "<<-" "<<=" ">&=" "<&-"
-                                       "&>>" "&>" "->" "-<" "!=" "/=" "|="
-                                       "|>" "==" "=>" ">-" ">=" "<-" "<|"
-                                       "<~" "~=" "~>" "'''" "\"\"\""
-                                       ":=" ":>" ":<" ";;"
-                                       "?=" "**" "***"
-                                       "*>" "*/" "-=" "*=" "+=" "%="
-                                       "#:" "#!" "#?" "#="
-                                       "/*" "/>" "///" "//" "/**" "$(" ">&"
-                                       "<&" "&&" "$>" ".." ".="
-                                       "+>" "=:=" "=!=" ">:" ">>" "<(" ">>>"
-                                       "<(" "<:" "<*" "<*>" "<$" "<$>" "<+"
-                                       "<+>" "<>" "<<" "<<<" "</" "</>" "^="
-                                       "%%"))
+  (ligature-set-ligatures 'prog-mode '("<!---" "--->" "<!--" "<==>" "-->" "->>"
+                                       "-<<" "/==" "||>" "||=" "|->" "&=" "&^="
+                                       "===" "==>" "=>>" "=<<" "=/=" ">->"
+                                       ">=>" ">>-" ">>=" "<--" "<->" "<-<"
+                                       "<||" "<|>" "<=" "<==" "<=>" "<=<" "<<-"
+                                       "<<=" ">&=" "<&-" "&>>" "&>" "->" "-<"
+                                       "!=" "/=" "|=" "|>" "==" "=>" ">-" ">="
+                                       "<-" "<|" "<~" "~=" "~>" "'''" "\"\"\""
+                                       ":=" ":>" ":<" ";;" "?=" "**" "***" "*>"
+                                       "*/" "-=" "*=" "+=" "%=" "#:" "#!" "#?"
+                                       "#=" "/*" "/>" "///" "//" "/**" "$("
+                                       ">&" "<&" "&&" "$>" ".." ".=" "+>" "=:="
+                                       "=!=" ">:" ">>" "<(" ">>>" "<(" "<:"
+                                       "<*" "<*>" "<$" "<$>" "<+" "<+>" "<>"
+                                       "<<" "<<<" "</" "</>" "^=" "%%"))
   (ligature-set-ligatures 't '("##" "###" "####" "++" "+++" "--" "---" "..."
                                "::" ":::" "!!" "!!!" "?:" "??"))
   (global-ligature-mode t))
 
-;; visual-fill-column
-(use-package visual-fill-column
-  :init
-  (add-hook 'text-mode-hook #'visual-fill-column-mode))
+;; visual-fill-column -- currently disabled
+;; (use-package visual-fill-column
+;;   :init
+;;   (add-hook 'text-mode-hook #'visual-fill-column-mode))
+;; (setq-default fill-column 80)
 
-(use-package flymake-markdownlint
-  :init
-  (add-hook 'markdown-mode-hook 'flymake-markdownlint-setup)
-  (add-hook 'markdown-mode-hook #'flymake-mode))
+;; YASnippet
+(use-package yasnippet
+  :config
+  (yas-global-mode 1))
 
 ;; TODO: investigate Treemacs
 ;; investigate treesitter modes (Crafted Emacs again?)
 ;; install and configure yasnippet
-;; think about how to mimic tasks from Nova
-
+;; think about how to mimic tasks from Nova: compile-multi?
+;; https://github.com/mohkale/compile-multi
