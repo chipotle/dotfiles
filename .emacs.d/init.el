@@ -399,6 +399,13 @@
   :config
   (yas-global-mode 1))
 
+;; Outline indent mode
+(use-package outline-indent
+  :custom
+  (outline-indent-ellipsis " ▼ "))
+(add-hook 'yaml-mode-hook #'outline-indent-minor-mode)
+(add-hook 'yaml-ts-mode-hook #'outline-indent-minor-mode)
+
 ;; TODO: investigate Treemacs
 ;; investigate treesitter modes (Crafted Emacs again?)
 ;; install and configure yasnippet
