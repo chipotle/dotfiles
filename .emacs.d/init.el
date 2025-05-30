@@ -11,6 +11,9 @@
 
 ;; === Defaults Stuff (mostly boosted from Crafted Emacs) ===
 
+;; try to stick to UTF-8, Windows
+(prefer-coding-system 'utf-8)
+
 ;; revert buffers when underlying file/data changes
 (global-auto-revert-mode 1)
 (customize-set-variable 'global-auto-revert-non-file-buffers t)
@@ -265,7 +268,9 @@
   :custom
   (corfu-cycle t)
   (corfu-auto t)
+  (corfu-auto-delay 0.5)
   (corfu-auto-prefix 2)
+  (text-mode-ispell-word-completion nil)
   :init
   (global-corfu-mode)
   (corfu-popupinfo-mode)
