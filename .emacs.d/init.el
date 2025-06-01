@@ -4,10 +4,6 @@
 	   (file-exists-p custom-file))
   (load custom-file nil :nomessage))
 
-;; Force EF themes (also see custom.el!)
-(mapc #'disable-theme custom-enabled-themes)
-(ef-themes-select 'ef-eagle)
-
 ;; === Keybindings ===
 
 (keymap-global-set "<remap> <list-buffers>" #'ibuffer-list-buffers)
@@ -143,6 +139,11 @@
 ;; always ensure packages are installed
 (require 'use-package-ensure)
 (setq use-package-always-ensure t)
+
+;; Force EF themes (also see custom.el!)
+(use-package ef-themes)
+(mapc #'disable-theme custom-enabled-themes)
+(ef-themes-select 'ef-eagle)
 
 ;; setup vertico and friends
 (use-package vertico
