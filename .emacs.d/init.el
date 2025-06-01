@@ -4,9 +4,14 @@
 	   (file-exists-p custom-file))
   (load custom-file nil :nomessage))
 
+;; Force EF themes (also see custom.el!)
+(mapc #'disable-theme custom-enabled-themes)
+(ef-themes-select 'ef-eagle)
+
 ;; === Keybindings ===
 
 (keymap-global-set "<remap> <list-buffers>" #'ibuffer-list-buffers)
+(keymap-global-set "C-c t" #'ef-themes-toggle)
 (global-set-key [remap dabbrev-expand] 'hippie-expand)
 
 ;; === Defaults Stuff (mostly boosted from Crafted Emacs) ===
@@ -52,6 +57,8 @@
 (setq-default bidi-paragraph-direction 'left-to-right)
 (setq-default bidi-inhibit-bpa t)
 (global-so-long-mode 1)
+
+;; line numbers
 (global-visual-line-mode t)
 (column-number-mode t)
 (add-hook 'speedbar-mode-hook (lambda () (display-line-numbers-mode -1)))
@@ -413,6 +420,5 @@
 
 ;; TODO: investigate Treemacs
 ;; investigate treesitter modes (Crafted Emacs again?)
-;; install and configure yasnippet
 ;; think about how to mimic tasks from Nova: compile-multi?
 ;; https://github.com/mohkale/compile-multi

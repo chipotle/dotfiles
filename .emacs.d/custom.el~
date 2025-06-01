@@ -5,15 +5,15 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(apropos-sort-by-scores t)
- '(custom-enabled-themes '(modus-operandi-tinted))
- '(markdown-asymmetric-header t)
+ '(custom-enabled-themes '(ef-eagle))
  '(modus-themes-to-toggle '(modus-operandi-tinted modus-vivendi-tinted))
  '(modus-themes-variable-pitch-ui t)
  '(package-selected-packages
-   '(cape corfu dashboard doom-modeline eldoc-box emacs-dashboard
-          embark-consult json-mode ligature magit marginalia
-          markdown-mode mood-line orderless php-mode typescript-mode
-          vertico web-mode yaml-mode))
+   '(cape corfu dashboard doom-modeline ef-themes eldoc-box
+          embark-consult flymake-markdownlint json-mode ligature magit
+          marginalia markdown-mode mood-line orderless outline-indent
+          php-mode typescript-mode vertico visual-fill-column web-mode
+          yaml-mode yasnippet))
  '(ring-bell-function 'ignore)
  '(safe-local-variable-values
    '((web-mode-indent-style . 2) (web-mode-block-padding . 2)
