@@ -419,6 +419,12 @@
 (add-hook 'yaml-mode-hook #'outline-indent-minor-mode)
 (add-hook 'yaml-ts-mode-hook #'outline-indent-minor-mode)
 
+;; expand region
+(use-package expand-region
+  :bind
+  ("C-=" . er/expand-region)
+  ("C-+" . er/contract-region))
+
 ;; TODO: investigate Treemacs
 ;; investigate treesitter modes (Crafted Emacs again?)
 ;; think about how to mimic tasks from Nova: compile-multi?

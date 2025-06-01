@@ -11,9 +11,9 @@
  '(modus-themes-variable-pitch-ui t)
  '(package-selected-packages
    '(cape corfu dashboard doom-modeline ef-themes eldoc-box
-          embark-consult flymake-markdownlint json-mode ligature magit
-          marginalia markdown-mode mood-line orderless outline-indent
-          php-mode typescript-mode vertico visual-fill-column web-mode
+          embark-consult expand-region flymake-markdownlint json-mode
+          ligature magit marginalia markdown-mode mood-line orderless
+          outline-indent php-mode typescript-mode vertico web-mode
           yaml-mode yasnippet))
  '(ring-bell-function 'ignore)
  '(safe-local-variable-values
