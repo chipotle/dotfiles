@@ -8,6 +8,14 @@
 (mapc #'disable-theme custom-enabled-themes)
 (ef-themes-select 'ef-eagle)
 
+;; if we're running Terminal Emacs, enable the mouse
+(defun wm/enable-mouse ()
+  "Enable mouse for terminal."
+  (unless (display-graphic-p)
+    (xterm-mouse-mode 1)))
+(add-hook 'after-make-frame-functions #'wm/enable-mouse)
+(add-hook 'after-init-hook #'wm/enable-mouse)
+
 ;; === Keybindings ===
 
 (keymap-global-set "<remap> <list-buffers>" #'ibuffer-list-buffers)
@@ -417,6 +425,10 @@
   (outline-indent-ellipsis " ▼ "))
 (add-hook 'yaml-mode-hook #'outline-indent-minor-mode)
 (add-hook 'yaml-ts-mode-hook #'outline-indent-minor-mode)
+
+;; rainbow delimiters!
+(use-package rainbow-delimiters
+  :hook (prog-mode . rainbow-delimiters-mode))
 
 ;; TODO: investigate Treemacs
 ;; investigate treesitter modes (Crafted Emacs again?)
