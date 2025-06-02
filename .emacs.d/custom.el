@@ -7,6 +7,8 @@
  '(apropos-sort-by-scores t)
  '(ef-themes-to-toggle '(ef-eagle ef-owl))
  '(ef-themes-variable-pitch-ui t)
+ '(flymake-no-changes-timeout 3.0)
+ '(line-spacing 3)
  '(modus-themes-to-toggle '(modus-operandi-tinted modus-vivendi-tinted))
  '(modus-themes-variable-pitch-ui t)
  '(package-selected-packages
