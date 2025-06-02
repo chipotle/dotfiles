@@ -5,15 +5,16 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(apropos-sort-by-scores t)
- '(custom-enabled-themes '(ef-eagle))
+ '(ef-themes-to-toggle '(ef-eagle ef-owl))
+ '(ef-themes-variable-pitch-ui t)
  '(modus-themes-to-toggle '(modus-operandi-tinted modus-vivendi-tinted))
  '(modus-themes-variable-pitch-ui t)
  '(package-selected-packages
    '(cape corfu dashboard doom-modeline ef-themes eldoc-box
           embark-consult flymake-markdownlint json-mode ligature magit
           marginalia markdown-mode mood-line orderless outline-indent
-          php-mode typescript-mode vertico visual-fill-column web-mode
-          yaml-mode yasnippet))
+          php-mode typescript-mode vertico web-mode yaml-mode
+          yasnippet))
  '(ring-bell-function 'ignore)
  '(safe-local-variable-values
    '((web-mode-indent-style . 2) (web-mode-block-padding . 2)
@@ -27,6 +28,6 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(default ((t (:weight regular :height 130 :width normal :foundry "nil" :family "MonoLisa"))))
- '(eldoc-box-body ((t (:background "#efe9dd" :foreground "#000000" :family "SF Pro"))))
+ '(eldoc-box-body ((t (:family "SF Pro"))))
  '(tab-line ((t (:inherit modus-themes-ui-variable-pitch :background "#e0d4ce"))))
  '(variable-pitch ((t (:height 130 :family "SF Pro")))))

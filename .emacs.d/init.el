@@ -152,6 +152,11 @@
 (require 'use-package-ensure)
 (setq use-package-always-ensure t)
 
+;; Force EF themes (also see custom.el!)
+(use-package ef-themes)
+(mapc #'disable-theme custom-enabled-themes)
+(ef-themes-select 'ef-eagle)
+
 ;; setup vertico and friends
 (use-package vertico
   :custom
@@ -429,6 +434,12 @@
 ;; rainbow delimiters!
 (use-package rainbow-delimiters
   :hook (prog-mode . rainbow-delimiters-mode))
+
+;; expand region
+(use-package expand-region
+  :bind
+  ("C-=" . er/expand-region)
+  ("C-+" . er/contract-region))
 
 ;; TODO: investigate Treemacs
 ;; investigate treesitter modes (Crafted Emacs again?)
