@@ -78,6 +78,8 @@ Version: 2018-11-12 2021-09-17 2022-05-02"
 (keymap-global-set "<remap> <list-buffers>" #'ibuffer-list-buffers)
 (keymap-global-set "C-c t" #'ef-themes-toggle)
 (global-set-key [remap dabbrev-expand] 'hippie-expand)
+;; left option stays meta, but right option goes back to option!
+(setq mac-right-option-modifier "none")
 
 ;; === Defaults Stuff (mostly boosted from Crafted Emacs) ===
 
