@@ -73,11 +73,19 @@ Version: 2018-11-12 2021-09-17 2022-05-02"
              (replace-match (elt xpair 1))))
          xcharMap)))))
 
+;; Set buffer face for Info manuals to be more interesting
+(setq buffer-face-mode-face '(:family "Triplicate T4p" :height 140))
+(add-hook 'Info-mode-hook #'buffer-face-mode)
+
 ;; === Keybindings ===
 
 (keymap-global-set "<remap> <list-buffers>" #'ibuffer-list-buffers)
 (keymap-global-set "C-c t" #'ef-themes-toggle)
 (global-set-key [remap dabbrev-expand] 'hippie-expand)
+(keymap-global-set "C-c l" #'org-store-link)
+(keymap-global-set "C-c a" #'org-agenda)
+(keymap-global-set "C-c c" #'org-capture)
+
 ;; left option stays meta, but right option goes back to option!
 (setq mac-right-option-modifier "none")
 
