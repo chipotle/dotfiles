@@ -73,10 +73,6 @@ Version: 2018-11-12 2021-09-17 2022-05-02"
              (replace-match (elt xpair 1))))
          xcharMap)))))
 
-;; Set buffer face for Info manuals to be more interesting
-(setq buffer-face-mode-face '(:family "Triplicate T4p" :height 140))
-(add-hook 'Info-mode-hook #'buffer-face-mode)
-
 ;; === Keybindings ===
 
 (keymap-global-set "<remap> <list-buffers>" #'ibuffer-list-buffers)
@@ -91,93 +87,60 @@ Version: 2018-11-12 2021-09-17 2022-05-02"
 
 ;; === Defaults Stuff (mostly boosted from Crafted Emacs) ===
 
-;; try to stick to UTF-8, Windows
 (prefer-coding-system 'utf-8)
 
-;; revert buffers when underlying file/data changes
 (global-auto-revert-mode 1)
 (customize-set-variable 'global-auto-revert-non-file-buffers t)
 
-;; make Dired guess default target directory when two directories are open
 (customize-set-variable 'dired-dwim-target t)
-
-;; automatically update dired buffers on revisiting their directory
 (customize-set-variable 'dired-auto-revert-buffer t)
 
-;; scroll eshell buffer to bottom on input, only in "this" window
 (customize-set-variable 'eshell-scroll-to-bottom-on-input 'this)
 
-;; pop up dedicated buffers in a different window.
 (customize-set-variable 'switch-to-buffer-in-dedicated-window 'pop)
-
-;; treat manual buffer switching (C-x b for example) the same as
-;; programmatic buffer switching.
 (customize-set-variable 'switch-to-buffer-obey-display-actions t)
 
-;; the number of hours before a buffer is considered "old" by
-;; ibuffer.
 (customize-set-variable 'ibuffer-old-time 24)
 
-;; Typed text replaces the selection if the selection is active,
-;; pressing delete or backspace deletes the selection.
 (delete-selection-mode)
 
-;; Use spaces instead of tabs
 (setq-default indent-tabs-mode nil)
 
-;; Do not save duplicates in kill-ring
 (customize-set-variable 'kill-do-not-save-duplicates t)
 
-;; Better support for files with long lines
 (setq-default bidi-paragraph-direction 'left-to-right)
 (setq-default bidi-inhibit-bpa t)
 (global-so-long-mode 1)
 
-;; line numbers
-(global-visual-line-mode t)
 (column-number-mode t)
-(add-hook 'speedbar-mode-hook (lambda () (display-line-numbers-mode -1)))
 
-;; set up dictionary server
 (keymap-set global-map "M-#" #'dictionary-lookup-definition)
 (setq dictionary-server "dict.org")
 
-;; turn on spell checking, if available.
 (with-eval-after-load 'ispell
   (when (executable-find ispell-program-name)
     (add-hook 'text-mode-hook #'flyspell-mode)
     (add-hook 'prog-mode-hook #'flyspell-prog-mode)))
 
-;; Turn on recentf mode
 (add-hook 'after-init-hook #'recentf-mode)
 
-;; save your place in files
 (save-place-mode 1)
 
-;; Enable savehist-mode for command history
 (savehist-mode 1)
 
-;; save the bookmarks file every time a bookmark is made or deleted
-;; rather than waiting for Emacs to be killed.  Useful especially when
-;; Emacs is a long running process.
 (customize-set-variable 'bookmark-save-flag 1)
 
-;; Make scrolling less stuttered
 (setq auto-window-vscroll nil)
 (customize-set-variable 'fast-but-imprecise-scrolling t)
 (customize-set-variable 'scroll-conservatively 101)
 (customize-set-variable 'scroll-margin 1)
 (customize-set-variable 'scroll-preserve-screen-position t)
 
-;; open man pages in their own window, and switch to that window to
-;; facilitate reading and closing the man page.
 (customize-set-variable 'Man-notify-method 'aggressive)
 
-;; keep the Ediff control panel in the same frame
 (customize-set-variable 'ediff-window-setup-function
                         'ediff-setup-windows-plain)
 
-;; Window configuration for special windows
 (add-to-list 'display-buffer-alist
              '("\\*Help\\*"
                (display-buffer-reuse-window display-buffer-pop-up-window)))
@@ -188,24 +151,28 @@ Version: 2018-11-12 2021-09-17 2022-05-02"
                (inhibit-same-window . t)
                (window-height . 10)))
 
-;; prefer the newest version of a file
 (customize-set-variable 'load-prefer-newer t)
 
-;; make scripts executable on save
 (add-hook 'after-save-hook
 	  #'executable-make-buffer-file-executable-if-script-p)
+
+(setq-default
+ display-line-numbers-grow-only t
+ display-line-numbers-width 2)
+
+(setf kill-buffer-delete-auto-save-files t)
+(setq backup-directory-alist '(("." . "~/.emacs-saves/"))
+      delete-old-versions t
+      version-control t)
+(setq auto-save-file-name-transforms
+      `((".*" ,temporary-file-directory t)))
+(setq create-lockfiles nil)
 
 ;; set initial window size
 (setq initial-frame-alist
       (append initial-frame-alist
               '((width . 120)
                 (height . 40))))
-
-;; line numbers
-(global-display-line-numbers-mode)
-(setq-default
- display-line-numbers-grow-only t
- display-line-numbers-width 2)
 
 ;; === Package Stuff ===
 
