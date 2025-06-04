@@ -156,6 +156,8 @@ Version: 2018-11-12 2021-09-17 2022-05-02"
 (add-hook 'after-save-hook
 	  #'executable-make-buffer-file-executable-if-script-p)
 
+(global-visual-line-mode t)
+
 (setq-default
  display-line-numbers-grow-only t
  display-line-numbers-width 2)
