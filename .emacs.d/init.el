@@ -391,8 +391,7 @@ Version: 2018-11-12 2021-09-17 2022-05-02"
   (markdown-open-command "/usr/local/bin/mark"))
 (use-package flymake-markdownlint
   :init
-  (add-hook 'markdown-mode-hook 'flymake-markdownlint-setup)
-  (add-hook 'markdown-mode-hook #'flymake-mode))
+  (add-hook 'markdown-mode-hook 'flymake-markdownlint-setup))
 
 ;; yaml
 (use-package yaml-mode
