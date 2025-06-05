@@ -161,6 +161,7 @@ Version: 2018-11-12 2021-09-17 2022-05-02"
 (setq-default
  display-line-numbers-grow-only t
  display-line-numbers-width 2)
+(add-hook 'prog-mode-hook #'display-line-numbers-mode)
 
 (setf kill-buffer-delete-auto-save-files t)
 (setq backup-directory-alist '(("." . "~/.emacs-saves/"))
@@ -175,6 +176,10 @@ Version: 2018-11-12 2021-09-17 2022-05-02"
       (append initial-frame-alist
               '((width . 120)
                 (height . 40))))
+
+;; Set buffer face for Info manuals to be more interesting
+(setq buffer-face-mode-face '(:family "Triplicate T4p" :height 140))
+(add-hook 'Info-mode-hook #'buffer-face-mode)
 
 ;; === Package Stuff ===
 
