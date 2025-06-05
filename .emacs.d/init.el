@@ -477,6 +477,18 @@ Version: 2018-11-12 2021-09-17 2022-05-02"
   ("C-=" . er/expand-region)
   ("C-+" . er/contract-region))
 
+;; languagetool
+(use-package flymake-languagetool
+  :ensure t
+  :hook ((text-mode       . flymake-languagetool-load)
+         (latex-mode      . flymake-languagetool-load)
+         (org-mode        . flymake-languagetool-load)
+         (markdown-mode   . flymake-languagetool-load))
+  :init
+  ;; LanguageTools API Remote Server Configuration
+  (setq flymake-languagetool-server-jar nil)
+  (setq flymake-languagetool-url "https://api.languagetool.org"))
+
 ;; TODO: investigate Treemacs
 ;; investigate treesitter modes (Crafted Emacs again?)
 ;; think about how to mimic tasks from Nova: compile-multi?
