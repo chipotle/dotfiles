@@ -15,7 +15,6 @@
   "Enable mouse for terminal."
   (unless (display-graphic-p)
     (xterm-mouse-mode 1)))
-(add-hook 'after-make-frame-functions #'wm/enable-mouse)
 (add-hook 'after-init-hook #'wm/enable-mouse)
 
 ;; add BBEdit-ish zap gremlins
@@ -54,6 +53,7 @@ Version: 2018-11-12 2021-09-17 2022-05-02"
            ["”" "\""]
            ["‘" "'"]
            ["’" "'"]
+           ["…" "..."]
            ])
          (xp1 (if Begin Begin
                 (if (region-active-p)
@@ -421,7 +421,7 @@ Version: 2018-11-12 2021-09-17 2022-05-02"
 (use-package dashboard
   :config
   (dashboard-setup-startup-hook))
-(setq dashboard-items '(( recents . 10)
+(setq dashboard-items '(( recents . 8)
                         (projects . 5)))
 (setq dashboard-startupify-list '(dashboard-insert-banner
                                   dashboard-insert-newline
@@ -492,6 +492,25 @@ Version: 2018-11-12 2021-09-17 2022-05-02"
   ;; LanguageTools API Remote Server Configuration
   (setq flymake-languagetool-server-jar nil)
   (setq flymake-languagetool-url "https://api.languagetool.org"))
+
+;; try polymode again
+(use-package poly-markdown)
+(define-hostmode poly-tera-md-hostmode :mode 'poly-markdown-mode)
+(define-innermode poly-tera-innermode
+  :mode 'python-mode
+  :head-matcher "{{"
+  :tail-matcher "}}"
+  :head-mode 'host
+  :tail-mode 'host)
+;; (define-innermode poly-tera-header-innermode
+;;   :mode 'conf-toml-mode
+;;   :head-matcher "\`\\+\\+\\+$"
+;;   :tail-matcher "^\\+\\+\\+$"
+;;   :head-mode 'host
+;;   :tail-mode 'host)
+(define-polymode poly-tera-md-mode
+  :hostmode 'poly-tera-md-hostmode
+  :innermodes '(poly-tera-innermode))
 
 ;; TODO: investigate Treemacs
 ;; investigate treesitter modes (Crafted Emacs again?)

@@ -16,8 +16,8 @@
           embark-consult expand-region flymake-languagetool
           flymake-markdownlint json-mode ligature magit marginalia
           markdown-mode mood-line orderless outline-indent php-mode
-          rainbow-delimiters typescript-mode vertico web-mode
-          yaml-mode yasnippet))
+          poly-markdown rainbow-delimiters typescript-mode vertico
+          web-mode yaml-mode yasnippet))
  '(ring-bell-function 'ignore)
  '(safe-local-variable-values
    '((web-mode-indent-style . 2) (web-mode-block-padding . 2)
