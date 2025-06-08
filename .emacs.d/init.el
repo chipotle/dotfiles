@@ -1,79 +1,21 @@
-;; use separate file for auto-generated customizations
+1; use separate file for auto-generated customizations
 (setq custom-file (expand-file-name "custom.el" user-emacs-directory))
 (when (and custom-file
 	   (file-exists-p custom-file))
   (load custom-file nil :nomessage))
 
-;; Force EF themes (also see custom.el!)
-(mapc #'disable-theme custom-enabled-themes)
-(ef-themes-select 'ef-eagle)
-
-;; === New commands ===
-
-;; if we're running Terminal Emacs, enable the mouse
+; if we're running Terminal Emacs, enable the mouse
 (defun wm/enable-mouse ()
   "Enable mouse for terminal."
   (unless (display-graphic-p)
     (xterm-mouse-mode 1)))
 (add-hook 'after-init-hook #'wm/enable-mouse)
 
-;; add BBEdit-ish zap gremlins
-;; http://xahlee.info/emacs/emacs/emacs_zap_gremlins.html
-(defun zap-gremlins (&optional Begin End)
-  "Remove accented letters in current line or selection.
-e.g. café → cafe.
+; add BBEdit-ish zap gremlins
+(when (file-exists-p "~/.emacs.d/zap-gremlins.el")
+  (load "~/.emacs.d/zap-gremlins"))
 
-URL `http://xahlee.info/emacs/emacs/emacs_zap_gremlins.html'
-Version: 2018-11-12 2021-09-17 2022-05-02"
-  (interactive)
-  (let ((xcharMap
-          [
-           ["ß" "ss"]
-           ["á\\|à\\|â\\|ä\\|ā\\|ǎ\\|ã\\|å\\|ą\\|ă\\|ạ\\|ả\\|ả\\|ấ\\|ầ\\|ẩ\\|ẫ\\|ậ\\|ắ\\|ằ\\|ẳ\\|ặ" "a"]
-           ["æ" "ae"]
-           ["ç\\|č\\|ć" "c"]
-           ["é\\|è\\|ê\\|ë\\|ē\\|ě\\|ę\\|ẹ\\|ẻ\\|ẽ\\|ế\\|ề\\|ể\\|ễ\\|ệ" "e"]
-           ["í\\|ì\\|î\\|ï\\|ī\\|ǐ\\|ỉ\\|ị" "i"]
-           ["ñ\\|ň\\|ń" "n"]
-           ["ó\\|ò\\|ô\\|ö\\|õ\\|ǒ\\|ø\\|ō\\|ồ\\|ơ\\|ọ\\|ỏ\\|ố\\|ổ\\|ỗ\\|ộ\\|ớ\\|ờ\\|ở\\|ợ" "o"]
-           ["ú\\|ù\\|û\\|ü\\|ū\\|ũ\\|ư\\|ụ\\|ủ\\|ứ\\|ừ\\|ử\\|ữ\\|ự"     "u"]
-           ["ý\\|ÿ\\|ỳ\\|ỷ\\|ỹ"     "y"]
-           ["þ" "th"]
-           ["ď\\|ð\\|đ" "d"]
-           ["ĩ" "i"]
-           ["ľ\\|ĺ\\|ł" "l"]
-           ["ř\\|ŕ" "r"]
-           ["š\\|ś" "s"]
-           ["ť" "t"]
-           ["ž\\|ź\\|ż" "z"]
-           [" " " "]  ; thin space
-           ["–" "--"] ; en dash
-           ["—" "---"] ; em dash
-           ["“" "\""]
-           ["”" "\""]
-           ["‘" "'"]
-           ["’" "'"]
-           ["…" "..."]
-           ])
-         (xp1 (if Begin Begin
-                (if (region-active-p)
-                    (region-beginning)
-                  (line-beginning-position))))
-         (xp2 (if End End
-                (if (region-active-p)
-                    (region-end)
-                  (line-end-position)))))
-    (let ((case-fold-search t))
-      (save-restriction
-        (narrow-to-region xp1 xp2)
-        (mapc
-         (lambda (xpair)
-           (goto-char (point-min))
-           (while (re-search-forward (elt xpair 0) (point-max) t)
-             (replace-match (elt xpair 1))))
-         xcharMap)))))
-
-;; === Keybindings ===
+; === Keybindings ===
 
 (keymap-global-set "<remap> <list-buffers>" #'ibuffer-list-buffers)
 (keymap-global-set "C-c t" #'ef-themes-toggle)
@@ -81,88 +23,64 @@ Version: 2018-11-12 2021-09-17 2022-05-02"
 (keymap-global-set "C-c l" #'org-store-link)
 (keymap-global-set "C-c a" #'org-agenda)
 (keymap-global-set "C-c c" #'org-capture)
-
-;; left option stays meta, but right option goes back to option!
+; left option stays meta, but right option goes back to option!
 (setq mac-right-option-modifier "none")
+(keymap-set global-map "M-#" #'dictionary-lookup-definition)
 
-;; === Defaults Stuff (mostly boosted from Crafted Emacs) ===
+; === Defaults Stuff (mostly boosted from Crafted Emacs) ===
 
-(prefer-coding-system 'utf-8)
-
-(global-auto-revert-mode 1)
+(prefer-coding-system 'utf-8)           ; keep Windows from dorking out
+(global-auto-revert-mode 1)             ; keep file in sync w/on-disk
 (customize-set-variable 'global-auto-revert-non-file-buffers t)
-
-(customize-set-variable 'dired-dwim-target t)
+(customize-set-variable 'dired-dwim-target t) ; make dired smarter
 (customize-set-variable 'dired-auto-revert-buffer t)
-
+; scroll on eshell input at bottom
 (customize-set-variable 'eshell-scroll-to-bottom-on-input 'this)
-
+; pop to buffers
 (customize-set-variable 'switch-to-buffer-in-dedicated-window 'pop)
 (customize-set-variable 'switch-to-buffer-obey-display-actions t)
-
-(customize-set-variable 'ibuffer-old-time 24)
-
-(delete-selection-mode)
-
-(setq-default indent-tabs-mode nil)
-
+(customize-set-variable 'ibuffer-old-time 24) ; delete old ibuffers
+(delete-selection-mode)                 ; typing replaces selection
+(setq-default indent-tabs-mode nil)     ; default to spaces
+(setq-default tab-width 4)              ; default to indent of 4
+; don't duplicate strings in kill ring
 (customize-set-variable 'kill-do-not-save-duplicates t)
+(global-so-long-mode 1)                 ; handle long lines better
+(column-number-mode t)                  ; show column in mode line
+(setq dictionary-server "dict.org")     ; dictionary lookup
+(add-hook 'after-init-hook #'recentf-mode) ; store recent files
+(save-place-mode 1)                     ; save your location in files
+(savehist-mode 1)                       ; save the minibuffer history
+(customize-set-variable 'bookmark-save-flag 1) ; save bookmark file on exit
+(global-visual-line-mode t)             ; wrap text sanely
 
-(setq-default bidi-paragraph-direction 'left-to-right)
-(setq-default bidi-inhibit-bpa t)
-(global-so-long-mode 1)
-
-(column-number-mode t)
-
-(keymap-set global-map "M-#" #'dictionary-lookup-definition)
-(setq dictionary-server "dict.org")
-
-(with-eval-after-load 'ispell
-  (when (executable-find ispell-program-name)
-    (add-hook 'text-mode-hook #'flyspell-mode)
-    (add-hook 'prog-mode-hook #'flyspell-prog-mode)))
-
-(add-hook 'after-init-hook #'recentf-mode)
-
-(save-place-mode 1)
-
-(savehist-mode 1)
-
-(customize-set-variable 'bookmark-save-flag 1)
-
-(setq auto-window-vscroll nil)
+(setq auto-window-vscroll nil)          ; scrolling changes
 (customize-set-variable 'fast-but-imprecise-scrolling t)
 (customize-set-variable 'scroll-conservatively 101)
-(customize-set-variable 'scroll-margin 1)
+(customize-set-variable 'scroll-margin 0)
 (customize-set-variable 'scroll-preserve-screen-position t)
 
-(customize-set-variable 'Man-notify-method 'aggressive)
+;; (add-to-list 'display-buffer-alist
+;;              '("\\*Help\\*"
+;;                (display-buffer-reuse-window display-buffer-pop-up-window)))
 
-(customize-set-variable 'ediff-window-setup-function
-                        'ediff-setup-windows-plain)
+;; (add-to-list 'display-buffer-alist
+;;              '("\\*Completions\\*"
+;;                (display-buffer-reuse-window display-buffer-pop-up-window)
+;;                (inhibit-same-window . t)
+;;                (window-height . 10)))
 
-(add-to-list 'display-buffer-alist
-             '("\\*Help\\*"
-               (display-buffer-reuse-window display-buffer-pop-up-window)))
+(customize-set-variable 'load-prefer-newer t) ; prefer newest ver of file
 
-(add-to-list 'display-buffer-alist
-             '("\\*Completions\\*"
-               (display-buffer-reuse-window display-buffer-pop-up-window)
-               (inhibit-same-window . t)
-               (window-height . 10)))
-
-(customize-set-variable 'load-prefer-newer t)
-
-(add-hook 'after-save-hook
+(add-hook 'after-save-hook              ; make scripts executable on save
 	  #'executable-make-buffer-file-executable-if-script-p)
 
-(global-visual-line-mode t)
-
-(setq-default
+(setq-default                           ; display line #s in prog modes
  display-line-numbers-grow-only t
  display-line-numbers-width 2)
 (add-hook 'prog-mode-hook #'display-line-numbers-mode)
 
+;; configure autosaving to get files saved elsewhere
 (setf kill-buffer-delete-auto-save-files t)
 (setq backup-directory-alist '(("." . "~/.emacs-saves/"))
       delete-old-versions t
@@ -183,20 +101,18 @@ Version: 2018-11-12 2021-09-17 2022-05-02"
 
 ;; === Package Stuff ===
 
-;; set up package archives
+;; set up package archives and ensure installation
 (setq package-archives
       '(("melpa" . "https://melpa.org/packages/")
 	("elpa" . "https://elpa.gnu.org/packages/")
 	("nongnu" . "https://elpa.nongnu.org/nongnu/")))
-
-;; always ensure packages are installed
 (require 'use-package-ensure)
 (setq use-package-always-ensure t)
 
 ;; Force EF themes (also see custom.el!)
 (use-package ef-themes)
 (mapc #'disable-theme custom-enabled-themes)
-(ef-themes-select 'ef-eagle)
+(ef-themes-select 'ef-reverie)
 
 ;; setup vertico and friends
 (use-package vertico
@@ -213,9 +129,9 @@ Version: 2018-11-12 2021-09-17 2022-05-02"
 ;; embark: "Emacs Mini-Buffer Actions Rooted in Keymaps"
 (use-package embark
   :bind
-  (("C-." . embark-act)         ;; pick some comfortable binding
-   ("C-;" . embark-dwim)        ;; good alternative: M-.
-   ("C-h B" . embark-bindings)) ;; alternative for `describe-bindings'
+  (("C-." . embark-act)
+   ("M-." . embark-dwim)                ; overrides xref-find-definitions
+   ("C-h B" . embark-bindings))
 
   :init
   ;; Optionally replace the key help with a completing-read interface
@@ -293,36 +209,7 @@ Version: 2018-11-12 2021-09-17 2022-05-02"
 
   ;; Use Consult to select xref locations with preview
   (setq xref-show-xrefs-function #'consult-xref
-        xref-show-definitions-function #'consult-xref)
-
-  ;; Configure other variables and modes in the :config section,
-  ;; after lazily loading the package.
-  :config
-
-  ;; Optionally configure preview. The default value
-  ;; is 'any, such that any key triggers the preview.
-  ;; (setq consult-preview-key 'any)
-  ;; (setq consult-preview-key "M-.")
-  ;; (setq consult-preview-key '("S-<down>" "S-<up>"))
-  ;; For some commands and buffer sources it is useful to configure the
-  ;; :preview-key on a per-command basis using the `consult-customize' macro.
-  (consult-customize
-   consult-theme :preview-key '(:debounce 0.2 any)
-   consult-ripgrep consult-git-grep consult-grep consult-man
-   consult-bookmark consult-recent-file consult-xref
-   consult--source-bookmark consult--source-file-register
-   consult--source-recent-file consult--source-project-recent-file
-   ;; :preview-key "M-."
-   :preview-key '(:debounce 0.4 any))
-
-  ;; Optionally configure the narrowing key.
-  ;; Both < and C-+ work reasonably well.
-  (setq consult-narrow-key "<") ;; "C-+"
-
-  ;; Optionally make narrowing help available in the minibuffer.
-  ;; You may want to use `embark-prefix-help-command' or which-key instead.
-  (keymap-set consult-narrow-map (concat consult-narrow-key " ?") #'consult-narrow-help)
-  )
+        xref-show-definitions-function #'consult-xref))
 
 ;; Corfu (completion in region function: in-buffer completion popup)
 (use-package corfu
@@ -364,9 +251,8 @@ Version: 2018-11-12 2021-09-17 2022-05-02"
   :bind (:map web-mode-map
               ("C-c C-v" . browse-url-of-file)))
 
-(setq web-mode-engines-alist
-      '(("django" . "\\.html\\'")) ;; for Tera templates
-      )
+(setq web-mode-engines-alist            ; set up Tera templates
+      '(("django" . "\\.html\\'")))
 
 ;; php mode
 (use-package php-mode
@@ -375,6 +261,7 @@ Version: 2018-11-12 2021-09-17 2022-05-02"
 
 ;; eglot
 (use-package eglot
+  :ensure nil
   :hook ((javascript-mode typescript-mode php-mode) . eglot-ensure)
   :config
   (add-to-list 'eglot-server-programs
@@ -422,7 +309,7 @@ Version: 2018-11-12 2021-09-17 2022-05-02"
   :config
   (dashboard-setup-startup-hook))
 (setq dashboard-items '(( recents . 8)
-                        (projects . 5)))
+                        (projects . 4)))
 (setq dashboard-startupify-list '(dashboard-insert-banner
                                   dashboard-insert-newline
                                   dashboard-insert-banner-title
@@ -431,7 +318,7 @@ Version: 2018-11-12 2021-09-17 2022-05-02"
                                   dashboard-insert-items))
 
 
-;; ligatures, maybe
+;; ligatures
 (use-package ligature
   :config
   (ligature-set-ligatures 'prog-mode '("<!---" "--->" "<!--" "<==>" "-->" "->>"
@@ -452,12 +339,6 @@ Version: 2018-11-12 2021-09-17 2022-05-02"
   (ligature-set-ligatures 't '("##" "###" "####" "++" "+++" "--" "---" "..."
                                "::" ":::" "!!" "!!!" "?:" "??"))
   (global-ligature-mode t))
-
-;; visual-fill-column -- currently disabled
-;; (use-package visual-fill-column
-;;   :init
-;;   (add-hook 'text-mode-hook #'visual-fill-column-mode))
-;; (setq-default fill-column 80)
 
 ;; YASnippet
 (use-package yasnippet
@@ -511,6 +392,15 @@ Version: 2018-11-12 2021-09-17 2022-05-02"
 (define-polymode poly-tera-md-mode
   :hostmode 'poly-tera-md-hostmode
   :innermodes '(poly-tera-innermode))
+
+;; Ultrascroll
+(use-package ultra-scroll
+  :vc (:url "https://github.com/jdtsmith/ultra-scroll")
+  :init
+  (setq scroll-conservatively 3
+        scroll-margin 0)
+  :config
+  (ultra-scroll-mode 1))
 
 ;; TODO: investigate Treemacs
 ;; investigate treesitter modes (Crafted Emacs again?)

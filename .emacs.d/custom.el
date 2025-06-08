@@ -5,9 +5,9 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(apropos-sort-by-scores t)
- '(ef-themes-to-toggle '(ef-eagle ef-owl))
+ '(ef-themes-to-toggle '(ef-reverie ef-dream))
  '(ef-themes-variable-pitch-ui t)
- '(flymake-no-changes-timeout 3.0)
+ '(flymake-no-changes-timeout 2.0)
  '(line-spacing 3)
  '(modus-themes-to-toggle '(modus-operandi-tinted modus-vivendi-tinted))
  '(modus-themes-variable-pitch-ui t)
@@ -16,8 +16,10 @@
           embark-consult expand-region flymake-languagetool
           flymake-markdownlint json-mode ligature magit marginalia
           markdown-mode mood-line orderless outline-indent php-mode
-          poly-markdown rainbow-delimiters typescript-mode vertico
-          web-mode yaml-mode yasnippet))
+          poly-markdown rainbow-delimiters typescript-mode
+          ultra-scroll vertico web-mode yaml-mode yasnippet))
+ '(package-vc-selected-packages
+   '((ultra-scroll :url "https://github.com/jdtsmith/ultra-scroll")))
  '(ring-bell-function 'ignore)
  '(safe-local-variable-values
    '((web-mode-indent-style . 2) (web-mode-block-padding . 2)
