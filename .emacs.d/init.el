@@ -1,21 +1,22 @@
-1; use separate file for auto-generated customizations
+;;; Emacs init file
+
+;; use separate file for auto-generated customizations
 (setq custom-file (expand-file-name "custom.el" user-emacs-directory))
 (when (and custom-file
 	   (file-exists-p custom-file))
   (load custom-file nil :nomessage))
 
-; if we're running Terminal Emacs, enable the mouse
+;; Enable mouse in temrinal mouse
 (defun wm/enable-mouse ()
-  "Enable mouse for terminal."
   (unless (display-graphic-p)
     (xterm-mouse-mode 1)))
 (add-hook 'after-init-hook #'wm/enable-mouse)
 
-; add BBEdit-ish zap gremlins
+;; Load zap gremlins
 (when (file-exists-p "~/.emacs.d/zap-gremlins.el")
   (load "~/.emacs.d/zap-gremlins"))
 
-; === Keybindings ===
+;;; Keybindings
 
 (keymap-global-set "<remap> <list-buffers>" #'ibuffer-list-buffers)
 (keymap-global-set "C-c t" #'ef-themes-toggle)
@@ -27,7 +28,7 @@
 (setq mac-right-option-modifier "none")
 (keymap-set global-map "M-#" #'dictionary-lookup-definition)
 
-; === Defaults Stuff (mostly boosted from Crafted Emacs) ===
+;;; Default modes & variables
 
 (prefer-coding-system 'utf-8)           ; keep Windows from dorking out
 (global-auto-revert-mode 1)             ; keep file in sync w/on-disk
@@ -59,6 +60,29 @@
 (customize-set-variable 'scroll-conservatively 101)
 (customize-set-variable 'scroll-margin 0)
 (customize-set-variable 'scroll-preserve-screen-position t)
+(customize-set-variable 'load-prefer-newer t) ; prefer newest ver of file
+(add-hook 'after-save-hook              ; make scripts executable on save
+	  #'executable-make-buffer-file-executable-if-script-p)
+(setq-default                           ; display line #s in prog modes
+ display-line-numbers-grow-only t
+ display-line-numbers-width 2)
+(add-hook 'prog-mode-hook #'display-line-numbers-mode)
+;; configure autosaving to get files saved elsewhere
+(setf kill-buffer-delete-auto-save-files t)
+(setq backup-directory-alist '(("." . "~/.emacs-saves/"))
+      delete-old-versions t
+      version-control t)
+(setq auto-save-file-name-transforms
+      `((".*" ,temporary-file-directory t)))
+(setq create-lockfiles nil)
+;; set initial window size
+(setq initial-frame-alist
+      (append initial-frame-alist
+              '((width . 120)
+                (height . 40))))
+;; Set buffer face for Info manuals to be more interesting
+(setq buffer-face-mode-face '(:family "Triplicate T4p" :height 140))
+(add-hook 'Info-mode-hook #'buffer-face-mode)
 
 ;; (add-to-list 'display-buffer-alist
 ;;              '("\\*Help\\*"
@@ -70,36 +94,7 @@
 ;;                (inhibit-same-window . t)
 ;;                (window-height . 10)))
 
-(customize-set-variable 'load-prefer-newer t) ; prefer newest ver of file
-
-(add-hook 'after-save-hook              ; make scripts executable on save
-	  #'executable-make-buffer-file-executable-if-script-p)
-
-(setq-default                           ; display line #s in prog modes
- display-line-numbers-grow-only t
- display-line-numbers-width 2)
-(add-hook 'prog-mode-hook #'display-line-numbers-mode)
-
-;; configure autosaving to get files saved elsewhere
-(setf kill-buffer-delete-auto-save-files t)
-(setq backup-directory-alist '(("." . "~/.emacs-saves/"))
-      delete-old-versions t
-      version-control t)
-(setq auto-save-file-name-transforms
-      `((".*" ,temporary-file-directory t)))
-(setq create-lockfiles nil)
-
-;; set initial window size
-(setq initial-frame-alist
-      (append initial-frame-alist
-              '((width . 120)
-                (height . 40))))
-
-;; Set buffer face for Info manuals to be more interesting
-(setq buffer-face-mode-face '(:family "Triplicate T4p" :height 140))
-(add-hook 'Info-mode-hook #'buffer-face-mode)
-
-;; === Package Stuff ===
+;;; Configure external packages
 
 ;; set up package archives and ensure installation
 (setq package-archives
@@ -114,36 +109,28 @@
 (mapc #'disable-theme custom-enabled-themes)
 (ef-themes-select 'ef-reverie)
 
-;; setup vertico and friends
+;; Vertico (vertical completion) and Marginalia
 (use-package vertico
   :custom
   (vertico-cycle t)
   :init
   (vertico-mode))
-
 (use-package marginalia
   :after vertico
   :config
   (marginalia-mode))
 
-;; embark: "Emacs Mini-Buffer Actions Rooted in Keymaps"
+;; Embark: "Emacs Mini-Buffer Actions Rooted in Keymaps"
 (use-package embark
   :bind
   (("C-." . embark-act)
    ("M-." . embark-dwim)                ; overrides xref-find-definitions
    ("C-h B" . embark-bindings))
-
-  :init
   ;; Optionally replace the key help with a completing-read interface
-  (setq prefix-help-command #'embark-prefix-help-command))
+  :custom (prefix-help-command #'embark-prefix-help-command))
 
-(use-package embark-consult
-  :hook
-  (embark-collect-mode . consult-preview-at-point-mode))
-
-;; consult: improve a whole bunch of commands with completing-read
+;; Consult: improve a whole bunch of commands with completing-read
 (use-package consult
-  ;; Replace bindings. Lazily loaded by `use-package'.
   :bind (;; C-c bindings in `mode-specific-map'
          ("C-c M-x" . consult-mode-command)
          ("C-c h" . consult-history)
@@ -152,27 +139,27 @@
          ("C-c i" . consult-info)
          ([remap Info-search] . consult-info)
          ;; C-x bindings in `ctl-x-map'
-         ("C-x M-:" . consult-complex-command)     ;; orig. repeat-complex-command
-         ("C-x b" . consult-buffer)                ;; orig. switch-to-buffer
-         ("C-x 4 b" . consult-buffer-other-window) ;; orig. switch-to-buffer-other-window
-         ("C-x 5 b" . consult-buffer-other-frame)  ;; orig. switch-to-buffer-other-frame
-         ("C-x t b" . consult-buffer-other-tab)    ;; orig. switch-to-buffer-other-tab
-         ("C-x r b" . consult-bookmark)            ;; orig. bookmark-jump
-         ("C-x p b" . consult-project-buffer)      ;; orig. project-switch-to-buffer
+         ("C-x M-:" . consult-complex-command)     ; repeat-complex-command
+         ("C-x b" . consult-buffer)                ; switch-to-buffer
+         ("C-x 4 b" . consult-buffer-other-window) ; switch-to-buffer-other-window
+         ("C-x 5 b" . consult-buffer-other-frame)  ; switch-to-buffer-other-frame
+         ("C-x t b" . consult-buffer-other-tab)    ; switch-to-buffer-other-tab
+         ("C-x r b" . consult-bookmark)            ; bookmark-jump
+         ("C-x p b" . consult-project-buffer)      ; project-switch-to-buffer
          ;; Other custom bindings
-         ("M-y" . consult-yank-pop)                ;; orig. yank-pop
+         ("M-y" . consult-yank-pop)                ; yank-pop
          ;; M-g bindings in `goto-map'
          ("M-g e" . consult-compile-error)
-         ("M-g f" . consult-flymake)               ;; Alternative: consult-flycheck
-         ("M-g g" . consult-goto-line)             ;; orig. goto-line
-         ("M-g M-g" . consult-goto-line)           ;; orig. goto-line
-         ("M-g o" . consult-outline)               ;; Alternative: consult-org-heading
+         ("M-g f" . consult-flymake)               ; Alternative: consult-flycheck
+         ("M-g g" . consult-goto-line)             ; goto-line
+         ("M-g M-g" . consult-goto-line)           ; goto-line
+         ("M-g o" . consult-outline)               ; Alternative: consult-org-heading
          ("M-g m" . consult-mark)
          ("M-g k" . consult-global-mark)
          ("M-i" . consult-imenu)
          ("M-I" . consult-imenu-multi)
          ;; M-s bindings in `search-map'
-         ("M-s d" . consult-find)                  ;; Alternative: consult-fd
+         ("M-s d" . consult-find)                  ; Alternative: consult-fd
          ("M-s c" . consult-locate)
          ("M-s g" . consult-grep)
          ("M-s G" . consult-git-grep)
@@ -184,32 +171,30 @@
          ;; Isearch integration
          ("M-s e" . consult-isearch-history)
          :map isearch-mode-map
-         ("M-e" . consult-isearch-history)         ;; orig. isearch-edit-string
-         ("M-s e" . consult-isearch-history)       ;; orig. isearch-edit-string
-         ("M-s l" . consult-line)                  ;; needed by consult-line to detect isearch
-         ("M-s L" . consult-line-multi)            ;; needed by consult-line to detect isearch
+         ("M-e" . consult-isearch-history)         ; isearch-edit-string
+         ("M-s e" . consult-isearch-history)       ; isearch-edit-string
+         ("M-s l" . consult-line)                  ; needed by consult-line to detect isearch
+         ("M-s L" . consult-line-multi)            ; needed by consult-line to detect isearch
          ;; Minibuffer history
          :map minibuffer-local-map
-         ("M-s" . consult-history)                 ;; orig. next-matching-history-element
-         ("M-r" . consult-history))                ;; orig. previous-matching-history-element
+         ("M-s" . consult-history)                 ; next-matching-history-element
+         ("M-r" . consult-history))                ; previous-matching-history-element
 
-  ;; Enable automatic preview at point in the *Completions* buffer. This is
-  ;; relevant when you use the default completion UI.
+  ;; Enable automatic preview at point in the *Completions* buffer
   :hook (completion-list-mode . consult-preview-at-point-mode)
 
-  ;; The :init configuration is always executed (Not lazy)
   :init
-
-  ;; Tweak the register preview for `consult-register-load',
-  ;; `consult-register-store' and the built-in commands.  This improves the
-  ;; register formatting, adds thin separator lines, register sorting and hides
-  ;; the window mode line.
+  ;; use consult's enhanced register preview
   (advice-add #'register-preview :override #'consult-register-window)
   (setq register-preview-delay 0.5)
-
   ;; Use Consult to select xref locations with preview
   (setq xref-show-xrefs-function #'consult-xref
         xref-show-definitions-function #'consult-xref))
+
+;; Embark & Consult integration
+(use-package embark-consult
+  :hook
+  (embark-collect-mode . consult-preview-at-point-mode))
 
 ;; Corfu (completion in region function: in-buffer completion popup)
 (use-package corfu
@@ -249,12 +234,11 @@
    ("\\.erb\\'" . web-mode)
    ("\\.mustache\\'" . web-mode))
   :bind (:map web-mode-map
-              ("C-c C-v" . browse-url-of-file)))
+              ("C-c C-v" . browse-url-of-file))
+  :custom
+  (web-mode-engines-alist '(("django" . "\\.html\\'"))))
 
-(setq web-mode-engines-alist            ; set up Tera templates
-      '(("django" . "\\.html\\'")))
-
-;; php mode
+;; PHP mode
 (use-package php-mode
   :custom
   (php-mode-coding-style 'psr2))
@@ -266,19 +250,19 @@
   :config
   (add-to-list 'eglot-server-programs
                `(php-mode . ,(eglot-alternatives
-                              '(("intelephense" "--stdio"))))))
-(setq eglot-autoshutdown t)
+                              '(("intelephense" "--stdio")))))
+  :custom (eglot-autoshutdown t))
 
-;; markdown
+;; Markdown
 (use-package markdown-mode
-  :init (setq markdown-command '("pandoc" "--from=markdown" "--to=html5"))
   :custom
+  (markdown-command '("pandoc" "--from=markdown" "--to=html5"))
   (markdown-italic-underscore t)
   (markdown-asymmetric-header t)
   (markdown-open-command "/usr/local/bin/mark"))
+
 (use-package flymake-markdownlint
-  :init
-  (add-hook 'markdown-mode-hook 'flymake-markdownlint-setup))
+  :hook (markdown-mode . flymake-markdownline-setup))
 
 ;; yaml
 (use-package yaml-mode
@@ -329,7 +313,7 @@
                                        "<<=" ">&=" "<&-" "&>>" "&>" "->" "-<"
                                        "!=" "/=" "|=" "|>" "==" "=>" ">-" ">="
                                        "<-" "<|" "<~" "~=" "~>" "'''" "\"\"\""
-                                       ":=" ":>" ":<" ";;" "?=" "**" "***" "*>"
+                                       ":=" ":>" ":<" "?=" "**" "***" "*>"
                                        "*/" "-=" "*=" "+=" "%=" "#:" "#!" "#?"
                                        "#=" "/*" "/>" "///" "//" "/**" "$("
                                        ">&" "<&" "&&" "$>" ".." ".=" "+>" "=:="
@@ -347,10 +331,9 @@
 
 ;; Outline indent mode
 (use-package outline-indent
-  :custom
-  (outline-indent-ellipsis " ▼ "))
-(add-hook 'yaml-mode-hook #'outline-indent-minor-mode)
-(add-hook 'yaml-ts-mode-hook #'outline-indent-minor-mode)
+  :hook
+  (yaml-mode . outline-indent-minor-mode)
+  (yaml-ts-mode . outline-indent-minor-mode))
 
 ;; rainbow delimiters!
 (use-package rainbow-delimiters
@@ -362,19 +345,17 @@
   ("C-=" . er/expand-region)
   ("C-+" . er/contract-region))
 
-;; languagetool
+;; Languagetool - this intentionally does NOT autostart
 (use-package flymake-languagetool
-  :ensure t
   :hook ((text-mode       . flymake-languagetool-load)
          (latex-mode      . flymake-languagetool-load)
          (org-mode        . flymake-languagetool-load)
          (markdown-mode   . flymake-languagetool-load))
-  :init
-  ;; LanguageTools API Remote Server Configuration
-  (setq flymake-languagetool-server-jar nil)
-  (setq flymake-languagetool-url "https://api.languagetool.org"))
+  :custom
+  (flymake-languagetool-server-jar nil)
+  (flymake-languagetool-url "https://api.languagetool.org"))
 
-;; try polymode again
+;; Polymode, for Tera shortcodes
 (use-package poly-markdown)
 (define-hostmode poly-tera-md-hostmode :mode 'poly-markdown-mode)
 (define-innermode poly-tera-innermode
@@ -383,12 +364,6 @@
   :tail-matcher "}}"
   :head-mode 'host
   :tail-mode 'host)
-;; (define-innermode poly-tera-header-innermode
-;;   :mode 'conf-toml-mode
-;;   :head-matcher "\`\\+\\+\\+$"
-;;   :tail-matcher "^\\+\\+\\+$"
-;;   :head-mode 'host
-;;   :tail-mode 'host)
 (define-polymode poly-tera-md-mode
   :hostmode 'poly-tera-md-hostmode
   :innermodes '(poly-tera-innermode))
