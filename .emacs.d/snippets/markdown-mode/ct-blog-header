@@ -1,0 +1,10 @@
+# -*- mode: snippet -*-
+# name: Coyote Tracks Blog Header
+# key: ct-blog
+# --
++++
+title = "${1:Title}"
+date = "`(format-time-string "%Y-%m-%d %H:%M:%S")`"
++++
+
+$0
