@@ -24,9 +24,19 @@
 (keymap-global-set "C-c l" #'org-store-link)
 (keymap-global-set "C-c a" #'org-agenda)
 (keymap-global-set "C-c c" #'org-capture)
+(keymap-global-set "M-#" #'dictionary-lookup-definition)
+; modify Tools menu a little
+(define-key-after global-map [menu-bar tools ede] nil t)
+(easy-menu-add-item global-map '(menu-bar tools)
+                    ["Automatic Linting (Flymake)"
+                     flymake-mode
+                     :help "Linting with LanguageTool"
+                     :style toggle
+                     :selected (bound-and-true-p flymake-mode)]
+                     "Spell Checking")
+                     
 ; left option stays meta, but right option goes back to option!
 (setq mac-right-option-modifier "none")
-(keymap-set global-map "M-#" #'dictionary-lookup-definition)
 
 ;;; Default modes & variables
 
@@ -213,17 +223,16 @@
 (use-package orderless
   :custom
   (completion-styles '(orderless basic))
+  (orderless-matching-styles '(orderless-flex orderless-regexp))
   (completion-category-overrides '((file (styles basic partial-completion)))))
 
 ;; Cape (completion at point extensions)
 (use-package cape
   :bind ("C-c p" . cape-prefix-map) ;; press C-c p ? for help
-  :init
-  (add-hook 'completion-at-point-functions #'cape-dabbrev)
-  (add-hook 'completion-at-point-functions #'cape-file)
-  (add-hook 'completion-at-point-functions #'cape-elisp-block)
-  ;; silence "pcomplete capf" (so says crafted emacs)
-  (advice-add 'pcomplete-completions-at-point :around #'cape-wrap-purify))
+  :hook
+  (completion-at-point-functions . cape-dabbrev)
+  (completion-at-point-functions . cape-file)
+  (completion-at-point-functions . cape-elisp-block))
 
 ;; web mode
 (use-package web-mode
@@ -262,7 +271,7 @@
   (markdown-open-command "/usr/local/bin/mark"))
 
 (use-package flymake-markdownlint
-  :hook (markdown-mode . flymake-markdownline-setup))
+  :hook (markdown-mode . flymake-markdownlint-setup))
 
 ;; yaml
 (use-package yaml-mode
@@ -274,7 +283,7 @@
 
 ;; eldoc-box (prettier documentation popups)
 (use-package eldoc-box
-  :hook (eglot-managed-mode-hook #'eldoc-box-hover-mode)
+  :hook (eglot-managed-mode-hook . eldoc-box-hover-mode)
   :bind (("C-h ." . eldoc-box-help-at-point)))
 
 ;; doom-modeline
