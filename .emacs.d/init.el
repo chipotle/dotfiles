@@ -6,15 +6,14 @@
 	   (file-exists-p custom-file))
   (load custom-file nil :nomessage))
 
-;; Enable mouse in temrinal mouse
+;; Enable mouse in terminal
 (defun wm/enable-mouse ()
   (unless (display-graphic-p)
     (xterm-mouse-mode 1)))
 (add-hook 'after-init-hook #'wm/enable-mouse)
 
-;; Load zap gremlins
-(when (file-exists-p "~/.emacs.d/zap-gremlins.el")
-  (load "~/.emacs.d/zap-gremlins"))
+;; Load library functions
+(load "~/.emacs.d/wm-lib" t t)
 
 ;;; Keybindings
 
@@ -93,16 +92,10 @@
 ;; Set buffer face for Info manuals to be more interesting
 (setq buffer-face-mode-face '(:family "Triplicate T4p" :height 140))
 (add-hook 'Info-mode-hook #'buffer-face-mode)
-
-;; (add-to-list 'display-buffer-alist
-;;              '("\\*Help\\*"
-;;                (display-buffer-reuse-window display-buffer-pop-up-window)))
-
-;; (add-to-list 'display-buffer-alist
-;;              '("\\*Completions\\*"
-;;                (display-buffer-reuse-window display-buffer-pop-up-window)
-;;                (inhibit-same-window . t)
-;;                (window-height . 10)))
+;; keep the Ediff control panel in the same frame
+(customize-set-variable 'ediff-window-setup-function
+                        'ediff-setup-windows-plain)
+(repeat-mode 1)                        ; enable repeat-mode
 
 ;;; Configure external packages
 

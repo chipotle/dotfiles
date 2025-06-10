@@ -1,10 +1,24 @@
+;;; Library functions
+
+;; Smarter keyboard quit
+;; https://emacsredux.com/blog/2025/06/01/let-s-make-keyboard-quit-smarter/
+(defun er-keyboard-quit ()
+  "Smarter version of the built-in `keyboard-quit'.
+
+The generic `keyboard-quit' does not do the expected thing when
+the minibuffer is open.  Whereas we want it to close the
+minibuffer, even without explicitly focusing it."
+  (interactive)
+  (if (active-minibuffer-window)
+      (if (minibufferp)
+          (minibuffer-keyboard-quit)
+        (abort-recursive-edit))
+    (keyboard-quit)))
+(global-set-key [remap keyboard-quit] #'er-keyboard-quit)
+
+;; Adapted from Xah Lee's zap gremlins
 ;; http://xahlee.info/emacs/emacs/emacs_zap_gremlins.html
 (defun zap-gremlins (&optional Begin End)
-  "Remove accented letters in current line or selection.
-e.g. café → cafe.
-
-URL `http://xahlee.info/emacs/emacs/emacs_zap_gremlins.html'
-Version: 2018-11-12 2021-09-17 2022-05-02"
   (interactive)
   (let ((xcharMap
           [
