@@ -1,0 +1,7 @@
+# -*- mode: snippet -*-
+# name: Arilin Illustration
+# key: gc-illo
+# --
+{{ illustration(src="$1", alt="$2", artist="$3", artist_url="$4") }}
+
+$0
