@@ -30,7 +30,7 @@
 (easy-menu-add-item global-map '(menu-bar tools)
                     ["Automatic Linting (Flymake)"
                      flymake-mode
-                     :help "Linting with LanguageTool"
+                     :help "Linting (with LanguageTool in text modes)"
                      :style toggle
                      :selected (bound-and-true-p flymake-mode)]
                      "Spell Checking")
@@ -311,26 +311,16 @@
                                   dashboard-insert-items))
 
 
-;; ligatures
+;; ligatures - a very selective subset
+(setq prog-ligatures
+      '("-->" "->" "<--" "<-" ".=" "..=" "|>" "<|" "||>" "<||" "|||>" "<|||"
+        "=>" "&&" "$>" "<$"))
+(setq text-ligatures
+      '("##" "###" "####" "--" "---" "++" "+++" ":=" "*>" "<*" "<*>"))
 (use-package ligature
   :config
-  (ligature-set-ligatures 'prog-mode '("<!---" "--->" "<!--" "<==>" "-->" "->>"
-                                       "-<<" "/==" "||>" "||=" "|->" "&=" "&^="
-                                       "===" "==>" "=>>" "=<<" "=/=" ">->"
-                                       ">=>" ">>-" ">>=" "<--" "<->" "<-<"
-                                       "<||" "<|>" "<=" "<==" "<=>" "<=<" "<<-"
-                                       "<<=" ">&=" "<&-" "&>>" "&>" "->" "-<"
-                                       "!=" "/=" "|=" "|>" "==" "=>" ">-" ">="
-                                       "<-" "<|" "<~" "~=" "~>" "'''" "\"\"\""
-                                       ":=" ":>" ":<" "?=" "**" "***" "*>"
-                                       "*/" "-=" "*=" "+=" "%=" "#:" "#!" "#?"
-                                       "#=" "/*" "/>" "///" "//" "/**" "$("
-                                       ">&" "<&" "&&" "$>" ".." ".=" "+>" "=:="
-                                       "=!=" ">:" ">>" "<(" ">>>" "<(" "<:"
-                                       "<*" "<*>" "<$" "<$>" "<+" "<+>" "<>"
-                                       "<<" "<<<" "</" "</>" "^=" "%%"))
-  (ligature-set-ligatures 't '("##" "###" "####" "++" "+++" "--" "---" "..."
-                               "::" ":::" "!!" "!!!" "?:" "??"))
+  (ligature-set-ligatures 't text-ligatures)
+  (ligature-set-ligatures 'prog-mode prog-ligatures)
   (global-ligature-mode t))
 
 ;; YASnippet
