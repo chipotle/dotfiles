@@ -9,6 +9,10 @@
  '(ef-themes-variable-pitch-ui t)
  '(flymake-no-changes-timeout 2.0)
  '(line-spacing 3)
+ '(markdown-header-scaling t)
+ '(markdown-header-scaling-values '(1.5 1.2 1.1 1.0 1.0 1.0))
+ '(markdown-marginalize-headers t)
+ '(markdown-marginalize-headers-margin-width 5)
  '(modus-themes-to-toggle '(modus-operandi-tinted modus-vivendi-tinted))
  '(modus-themes-variable-pitch-ui t)
  '(package-selected-packages
@@ -22,8 +26,9 @@
    '((ultra-scroll :url "https://github.com/jdtsmith/ultra-scroll")))
  '(ring-bell-function 'ignore)
  '(safe-local-variable-values
-   '((web-mode-indent-style . 2) (web-mode-block-padding . 2)
-     (web-mode-script-padding . 2) (web-mode-style-padding . 2)))
+   '((indent-tab-mode . t) (web-mode-indent-style . 2)
+     (web-mode-block-padding . 2) (web-mode-script-padding . 2)
+     (web-mode-style-padding . 2)))
  '(sentence-end-double-space nil)
  '(tool-bar-mode nil)
  '(visible-bell t))
