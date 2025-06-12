@@ -51,8 +51,14 @@
 (customize-set-variable 'switch-to-buffer-obey-display-actions t)
 (customize-set-variable 'ibuffer-old-time 24) ; delete old ibuffers
 (delete-selection-mode)                 ; typing replaces selection
-(setq-default indent-tabs-mode nil)     ; default to spaces
-(setq-default tab-width 4)              ; default to indent of 4
+(setq indent-tabs-mode nil)             ; default to spaces
+(setq tab-width 4)                      ; default to indent of 4
+(setq apropos-sort-by-scores t)         ; best match sorting
+(setq flymake-no-changes-timeout 2.0)   ; 2 sec timeout
+(setq line-spacing 3)                   ; tweak line spacing
+(setq ring-bell-function 'ignore)       ; no bell!
+(tool-bar-mode -1)                      ; no tool bar, either
+(setq sentence-end-double-space nil)    ; it's not 1983 anymore
 ; don't duplicate strings in kill ring
 (customize-set-variable 'kill-do-not-save-duplicates t)
 (global-so-long-mode 1)                 ; handle long lines better
@@ -109,10 +115,25 @@
 (require 'use-package-ensure)
 (setq use-package-always-ensure t)
 
-;; Force EF themes (also see custom.el!)
-(use-package ef-themes)
-(mapc #'disable-theme custom-enabled-themes)
+;; Set up EF-themes
+(use-package ef-themes
+  :custom
+  (ef-themes-to-toggle '(ef-reverie ef-dream))
+  (ef-themes-variable-pitch-ui t)
+  (ef-themes-disable-other-themes nil))
+(setq ef-themes-headings
+      '((1 regular variable-pitch 1.6)
+	(2 1.4)
+	(3 1.2)
+	(4 bold 1.1)))
+;; (mapc #'disable-theme custom-enabled-themes)
 (ef-themes-select 'ef-reverie)
+
+;; Modus themes fallback settings
+(setq-default
+ modus-themes-to-toggle
+ '(modus-operandi-tinted modus-vivendi-tinted)
+ modus-themes-variable-pitch-ui t)
 
 ;; Vertico (vertical completion) and Marginalia
 (use-package vertico
@@ -261,6 +282,8 @@
 (use-package markdown-mode
   :custom
   (markdown-command '("pandoc" "--from=markdown" "--to=html5"))
+  ;; (markdown-header-scaling t)
+  ;; (markdown-header-scaling-values '(1.5 1.2 1.1 1.0 1.0 1.0))
   (markdown-italic-underscore t)
   (markdown-asymmetric-header t)
   (markdown-open-command "/usr/local/bin/mark"))
