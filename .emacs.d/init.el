@@ -74,7 +74,7 @@
 	  #'executable-make-buffer-file-executable-if-script-p)
 (setq-default                           ; display line #s in prog modes
  display-line-numbers-grow-only t
- display-line-numbers-width 2)
+ display-line-numbers-width 3)
 (add-hook 'prog-mode-hook #'display-line-numbers-mode)
 ;; configure autosaving to get files saved elsewhere
 (setf kill-buffer-delete-auto-save-files t)
@@ -96,6 +96,8 @@
 (customize-set-variable 'ediff-window-setup-function
                         'ediff-setup-windows-plain)
 (repeat-mode 1)                        ; enable repeat-mode
+(add-hook 'js-mode-hook                ; JS/JSON indents
+          (lambda () (setq js-indent-level 2)))
 
 ;;; Configure external packages
 
@@ -304,17 +306,24 @@
                                   dashboard-insert-items))
 
 
-;; ligatures - a very selective subset
-(setq prog-ligatures
-      '("-->" "->" "<--" "<-" ".=" "..=" "|>" "<|" "||>" "<||" "|||>" "<|||"
-        "=>" "&&" "$>" "<$"))
-(setq text-ligatures
-      '("##" "###" "####" "--" "---" "++" "+++" ":=" "*>" "<*" "<*>"))
+;; ligatures
 (use-package ligature
   :config
-  (ligature-set-ligatures 't text-ligatures)
-  (ligature-set-ligatures 'prog-mode prog-ligatures)
-  (global-ligature-mode t))
+  ;; Enable traditional ligature support in eww-mode, if the
+  ;; `variable-pitch' face supports it
+  (ligature-set-ligatures 'eww-mode '("ff" "fi" "ffi"))
+  ;; All modes get Markdown header ligatures
+  (ligature-set-ligatures 't '(("#" (rx (+ "#")))))
+  ;; Programming modes get a selection of other ligatures
+  (ligature-set-ligatures 'prog-mode
+                          '(("-" (rx (+ (or "-" "=" ">"))))
+                            ("=" (rx (+ (or "=" ">"))))
+                            ("<" (rx (+ (or "<" "-" "+" "=" "|"))))
+                            ("+" (rx (+ (or "+" ">" "="))))
+                            ("." (rx (+ (or "." "="))))
+                            ("|" (rx (* "|") ">"))
+                            "??" ":=" ">="))
+  (global-ligature-mode t)) 
 
 ;; YASnippet
 (use-package yasnippet

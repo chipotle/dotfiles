@@ -11,8 +11,6 @@
  '(line-spacing 3)
  '(markdown-header-scaling t)
  '(markdown-header-scaling-values '(1.5 1.2 1.1 1.0 1.0 1.0))
- '(markdown-marginalize-headers t)
- '(markdown-marginalize-headers-margin-width 5)
  '(modus-themes-to-toggle '(modus-operandi-tinted modus-vivendi-tinted))
  '(modus-themes-variable-pitch-ui t)
  '(package-selected-packages
