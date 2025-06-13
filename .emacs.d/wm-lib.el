@@ -72,3 +72,13 @@ minibuffer, even without explicitly focusing it."
   (if (eq system-type 'darwin)
       (string-equal "true" (string-trim (shell-command-to-string "osascript -e 'tell application \"System Events\" to tell appearance preferences to return dark mode'")))
     nil))
+
+;;; Add Org mode emphasis toggle
+(defun org-toggle-emphasis ()
+  "Toggle visibility of Org mode emphasis markers."
+  (interactive)
+  (if org-hide-emphasis-markers
+      (set-variable 'org-hide-emphasis-markers nil)
+    (set-variable 'org-hide-emphasis-markers t))
+  (org-mode-restart))
+(define-key org-mode-map (kbd "C-c e") 'org-toggle-emphasis)
