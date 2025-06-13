@@ -66,3 +66,9 @@ minibuffer, even without explicitly focusing it."
            (while (re-search-forward (elt xpair 0) (point-max) t)
              (replace-match (elt xpair 1))))
          xcharMap)))))
+
+;; test if Emacs is in dark mode on Mac
+(defun wm-is-dark-mode ()
+  (if (eq system-type 'darwin)
+      (string-equal "true" (string-trim (shell-command-to-string "osascript -e 'tell application \"System Events\" to tell appearance preferences to return dark mode'")))
+    nil))

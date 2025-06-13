@@ -8,7 +8,7 @@
    '(cape corfu dashboard doom-modeline ef-themes eldoc-box
           embark-consult expand-region flymake-languagetool
           flymake-markdownlint json-mode ligature magit marginalia
-          markdown-mode mood-line orderless outline-indent php-mode
+          markdown-mode orderless outline-indent php-mode
           poly-markdown rainbow-delimiters typescript-mode
           ultra-scroll vertico web-mode yaml-mode yasnippet))
  '(package-vc-selected-packages
