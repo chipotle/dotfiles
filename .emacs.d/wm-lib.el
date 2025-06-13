@@ -66,3 +66,13 @@ minibuffer, even without explicitly focusing it."
            (while (re-search-forward (elt xpair 0) (point-max) t)
              (replace-match (elt xpair 1))))
          xcharMap)))))
+
+;;; Add Org mode emphasis toggle
+(defun org-toggle-emphasis ()
+  "Toggle visibility of Org mode emphasis markers."
+  (interactive)
+  (if org-hide-emphasis-markers
+      (set-variable 'org-hide-emphasis-markers nil)
+    (set-variable 'org-hide-emphasis-markers t))
+  (org-mode-restart))
+(define-key org-mode-map (kbd "C-c e") 'org-toggle-emphasis)
