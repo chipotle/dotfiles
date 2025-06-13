@@ -67,6 +67,12 @@ minibuffer, even without explicitly focusing it."
              (replace-match (elt xpair 1))))
          xcharMap)))))
 
+;; test if Emacs is in dark mode on Mac
+(defun wm-is-dark-mode ()
+  (if (eq system-type 'darwin)
+      (string-equal "true" (string-trim (shell-command-to-string "osascript -e 'tell application \"System Events\" to tell appearance preferences to return dark mode'")))
+    nil))
+
 ;;; Add Org mode emphasis toggle
 (defun org-toggle-emphasis ()
   "Toggle visibility of Org mode emphasis markers."
