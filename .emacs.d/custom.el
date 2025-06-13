@@ -22,7 +22,7 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(default ((t (:height 120 :family "IBM Plex Mono"))))
+ '(default ((t (:height 140 :family "IBM Plex Mono"))))
  '(eldoc-box-body ((t (:family "SF Pro"))))
  '(tab-line ((t (:inherit modus-themes-ui-variable-pitch :background "#e0d4ce"))))
  '(variable-pitch ((t (:height 120 :family "SF Pro")))))

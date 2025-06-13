@@ -123,10 +123,9 @@
   (ef-themes-variable-pitch-ui t)
   (ef-themes-disable-other-themes nil))
 (setq ef-themes-headings
-      '((1 bold 1.6)
-	    (2 1.4)
-	    (3 1.2)
-	    (4 bold 1.1)))
+      '((1 bold 1.5)
+	    (2 1.2)
+	    (t bold)))
 (ef-themes-select 'ef-reverie)
 
 ;; Modus themes fallback settings
