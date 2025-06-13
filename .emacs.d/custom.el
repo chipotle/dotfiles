@@ -6,11 +6,11 @@
  ;; If there is more than one, they won't work right.
  '(package-selected-packages
    '(cape corfu dashboard doom-modeline ef-themes eldoc-box
-	  embark-consult expand-region flymake-languagetool
-	  flymake-markdownlint json-mode ligature magit marginalia
-	  markdown-mode mood-line orderless outline-indent php-mode
-	  poly-markdown rainbow-delimiters typescript-mode
-	  ultra-scroll vertico web-mode yaml-mode yasnippet))
+          embark-consult expand-region flymake-languagetool
+          flymake-markdownlint json-mode ligature magit marginalia
+          markdown-mode mood-line orderless outline-indent php-mode
+          poly-markdown rainbow-delimiters typescript-mode
+          ultra-scroll vertico web-mode yaml-mode yasnippet))
  '(package-vc-selected-packages
    '((ultra-scroll :url "https://github.com/jdtsmith/ultra-scroll")))
  '(safe-local-variable-values
@@ -22,7 +22,7 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(default ((t (:height 130 :family "MonoLisa"))))
+ '(default ((t (:height 120 :family "IBM Plex Mono"))))
  '(eldoc-box-body ((t (:family "SF Pro"))))
  '(tab-line ((t (:inherit modus-themes-ui-variable-pitch :background "#e0d4ce"))))
- '(variable-pitch ((t (:height 130 :family "SF Pro")))))
+ '(variable-pitch ((t (:height 120 :family "SF Pro")))))
