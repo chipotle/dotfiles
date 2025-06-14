@@ -81,4 +81,3 @@ minibuffer, even without explicitly focusing it."
       (set-variable 'org-hide-emphasis-markers nil)
     (set-variable 'org-hide-emphasis-markers t))
   (org-mode-restart))
-(define-key org-mode-map (kbd "C-c e") 'org-toggle-emphasis)

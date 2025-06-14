@@ -6,14 +6,20 @@
 	   (file-exists-p custom-file))
   (load custom-file nil :nomessage))
 
+;; Load library functions
+(load "~/.emacs.d/wm-lib" t t)
+
+;; set initial window size
+(setq initial-frame-alist
+      (append initial-frame-alist
+              '((width . 120)
+                (height . 40))))
+
 ;; Enable mouse in terminal
 (defun wm/enable-mouse ()
   (unless (display-graphic-p)
     (xterm-mouse-mode 1)))
 (add-hook 'after-init-hook #'wm/enable-mouse)
-
-;; Load library functions
-(load "~/.emacs.d/wm-lib" t t)
 
 ;;; Keybindings
 
@@ -23,6 +29,7 @@
 (keymap-global-set "C-c l" #'org-store-link)
 (keymap-global-set "C-c a" #'org-agenda)
 (keymap-global-set "C-c c" #'org-capture)
+(keymap-global-set "C-c e" #'org-toggle-emphasis)
 (keymap-global-set "M-#" #'dictionary-lookup-definition)
 ; modify Tools menu a little
 (define-key-after global-map [menu-bar tools ede] nil t)
@@ -91,14 +98,7 @@
 (setq auto-save-file-name-transforms
       `((".*" ,temporary-file-directory t)))
 (setq create-lockfiles nil)
-;; set initial window size
-(setq initial-frame-alist
-      (append initial-frame-alist
-              '((width . 120)
-                (height . 40))))
-;; Set buffer face for Info manuals to be more interesting
-(setq buffer-face-mode-face '(:family "Triplicate T4p" :height 140))
-(add-hook 'Info-mode-hook #'buffer-face-mode)
+
 ;; keep the Ediff control panel in the same frame
 (customize-set-variable 'ediff-window-setup-function
                         'ediff-setup-windows-plain)
