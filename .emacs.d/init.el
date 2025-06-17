@@ -106,6 +106,12 @@
 (add-hook 'js-mode-hook                ; JS/JSON indents
           (lambda () (setq js-indent-level 2)))
 
+;; Set up proportional fonts for specific modes
+(defun wm-text-face ()
+        (face-remap-add-relative 'default :family "Triplicate T4p"))
+;; (setq buffer-face-mode-face '(:family "Triplicate T4p"))
+(add-hook 'text-mode-hook 'wm-text-face)
+
 ;;; Configure external packages
 
 ;; set up package archives and ensure installation

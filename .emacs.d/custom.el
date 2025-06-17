@@ -23,6 +23,7 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(default ((t (:height 140 :family "IBM Plex Mono"))))
+ '(ef-themes-fixed-pitch ((t (:family "Triplicate T4c"))) t)
  '(eldoc-box-body ((t (:family "SF Pro"))))
  '(tab-line ((t (:inherit modus-themes-ui-variable-pitch :background "#e0d4ce"))))
  '(variable-pitch ((t (:height 120 :family "SF Pro")))))
