@@ -52,11 +52,11 @@ minibuffer, even without explicitly focusing it."
          (xp1 (if Begin Begin
                 (if (region-active-p)
                     (region-beginning)
-                  (line-beginning-position))))
+                  (point-min))))
          (xp2 (if End End
                 (if (region-active-p)
                     (region-end)
-                  (line-end-position)))))
+                  (point-max)))))
     (let ((case-fold-search t))
       (save-restriction
         (narrow-to-region xp1 xp2)
