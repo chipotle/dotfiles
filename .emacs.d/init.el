@@ -109,7 +109,6 @@
 ;; Set up proportional fonts for specific modes
 (defun wm-text-face ()
         (face-remap-add-relative 'default :family "Triplicate T4p"))
-;; (setq buffer-face-mode-face '(:family "Triplicate T4p"))
 (add-hook 'text-mode-hook 'wm-text-face)
 
 ;;; Configure external packages
@@ -383,7 +382,8 @@
   (flymake-languagetool-url "https://api.languagetool.org"))
 
 ;; Polymode, for Tera shortcodes
-(use-package poly-markdown)
+(use-package poly-markdown
+  :disabled t)
 (define-hostmode poly-tera-md-hostmode :mode 'poly-markdown-mode)
 (define-innermode poly-tera-innermode
   :mode 'python-mode
@@ -396,13 +396,13 @@
   :innermodes '(poly-tera-innermode))
 
 ;; Ultrascroll
-(use-package ultra-scroll
-  :vc (:url "https://github.com/jdtsmith/ultra-scroll")
-  :init
-  (setq scroll-conservatively 3
-        scroll-margin 0)
-  :config
-  (ultra-scroll-mode 1))
+;; (use-package ultra-scroll
+;;   :vc (:url "https://github.com/jdtsmith/ultra-scroll")
+;;   :init
+;;   (setq scroll-conservatively 3
+;;         scroll-margin 0)
+;;   :config
+;;   (ultra-scroll-mode 1))
 
 ;; TODO: investigate Treemacs
 ;; investigate treesitter modes (Crafted Emacs again?)
