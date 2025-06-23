@@ -4,6 +4,8 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
+ '(org-agenda-files
+   '("~/Library/Mobile Documents/com~apple~CloudDocs/Docs/Anthrocon-2025.org"))
  '(package-selected-packages
    '(cape corfu dashboard doom-modeline ef-themes eldoc-box
           embark-consult expand-region flymake-languagetool
