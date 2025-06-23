@@ -317,6 +317,9 @@
 
 ;; magit
 (use-package magit)
+(with-eval-after-load 'project
+  (define-key project-prefix-map "m" #'magit-project-status)
+  (add-to-list 'project-switch-commands '(magit-project-status "Magit") t))
 
 ;; dashboard
 (use-package dashboard
