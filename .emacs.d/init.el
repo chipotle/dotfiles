@@ -66,7 +66,6 @@
 (customize-set-variable 'js-indent-level 2) ; except for JavaScript
 (setq apropos-sort-by-scores t)         ; best match sorting
 (setq flymake-no-changes-timeout 2.0)   ; 2 sec timeout
-(customize-set-variable 'line-spacing 3) ; tweak line spacing
 (setq ring-bell-function 'ignore)       ; no bell!
 (tool-bar-mode -1)                      ; no tool bar, either
 (setq sentence-end-double-space nil)    ; it's not 1983 anymore
@@ -135,7 +134,9 @@
       '((1 bold 1.5)
 	    (2 1.2)
 	    (t bold)))
-(ef-themes-select 'ef-reverie)
+(if (wm-is-dark-mode)
+    (ef-themes-select 'ef-dream)
+  (ef-themes-select 'ef-reverie))
 
 ;; Modus themes fallback settings
 (setq-default
@@ -320,6 +321,9 @@
 
 ;; magit
 (use-package magit)
+(with-eval-after-load 'project
+  (define-key project-prefix-map "m" #'magit-project-status)
+  (add-to-list 'project-switch-commands '(magit-project-status "Magit") t))
 
 ;; dashboard
 (use-package dashboard
@@ -335,26 +339,6 @@
                                   dashboard-insert-items))
 
 
-;; ligatures
-(use-package ligature
-  :config
-  ;; Enable traditional ligature support in eww-mode, if the
-  ;; `variable-pitch' face supports it
-  (ligature-set-ligatures 'eww-mode '("ff" "fi" "ffi"))
-  ;; All modes get Markdown header ligatures
-  (ligature-set-ligatures 't '(("#" (rx (+ "#")))))
-  ;; Programming modes get a selection of other ligatures
-  (ligature-set-ligatures 'prog-mode
-                          '(("-" (rx (+ (or "-" "=" ">"))))
-                            ("=" (rx (+ (or "=" ">"))))
-                            ("<" (rx (+ (or "<" "-" "+" "=" "|"))))
-                            ("+" (rx (+ (or "+" ">" "="))))
-                            ("." (rx (+ (or "." "="))))
-                            ("|" (rx (* "|") ">"))
-                            "??" ":=" ">="))
-  (global-ligature-mode t)) 
-
-;; YASnippet
 (use-package yasnippet
   :config
   (yas-global-mode 1))
