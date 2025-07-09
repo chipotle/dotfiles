@@ -11,7 +11,7 @@
           embark-consult expand-region flymake-languagetool
           flymake-markdownlint json-mode ligature magit marginalia
           markdown-mode orderless outline-indent php-mode
-          poly-markdown rainbow-delimiters typescript-mode
+          poly-markdown rainbow-delimiters swift-mode typescript-mode
           ultra-scroll vertico web-mode yaml-mode yasnippet))
  '(package-vc-selected-packages
    '((ultra-scroll :url "https://github.com/jdtsmith/ultra-scroll")))
