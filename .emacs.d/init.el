@@ -31,7 +31,10 @@
 (keymap-global-set "C-c c" #'org-capture)
 (keymap-global-set "C-c e" #'org-toggle-emphasis)
 (keymap-global-set "M-#" #'dictionary-lookup-definition)
-; modify Tools menu a little
+(keymap-global-set "M-z" #'zap-up-to-char) ; much more useful!
+(keymap-global-set "M-Z" #'zap-to-char)    ; but keep this around
+
+;; modify Tools menu a little
 (define-key-after global-map [menu-bar tools ede] nil t)
 (easy-menu-add-item global-map '(menu-bar tools)
                     ["Automatic Linting (Flymake)"
@@ -41,7 +44,7 @@
                      :selected (bound-and-true-p flymake-mode)]
                      "Spell Checking")
                      
-; left option stays meta, but right option goes back to option!
+;; left option stays meta, but right option goes back to option!
 (setq mac-right-option-modifier "none")
 
 ;;; Default modes & variables
@@ -60,6 +63,7 @@
 (delete-selection-mode)                 ; typing replaces selection
 (customize-set-variable 'indent-tabs-mode nil) ; default to spaces
 (customize-set-variable 'tab-width 4)   ; default to indent of 4
+(customize-set-variable 'js-indent-level 2) ; except for JavaScript
 (setq apropos-sort-by-scores t)         ; best match sorting
 (setq flymake-no-changes-timeout 2.0)   ; 2 sec timeout
 (customize-set-variable 'line-spacing 3) ; tweak line spacing
