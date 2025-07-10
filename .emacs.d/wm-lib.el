@@ -81,3 +81,18 @@ minibuffer, even without explicitly focusing it."
       (set-variable 'org-hide-emphasis-markers nil)
     (set-variable 'org-hide-emphasis-markers t))
   (org-mode-restart))
+
+;;; Shortcode, maybe
+(defun wm/markdown-tera-shortcode ()
+  (let ((shortcode-regexp
+         (rx (group "{{" (1+ space))
+             (group (1+ (not "(")))
+             (group (*? any))
+             (group (1+ space) "}}"))))
+    (font-lock-add-keywords
+     nil
+     `((,shortcode-regexp . ((1 'markdown-markup-face)
+                             (2 'markdown-metadata-key-face)
+                             (3 'markdown-metadata-value-face)
+                             (4 'markdown-markup-face)))))))
+

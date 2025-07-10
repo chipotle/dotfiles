@@ -290,6 +290,7 @@
 
 ;; Markdown
 (use-package markdown-mode
+  :hook (markdown-mode . wm/markdown-tera-shortcode)
   :custom
   (markdown-command '("pandoc" "--from=markdown" "--to=html5"))
   (markdown-italic-underscore t)
