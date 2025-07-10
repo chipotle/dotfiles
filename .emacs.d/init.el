@@ -111,7 +111,8 @@
 
 ;; Set up proportional fonts for specific modes
 (defun wm-text-face ()
-        (face-remap-add-relative 'default :family "Triplicate T4p"))
+  (face-remap-add-relative 'default :family "Triplicate T4p" :height 140)
+  (setq-local line-spacing 3))
 (add-hook 'text-mode-hook 'wm-text-face)
 
 ;;; Configure external packages
@@ -370,18 +371,18 @@
   (flymake-languagetool-url "https://api.languagetool.org"))
 
 ;; Polymode, for Tera shortcodes
-(use-package poly-markdown
-  :disabled t)
-(define-hostmode poly-tera-md-hostmode :mode 'poly-markdown-mode)
-(define-innermode poly-tera-innermode
-  :mode 'python-mode
-  :head-matcher "{{"
-  :tail-matcher "}}"
-  :head-mode 'host
-  :tail-mode 'host)
-(define-polymode poly-tera-md-mode
-  :hostmode 'poly-tera-md-hostmode
-  :innermodes '(poly-tera-innermode))
+;; (use-package poly-markdown
+;;   :disabled t)
+;; (define-hostmode poly-tera-md-hostmode :mode 'poly-markdown-mode)
+;; (define-innermode poly-tera-innermode
+;;   :mode 'python-mode
+;;   :head-matcher "{{"
+;;   :tail-matcher "}}"
+;;   :head-mode 'host
+;;   :tail-mode 'host)
+;; (define-polymode poly-tera-md-mode
+;;   :hostmode 'poly-tera-md-hostmode
+;;   :innermodes '(poly-tera-innermode))
 
 ;; Ultrascroll
 ;; (use-package ultra-scroll
