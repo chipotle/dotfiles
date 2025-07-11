@@ -371,29 +371,15 @@
   (flymake-languagetool-server-jar nil)
   (flymake-languagetool-url "https://api.languagetool.org"))
 
-;; Polymode, for Tera shortcodes
-;; (use-package poly-markdown
-;;   :disabled t)
-;; (define-hostmode poly-tera-md-hostmode :mode 'poly-markdown-mode)
-;; (define-innermode poly-tera-innermode
-;;   :mode 'python-mode
-;;   :head-matcher "{{"
-;;   :tail-matcher "}}"
-;;   :head-mode 'host
-;;   :tail-mode 'host)
-;; (define-polymode poly-tera-md-mode
-;;   :hostmode 'poly-tera-md-hostmode
-;;   :innermodes '(poly-tera-innermode))
-
 ;; Ultrascroll
-;; (use-package ultra-scroll
-;;   :vc (:url "https://github.com/jdtsmith/ultra-scroll")
-;;   :init
-;;   (setq scroll-conservatively 3
-;;         scroll-margin 0)
-;;   :config
-;;   (ultra-scroll-mode 1))
-
+(use-package ultra-scroll
+  :vc (:url "https://github.com/jdtsmith/ultra-scroll")
+  :init
+  (setq scroll-conservatively 3
+        scroll-margin 0)
+  :config
+  (ultra-scroll-mode 1))
+;; 
 ;; TODO: investigate Treemacs
 ;; investigate treesitter modes (Crafted Emacs again?)
 ;; think about how to mimic tasks from Nova: compile-multi?
