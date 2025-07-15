@@ -379,7 +379,29 @@
         scroll-margin 0)
   :config
   (ultra-scroll-mode 1))
-;; 
+
+;;; transient menus
+
+(defun wm/zola-preview ()
+  (interactive)
+  (async-shell-command "zola serve --drafts"))
+
+(defun wm/zola-deploy ()
+  (interactive)
+  (async-shell-command
+   (concat "cd " (vc-root-dir) "; make deploy")))
+
+;; Zola tasks menu
+(transient-define-prefix wm/zola ()
+  ["Zola Tasks"
+   ("p" "Preview" wm/zola-preview)
+   ("b" "Build"
+    (lambda () (interactive) (async-shell-command "zola build")))
+   ("c" "Check"
+    (lambda () (interactive) (async-shell-command "zola check")))
+   ("D" "Deploy (make)" wm/zola-deploy)])
+(keymap-global-set "C-c z" #'wm/zola)
+
 ;; TODO: investigate Treemacs
 ;; investigate treesitter modes (Crafted Emacs again?)
 ;; think about how to mimic tasks from Nova: compile-multi?

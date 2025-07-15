@@ -95,4 +95,3 @@ minibuffer, even without explicitly focusing it."
                              (2 'markdown-metadata-key-face)
                              (3 'markdown-metadata-value-face)
                              (4 'markdown-markup-face)))))))
-
