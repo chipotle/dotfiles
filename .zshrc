@@ -42,10 +42,10 @@ PS1='${vcs_info_msg_0_}%{$fg[green]%}%m:%2~%#%{$reset_color%} '
 
 # Environment variables and aliases
 
-# export EDITOR=vim
-# export VISUAL=vim
-export EDITOR="emacsclient -nw --alternate-editor=\"\""
-export VISUAL="emacsclient -nw --alternate-editor=\"\""
+export EDITOR=vim
+export VISUAL=vim
+# export EDITOR="/opt/homebrew/bin/emacsclient -nw --alternate-editor=\"\""
+# export VISUAL="/opt/homebrew/bin/emacsclient -nw --alternate-editor=\"\""
 
 alias ls="ls -FG"
 alias mct="mosh watts@coyotetracks.org -- tmux attach -d"
