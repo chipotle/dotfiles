@@ -47,6 +47,10 @@
 ;; left option stays meta, but right option goes back to option!
 (setq mac-right-option-modifier "none")
 
+;; use option keys as option, command key as meta
+;; (setq mac-option-modifier 'none
+;;       mac-command-modifier 'meta)
+
 ;;; Default modes & variables
 
 (prefer-coding-system 'utf-8)           ; keep Windows from dorking out
@@ -111,9 +115,10 @@
 
 ;; Set up proportional fonts for specific modes
 (defun wm-text-face ()
-  (face-remap-add-relative 'default :family "Triplicate T4p" :height 140)
+  (face-remap-add-relative 'default :family "IBM Plex Sans" :height 160)
   (setq-local line-spacing 3))
-(add-hook 'text-mode-hook 'wm-text-face)
+(add-hook 'markdown-mode-hook 'wm-text-face)
+(add-hook 'org-mode-hook 'wm-text-face)
 
 ;;; Configure external packages
 

@@ -5,6 +5,7 @@
 +++
 title = "${1:Title}"
 date = "`(format-time-string "%Y-%m-%d %H:%M:%S")`"
+draft = true
 +++
 
 $0
