@@ -49,6 +49,8 @@ alias ls="ls -FG"
 alias mct="mosh watts@coyotetracks.org -- tmux attach -d"
 alias gpsup='git push --set-upstream origin $(git_current_branch)'
 alias marked="open -a /Applications/Marked\ 2.app"
+alias ec="emacsclient -n"
+alias ect="emacsclient -nw"
 
 # Functions
 
