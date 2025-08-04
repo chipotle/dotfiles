@@ -16,10 +16,10 @@
                 (height . 40))))
 
 ;; Enable mouse in terminal
-(defun wm/enable-mouse ()
-  (unless (display-graphic-p)
-    (xterm-mouse-mode 1)))
-(add-hook 'after-init-hook #'wm/enable-mouse)
+(xterm-mouse-mode 1)
+
+;; start the server
+(server-start)
 
 ;;; Keybindings
 
@@ -394,7 +394,7 @@
 (defun wm/zola-deploy ()
   (interactive)
   (async-shell-command
-   (concat "cd " (vc-root-dir) "; make deploy")))
+   (concat "cd " (doom-modeline--project-root) "; make deploy")))
 
 ;; Zola tasks menu
 (transient-define-prefix wm/zola ()
