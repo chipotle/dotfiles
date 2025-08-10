@@ -73,6 +73,14 @@ minibuffer, even without explicitly focusing it."
       (string-equal "true" (string-trim (shell-command-to-string "osascript -e 'tell application \"System Events\" to tell appearance preferences to return dark mode'")))
     nil))
 
+;; add hook for automatic appearance change
+(defun wm/theme-hook (appearance)
+  "Load theme based on Mac system appearance."
+  (mapc #'disable-theme custom-enabled-themes)
+  (pcase appearance
+    ('light (ef-themes-select 'ef-reverie))
+    ('dark (ef-themes-select 'ef-dream))))
+
 ;;; Add Org mode emphasis toggle
 (defun org-toggle-emphasis ()
   "Toggle visibility of Org mode emphasis markers."

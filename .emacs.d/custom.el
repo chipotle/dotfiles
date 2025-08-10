@@ -5,7 +5,13 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(org-agenda-files nil)
- '(package-selected-packages nil)
+ '(package-selected-packages
+   '(cape corfu dashboard doom-modeline ef-themes eldoc-box
+          embark-consult expand-region flymake-languagetool
+          flymake-markdownlint json-mode langtool magit marginalia
+          markdown-mode orderless outline-indent php-mode
+          rainbow-delimiters swift-mode typescript-mode ultra-scroll
+          vertico web-mode yaml-mode yasnippet))
  '(safe-local-variable-values
    '((indent-tab-mode . t) (web-mode-indent-style . 2)
      (web-mode-block-padding . 2) (web-mode-script-padding . 2)

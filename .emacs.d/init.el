@@ -1,12 +1,8 @@
-;;; Emacs init file
-
 ;; path magic
 (defun set-exec-path-from-shell-PATH ()
   "Set up Emacs' `exec-path' and PATH environment variable to match
-that used by the user's shell.
-
-This is particularly useful under Mac OS X and macOS, where GUI
-apps are not started from a shell."
+that used by the user's shell. This is particularly useful under macOS,
+where GUI apps are not started from a shell."
   (interactive)
   (let ((path-from-shell (replace-regexp-in-string
 			  "[ \t\n]*$" "" (shell-command-to-string
@@ -55,17 +51,13 @@ apps are not started from a shell."
 (easy-menu-add-item global-map '(menu-bar tools)
                     ["Automatic Linting (Flymake)"
                      flymake-mode
-                     :help "Linting (with LanguageTool in text modes)"
+                     :help "Linting with Flymake"
                      :style toggle
                      :selected (bound-and-true-p flymake-mode)]
                      "Spell Checking")
                      
 ;; left option stays meta, but right option goes back to option!
 (setq mac-right-option-modifier "none")
-
-;; use option keys as option, command key as meta
-;; (setq mac-option-modifier 'none
-;;       mac-command-modifier 'meta)
 
 ;;; Default modes & variables
 
@@ -156,9 +148,13 @@ apps are not started from a shell."
       '((1 bold 1.5)
 	    (2 1.2)
 	    (t bold)))
-(if (wm-is-dark-mode)
-    (ef-themes-select 'ef-dream)
-  (ef-themes-select 'ef-reverie))
+
+;; hook into system appearance change if it's there, otherwise test
+(if (boundp 'ns-system-appearance-change-functions)
+    (add-hook 'ns-system-appearance-change-functions #'wm/theme-hook)
+  (if (wm-is-dark-mode)
+      (ef-themes-select 'ef-dream)
+    (ef-themes-select 'ef-reverie)))
 
 ;; Modus themes fallback settings
 (setq-default
@@ -190,13 +186,8 @@ apps are not started from a shell."
 (use-package consult
   :bind (;; C-c bindings in `mode-specific-map'
          ("C-c M-x" . consult-mode-command)
-         ("C-c h" . consult-history)
-         ("C-c k" . consult-kmacro)
-         ("C-c m" . consult-man)
-         ("C-c i" . consult-info)
          ([remap Info-search] . consult-info)
          ;; C-x bindings in `ctl-x-map'
-         ("C-x M-:" . consult-complex-command)     ; repeat-complex-command
          ("C-x b" . consult-buffer)                ; switch-to-buffer
          ("C-x 4 b" . consult-buffer-other-window) ; switch-to-buffer-other-window
          ("C-x 5 b" . consult-buffer-other-frame)  ; switch-to-buffer-other-frame
@@ -232,11 +223,7 @@ apps are not started from a shell."
          ("M-s e" . consult-isearch-history)       ; isearch-edit-string
          ("M-s l" . consult-line)                  ; needed by consult-line to detect isearch
          ("M-s L" . consult-line-multi)            ; needed by consult-line to detect isearch
-         ;; Minibuffer history
-         :map minibuffer-local-map
-         ("M-s" . consult-history)                 ; next-matching-history-element
-         ("M-r" . consult-history))                ; previous-matching-history-element
-
+         )
   ;; Enable automatic preview at point in the *Completions* buffer
   :hook (completion-list-mode . consult-preview-at-point-mode)
 
@@ -361,7 +348,7 @@ apps are not started from a shell."
                                   dashboard-insert-init-info
                                   dashboard-insert-items))
 
-
+;; yasnippet
 (use-package yasnippet
   :config
   (yas-global-mode 1))
@@ -422,8 +409,3 @@ apps are not started from a shell."
     (lambda () (interactive) (async-shell-command "zola check")))
    ("D" "Deploy (make)" wm/zola-deploy)])
 (keymap-global-set "C-c z" #'wm/zola)
-
-;; TODO: investigate Treemacs
-;; investigate treesitter modes (Crafted Emacs again?)
-;; think about how to mimic tasks from Nova: compile-multi?
-;; https://github.com/mohkale/compile-multi
