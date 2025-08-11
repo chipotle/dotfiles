@@ -378,6 +378,7 @@ where GUI apps are not started from a shell."
   :custom
   (flymake-languagetool-server-jar nil)
   (flymake-languagetool-url "https://api.languagetool.org"))
+;; (push "WHITESPACE_RULE" flymake-languagetool-disabled-rules)
 
 ;; Ultrascroll
 (use-package ultra-scroll
@@ -390,22 +391,34 @@ where GUI apps are not started from a shell."
 
 ;;; transient menus
 
-(defun wm/zola-preview ()
-  (interactive)
-  (async-shell-command "zola serve --drafts"))
-
 (defun wm/zola-deploy ()
   (interactive)
-  (async-shell-command
-   (concat "cd " (doom-modeline--project-root) "; make deploy")))
+  (shell-command
+   (concat "cd " (project-root (project-current t)) "; make deploy")))
+
+(defun wm/zola-schedule ()
+  (interactive)
+  (shell-command
+   (concat "cd " (project-root (project-current t))
+           "; at "
+           (read-string "Schedule deploy at: ")
+           " < schedule.sh")))
 
 ;; Zola tasks menu
 (transient-define-prefix wm/zola ()
   ["Zola Tasks"
-   ("p" "Preview" wm/zola-preview)
+   ("p" "Preview"
+    (lambda ()
+      (interactive)
+      (async-shell-command "zola serve --drafts" "Zola: Preview Console")))
    ("b" "Build"
-    (lambda () (interactive) (async-shell-command "zola build")))
+    (lambda ()
+      (interactive)
+      (async-shell-command "zola build" "Zola: Build Output")))
    ("c" "Check"
-    (lambda () (interactive) (async-shell-command "zola check")))
-   ("D" "Deploy (make)" wm/zola-deploy)])
+    (lambda ()
+      (interactive)
+      (async-shell-command "zola check" "Zola: Check Site")))
+   ("D" "Deploy (make)" wm/zola-deploy)
+   ("S" "Schedule deployment" wm/zola-schedule)])
 (keymap-global-set "C-c z" #'wm/zola)
