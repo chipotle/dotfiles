@@ -4,10 +4,10 @@
 that used by the user's shell. This is particularly useful under macOS,
 where GUI apps are not started from a shell."
   (interactive)
-  (let ((path-from-shell (replace-regexp-in-string
-			  "[ \t\n]*$" "" (shell-command-to-string
-					  "$SHELL --login -c 'echo $PATH'"
-						    ))))
+  (let ((path-from-shell
+         (replace-regexp-in-string
+		  "[ \t\n]*$" ""
+          (shell-command-to-string "$SHELL --login -c 'echo $PATH'"))))
     (setenv "PATH" path-from-shell)
     (setq exec-path (split-string path-from-shell path-separator))))
 (set-exec-path-from-shell-PATH)
@@ -23,9 +23,7 @@ where GUI apps are not started from a shell."
 
 ;; set initial window size
 (setq initial-frame-alist
-      (append initial-frame-alist
-              '((width . 120)
-                (height . 40))))
+      '((width . 120) (height . 40)))
 
 ;; Enable mouse in terminal
 (xterm-mouse-mode 1)
@@ -57,7 +55,7 @@ where GUI apps are not started from a shell."
                      "Spell Checking")
                      
 ;; left option stays meta, but right option goes back to option!
-(setq mac-right-option-modifier "none")
+(setq mac-right-option-modifier 'none)
 
 ;;; Default modes & variables
 
@@ -208,21 +206,9 @@ where GUI apps are not started from a shell."
          ("M-I" . consult-imenu-multi)
          ;; M-s bindings in `search-map'
          ("M-s d" . consult-find)                  ; Alternative: consult-fd
-         ("M-s c" . consult-locate)
          ("M-s g" . consult-grep)
          ("M-s G" . consult-git-grep)
          ("M-s r" . consult-ripgrep)
-         ("M-s l" . consult-line)
-         ("M-s L" . consult-line-multi)
-         ("M-s k" . consult-keep-lines)
-         ("M-s u" . consult-focus-lines)
-         ;; Isearch integration
-         ("M-s e" . consult-isearch-history)
-         :map isearch-mode-map
-         ("M-e" . consult-isearch-history)         ; isearch-edit-string
-         ("M-s e" . consult-isearch-history)       ; isearch-edit-string
-         ("M-s l" . consult-line)                  ; needed by consult-line to detect isearch
-         ("M-s L" . consult-line-multi)            ; needed by consult-line to detect isearch
          )
   ;; Enable automatic preview at point in the *Completions* buffer
   :hook (completion-list-mode . consult-preview-at-point-mode)
@@ -294,7 +280,13 @@ where GUI apps are not started from a shell."
   (add-to-list 'eglot-server-programs
                `(php-mode . ,(eglot-alternatives
                               '(("intelephense" "--stdio")))))
+  (add-to-list 'eglot-server-programs
+               '(markdown-mode . ("harper-ls" "--stdio")))
   :custom (eglot-autoshutdown t))
+(setq-default eglot-workspace-configuration
+              '(:harper-ls (:linters
+                            (:NoOxfordComma t :AvoidCurses :json-false
+                             :BoringWords t :Dashes :json-false))))
 
 ;; Markdown
 (use-package markdown-mode
@@ -369,20 +361,8 @@ where GUI apps are not started from a shell."
   ("C-=" . er/expand-region)
   ("C-+" . er/contract-region))
 
-;; Languagetool - this intentionally does NOT autostart
-(use-package flymake-languagetool
-  :hook ((text-mode       . flymake-languagetool-load)
-         (latex-mode      . flymake-languagetool-load)
-         (org-mode        . flymake-languagetool-load)
-         (markdown-mode   . flymake-languagetool-load))
-  :custom
-  (flymake-languagetool-server-jar nil)
-  (flymake-languagetool-url "https://api.languagetool.org"))
-;; (push "WHITESPACE_RULE" flymake-languagetool-disabled-rules)
-
 ;; Ultrascroll
 (use-package ultra-scroll
-  :vc (:url "https://github.com/jdtsmith/ultra-scroll")
   :init
   (setq scroll-conservatively 3
         scroll-margin 0)
