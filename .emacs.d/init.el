@@ -1,8 +1,5 @@
-;; path magic
+;; path magic: match shell on macOS
 (defun set-exec-path-from-shell-PATH ()
-  "Set up Emacs' `exec-path' and PATH environment variable to match
-that used by the user's shell. This is particularly useful under macOS,
-where GUI apps are not started from a shell."
   (interactive)
   (let ((path-from-shell
          (replace-regexp-in-string
@@ -23,7 +20,7 @@ where GUI apps are not started from a shell."
 
 ;; set initial window size
 (setq initial-frame-alist
-      '((width . 120) (height . 40)))
+      '((width . 100) (height . 50)))
 
 ;; Enable mouse in terminal
 (xterm-mouse-mode 1)
@@ -368,6 +365,9 @@ where GUI apps are not started from a shell."
         scroll-margin 0)
   :config
   (ultra-scroll-mode 1))
+
+(use-package emacs-everywhere)
+(setq emacs-everywhere-markdown-apps '("Ulysses" "MailMate" "Discord" "Slack"))
 
 ;;; transient menus
 
