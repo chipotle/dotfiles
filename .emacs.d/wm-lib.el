@@ -67,6 +67,38 @@ minibuffer, even without explicitly focusing it."
              (replace-match (elt xpair 1))))
          xcharMap)))))
 
+;; Another adaptation, for Smartypants function
+(defun smartypants (&optional Begin End)
+  (interactive)
+  (let ((xcharMap
+          [
+           ["\\(\\s-\\)\"" "\\1“"]
+           ["\"" "”"]
+           ["\\(\\s-\\)'" "\\1‘"]
+           ["'" "’"]
+           ["\\b---" "—"]
+           ["---\\b" "—"]
+           ["\\b--\\b" "–"]
+           ["\\.\\.\\." "…"]
+           ])
+         (xp1 (if Begin Begin
+                (if (region-active-p)
+                    (region-beginning)
+                  (point-min))))
+         (xp2 (if End End
+                (if (region-active-p)
+                    (region-end)
+                  (point-max)))))
+    (let ((case-fold-search t))
+      (save-restriction
+        (narrow-to-region xp1 xp2)
+        (mapc
+         (lambda (xpair)
+           (goto-char (point-min))
+           (while (re-search-forward (elt xpair 0) (point-max) t)
+             (replace-match (elt xpair 1))))
+         xcharMap)))))
+
 ;; test if Emacs is in dark mode on Mac
 (defun wm-is-dark-mode ()
   (if (eq system-type 'darwin)
