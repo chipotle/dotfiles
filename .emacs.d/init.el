@@ -279,6 +279,10 @@
                               '(("intelephense" "--stdio")))))
   (add-to-list 'eglot-server-programs
                '(markdown-mode . ("harper-ls" "--stdio")))
+  (message "warning: `json-rpc--log-event' is ignored.")
+  (fset #'jsonrpc--log-event #'ignore)
+  (add-to-list 'eglot-server-programs
+               '(swift-mode . ("/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/sourcekit-lsp")))
   :custom (eglot-autoshutdown t))
 (setq-default eglot-workspace-configuration
               '(:harper-ls (:linters
