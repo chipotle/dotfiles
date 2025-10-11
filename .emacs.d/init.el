@@ -51,8 +51,11 @@
                      :selected (bound-and-true-p flymake-mode)]
                      "Spell Checking")
                      
-;; left option stays meta, but right option goes back to option!
-(setq mac-right-option-modifier 'none)
+;; Swap option back to option, left command to meta, right command
+;; to command
+(setq mac-option-modifier 'none)
+(setq mac-command-modifier 'meta)
+(setq mac-right-command-modifier 'super)
 
 ;;; Default modes & variables
 
