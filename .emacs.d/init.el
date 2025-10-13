@@ -282,8 +282,11 @@
                               '(("intelephense" "--stdio")))))
   (add-to-list 'eglot-server-programs
                '(markdown-mode . ("harper-ls" "--stdio")))
-  (message "warning: `json-rpc--log-event' is ignored.")
-  (fset #'jsonrpc--log-event #'ignore)
+  (add-to-list 'eglot-server-programs
+               '(dart-mode . ("dart" "language-server"
+                              "--protocol" "lsp")))
+;  (message "warning: `json-rpc--log-event' is ignored.")
+;  (fset #'jsonrpc--log-event #'ignore)
   (add-to-list 'eglot-server-programs
                '(swift-mode . ("/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/sourcekit-lsp")))
   :custom (eglot-autoshutdown t))
@@ -373,8 +376,14 @@
   :config
   (ultra-scroll-mode 1))
 
+;; Emacs everywhere, which doesn't really seem to work
 (use-package emacs-everywhere)
 (setq emacs-everywhere-markdown-apps '("Ulysses" "MailMate" "Discord" "Slack"))
+
+;; Dart configuration
+(use-package dart-mode)
+(use-package flymake-dart
+  :vc (:url "https://github.com/flymake/flymake-dart" :branch "main"))
 
 ;;; transient menus
 
