@@ -6,13 +6,15 @@
  ;; If there is more than one, they won't work right.
  '(eglot-ignored-server-capabilities '(:inlayHintProvider))
  '(org-agenda-files nil)
+ '(org-babel-load-languages '((emacs-lisp . t) (ruby . t)))
  '(package-selected-packages
    '(cape corfu dart-mode dashboard doom-modeline ef-themes eldoc-box
-          emacs-everywhere embark-consult expand-region flutter
-          flymake-dart flymake-markdownlint fountain-mode json-mode
-          magit marginalia markdown-mode orderless outline-indent
-          php-mode rainbow-delimiters swift-mode typescript-mode
-          ultra-scroll vertico web-mode yaml-mode yasnippet))
+          embark-consult expand-region flutter flymake-dart
+          flymake-markdownlint fountain-mode json-mode magit
+          marginalia markdown-mode orderless org-side-tree
+          outline-indent php-mode rainbow-delimiters swift-mode
+          typescript-mode ultra-scroll vertico wc-goal-mode web-mode
+          yaml-mode yasnippet))
  '(package-vc-selected-packages
    '((flymake-dart :url "https://github.com/flymake/flymake-dart" :branch
                    "main")))

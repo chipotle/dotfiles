@@ -94,7 +94,8 @@
 (setq auto-window-vscroll nil)          ; scrolling changes
 (customize-set-variable 'fast-but-imprecise-scrolling t)
 (customize-set-variable 'scroll-conservatively 101)
-(customize-set-variable 'scroll-margin 0)
+(customize-set-variable 'scroll-margin 2)
+(customize-set-variable 'scroll-step 1)
 (customize-set-variable 'scroll-preserve-screen-position t)
 (customize-set-variable 'load-prefer-newer t) ; prefer newest ver of file
 (add-hook 'after-save-hook              ; make scripts executable on save
@@ -293,7 +294,8 @@
 (setq-default eglot-workspace-configuration
               '(:harper-ls (:linters
                             (:NoOxfordComma t :AvoidCurses :json-false
-                             :BoringWords t :Dashes :json-false))))
+                                            :BoringWords t :Dashes :json-false))))
+(setq eldoc-echo-area-use-multiline-p nil)
 
 ;; Markdown
 (use-package markdown-mode
@@ -323,7 +325,9 @@
 ;; doom-modeline
 (use-package nerd-icons)
 (use-package doom-modeline
-  :hook (after-init . doom-modeline-mode))
+  :hook (after-init . doom-modeline-mode)
+  :custom
+  (doom-modeline-enable-word-count t))
 
 ;; editorconfig
 (add-hook 'prog-mode-hook #'editorconfig-mode)
@@ -368,6 +372,8 @@
   ("C-=" . er/expand-region)
   ("C-+" . er/contract-region))
 
+(use-package org-side-tree)
+
 ;; Ultrascroll
 (use-package ultra-scroll
   :init
@@ -376,14 +382,14 @@
   :config
   (ultra-scroll-mode 1))
 
-;; Emacs everywhere, which doesn't really seem to work
-(use-package emacs-everywhere)
-(setq emacs-everywhere-markdown-apps '("Ulysses" "MailMate" "Discord" "Slack"))
-
 ;; Dart configuration
-(use-package dart-mode)
-(use-package flymake-dart
-  :vc (:url "https://github.com/flymake/flymake-dart" :branch "main"))
+(use-package dart-mode
+  :hook (dart-mode . flutter-test-mode))
+
+(use-package flutter
+  :after dart-mode
+  :bind (:map dart-mode-map
+              ("C-M-x" . #'flutter-run-or-hot-reload)))
 
 ;;; transient menus
 
