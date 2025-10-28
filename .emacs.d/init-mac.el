@@ -25,7 +25,10 @@
 ;; hook into system appearance change
 (add-hook 'ns-system-appearance-change-functions #'wm/theme-hook)
 
-;; add Swift to Eglot
+;; add Swift support
+(use-package swift-mode
+  :ensure t)
+
 (with-eval-after-load "eglot"
   (add-to-list 'eglot-server-programs
                '(swift-mode . ("/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/sourcekit-lsp"))))

@@ -243,6 +243,9 @@
   :custom
   (php-mode-coding-style 'psr2))
 
+;; JSON mode
+(use-package json-mode)
+
 ;; eglot
 (use-package eglot
   :ensure nil
@@ -335,14 +338,6 @@
   ("C-=" . er/expand-region)
   ("C-+" . er/contract-region))
 
-;; Ultrascroll
-(use-package ultra-scroll
-  :init
-  (setq scroll-conservatively 3
-        scroll-margin 0)
-  :config
-  (ultra-scroll-mode 1))
-
 ;; Dart configuration
 (use-package dart-mode
   :hook (dart-mode . flutter-test-mode))
@@ -351,6 +346,9 @@
   :after dart-mode
   :bind (:map dart-mode-map
               ("C-M-x" . #'flutter-run-or-hot-reload)))
+
+;; Fountain
+(use-package fountain-mode)
 
 ;;; transient menus
 
