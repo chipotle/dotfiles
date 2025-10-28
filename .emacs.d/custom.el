@@ -4,9 +4,6 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(eglot-ignored-server-capabilities '(:inlayHintProvider))
- '(org-agenda-files nil)
- '(org-babel-load-languages '((emacs-lisp . t) (ruby . t)))
  '(package-selected-packages
    '(cape corfu dart-mode dashboard doom-modeline ef-themes eldoc-box
           embark-consult expand-region flutter flymake-dart
@@ -18,10 +15,6 @@
  '(package-vc-selected-packages
    '((flymake-dart :url "https://github.com/flymake/flymake-dart" :branch
                    "main")))
- '(safe-local-variable-values
-   '((indent-tab-mode . t) (web-mode-indent-style . 2)
-     (web-mode-block-padding . 2) (web-mode-script-padding . 2)
-     (web-mode-style-padding . 2))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.

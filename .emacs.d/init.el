@@ -1,26 +1,22 @@
-;; path magic: match shell on macOS
-(defun set-exec-path-from-shell-PATH ()
-  (interactive)
-  (let ((path-from-shell
-         (replace-regexp-in-string
-		  "[ \t\n]*$" ""
-          (shell-command-to-string "$SHELL --login -c 'echo $PATH'"))))
-    (setenv "PATH" path-from-shell)
-    (setq exec-path (split-string path-from-shell path-separator))))
-(set-exec-path-from-shell-PATH)
+;; Set variable based on OS
+(cond
+ ((eq system-type 'darwin) (setq os-type "mac"))
+ ((eq system-type 'windows-nt) (setq os-type "win"))
+ ((eq system-type 'gnu/linux) (setq os-type "linux")))
 
 ;; use separate file for auto-generated customizations
-(setq custom-file (expand-file-name "custom.el" user-emacs-directory))
+(setq custom-file
+      (expand-file-name
+       (concat "custom-" os-type ".el") user-emacs-directory))
 (when (and custom-file
-	   (file-exists-p custom-file))
+	       (file-exists-p custom-file))
   (load custom-file nil :nomessage))
 
-;; Load library functions
-(load "~/.emacs.d/wm-lib" t t)
+;; load OS-specific functions
+(load (concat "~/.emacs.d/init-" os-type))
 
-;; set initial window size
-(setq initial-frame-alist
-      '((width . 100) (height . 50)))
+;; Load library functions
+(load "~/.emacs.d/wm-lib")
 
 ;; Enable mouse in terminal
 (xterm-mouse-mode 1)
@@ -32,7 +28,6 @@
 
 (keymap-global-set "<remap> <list-buffers>" #'ibuffer-list-buffers)
 (keymap-global-set "C-c t" #'ef-themes-toggle)
-(global-set-key [remap dabbrev-expand] 'hippie-expand)
 (keymap-global-set "C-c l" #'org-store-link)
 (keymap-global-set "C-c a" #'org-agenda)
 (keymap-global-set "C-c c" #'org-capture)
@@ -40,22 +35,6 @@
 (keymap-global-set "M-#" #'dictionary-lookup-definition)
 (keymap-global-set "M-z" #'zap-up-to-char) ; much more useful!
 (keymap-global-set "M-Z" #'zap-to-char)    ; but keep this around
-
-;; modify Tools menu a little
-(define-key-after global-map [menu-bar tools ede] nil t)
-(easy-menu-add-item global-map '(menu-bar tools)
-                    ["Automatic Linting (Flymake)"
-                     flymake-mode
-                     :help "Linting with Flymake"
-                     :style toggle
-                     :selected (bound-and-true-p flymake-mode)]
-                     "Spell Checking")
-                     
-;; Swap option back to option, left command to meta, right command
-;; to command
-(setq mac-option-modifier 'none)
-(setq mac-command-modifier 'meta)
-(setq mac-right-command-modifier 'super)
 
 ;;; Default modes & variables
 
@@ -74,6 +53,11 @@
 (customize-set-variable 'indent-tabs-mode nil) ; default to spaces
 (customize-set-variable 'tab-width 4)   ; default to indent of 4
 (customize-set-variable 'js-indent-level 2) ; except for JavaScript
+; disable inlayHintProvider
+(customize-set-variable 'eglot-ignored-server-capabilities '(:inlayHintProvider))
+; org stuff
+(customize-set-variable 'org-agenda-files nil)
+(customize-set-variable 'org-babel-load-languages '((emacs-lisp . t) (ruby . t)))
 (setq apropos-sort-by-scores t)         ; best match sorting
 (setq flymake-no-changes-timeout 2.0)   ; 2 sec timeout
 (setq ring-bell-function 'ignore)       ; no bell!
@@ -90,13 +74,6 @@
 (savehist-mode 1)                       ; save the minibuffer history
 (customize-set-variable 'bookmark-save-flag 1) ; save bookmark file on exit
 (global-visual-line-mode t)             ; wrap text sanely
-
-(setq auto-window-vscroll nil)          ; scrolling changes
-(customize-set-variable 'fast-but-imprecise-scrolling t)
-(customize-set-variable 'scroll-conservatively 101)
-(customize-set-variable 'scroll-margin 2)
-(customize-set-variable 'scroll-step 1)
-(customize-set-variable 'scroll-preserve-screen-position t)
 (customize-set-variable 'load-prefer-newer t) ; prefer newest ver of file
 (add-hook 'after-save-hook              ; make scripts executable on save
 	  #'executable-make-buffer-file-executable-if-script-p)
@@ -104,6 +81,18 @@
  display-line-numbers-grow-only t
  display-line-numbers-width 3)
 (add-hook 'prog-mode-hook #'display-line-numbers-mode)
+(repeat-mode 1)                        ; enable repeat-mode
+(add-hook 'js-mode-hook                ; JS/JSON indents
+          (lambda () (setq js-indent-level 2)))
+
+;; fiddle around with scrolling
+(setq auto-window-vscroll nil)
+(customize-set-variable 'fast-but-imprecise-scrolling t)
+(customize-set-variable 'scroll-conservatively 101)
+(customize-set-variable 'scroll-margin 2)
+(customize-set-variable 'scroll-step 1)
+(customize-set-variable 'scroll-preserve-screen-position t)
+
 ;; configure autosaving to get files saved elsewhere
 (setf kill-buffer-delete-auto-save-files t)
 (setq backup-directory-alist '(("." . "~/.emacs-saves/"))
@@ -116,16 +105,6 @@
 ;; keep the Ediff control panel in the same frame
 (customize-set-variable 'ediff-window-setup-function
                         'ediff-setup-windows-plain)
-(repeat-mode 1)                        ; enable repeat-mode
-(add-hook 'js-mode-hook                ; JS/JSON indents
-          (lambda () (setq js-indent-level 2)))
-
-;; Set up proportional fonts for specific modes
-(defun wm-text-face ()
-  (face-remap-add-relative 'default :family "IBM Plex Sans" :height 160)
-  (setq-local line-spacing 3))
-(add-hook 'markdown-mode-hook 'wm-text-face)
-(add-hook 'org-mode-hook 'wm-text-face)
 
 ;;; Configure external packages
 
@@ -147,19 +126,6 @@
       '((1 bold 1.5)
 	    (2 1.2)
 	    (t bold)))
-
-;; hook into system appearance change if it's there, otherwise test
-(if (boundp 'ns-system-appearance-change-functions)
-    (add-hook 'ns-system-appearance-change-functions #'wm/theme-hook)
-  (if (wm-is-dark-mode)
-      (ef-themes-select 'ef-dream)
-    (ef-themes-select 'ef-reverie)))
-
-;; Modus themes fallback settings
-(setq-default
- modus-themes-to-toggle
- '(modus-operandi-tinted modus-vivendi-tinted)
- modus-themes-variable-pitch-ui t)
 
 ;; Vertico (vertical completion) and Marginalia
 (use-package vertico
@@ -231,14 +197,18 @@
 (use-package corfu
   :custom
   (corfu-cycle t)
-  (corfu-auto t)
-  (corfu-auto-delay 0.5)
-  (corfu-auto-prefix 2)
+  (tab-always-indent 'complete)
   (text-mode-ispell-word-completion nil)
   :init
   (global-corfu-mode)
   (corfu-popupinfo-mode)
   (corfu-history-mode))
+
+(use-package dabbrev
+  :bind (("M-/" . dabbrev-completion)
+         ("C-M-/" . hippie-expand))
+  :config
+  (add-to-list 'dabbrev-ignored-buffer-regexps "\\` "))
 
 ;; orderless (fuzzy completion matching)
 (use-package orderless
@@ -286,15 +256,14 @@
   (add-to-list 'eglot-server-programs
                '(dart-mode . ("dart" "language-server"
                               "--protocol" "lsp")))
-;  (message "warning: `json-rpc--log-event' is ignored.")
-;  (fset #'jsonrpc--log-event #'ignore)
-  (add-to-list 'eglot-server-programs
-               '(swift-mode . ("/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/sourcekit-lsp")))
   :custom (eglot-autoshutdown t))
 (setq-default eglot-workspace-configuration
-              '(:harper-ls (:linters
-                            (:NoOxfordComma t :AvoidCurses :json-false
-                                            :BoringWords t :Dashes :json-false))))
+              '(:harper-ls
+                (:linters
+                 (:AvoidCurses :json-false
+                               :BoringWords t
+                               :Dashes :json-false))))
+
 (setq eldoc-echo-area-use-multiline-p nil)
 
 ;; Markdown
@@ -356,13 +325,7 @@
   :config
   (yas-global-mode 1))
 
-;; Outline indent mode
-(use-package outline-indent
-  :hook
-  (yaml-mode . outline-indent-minor-mode)
-  (yaml-ts-mode . outline-indent-minor-mode))
-
-;; rainbow delimiters!
+;; rainbow delimiters
 (use-package rainbow-delimiters
   :hook (prog-mode . rainbow-delimiters-mode))
 
@@ -371,8 +334,6 @@
   :bind
   ("C-=" . er/expand-region)
   ("C-+" . er/contract-region))
-
-(use-package org-side-tree)
 
 ;; Ultrascroll
 (use-package ultra-scroll
@@ -406,7 +367,6 @@
            (read-string "Schedule deploy at: ")
            " < schedule.sh")))
 
-;; Zola tasks menu
 (transient-define-prefix wm/zola ()
   ["Zola Tasks"
    ("p" "Preview"
@@ -423,4 +383,5 @@
       (async-shell-command "zola check" "Zola: Check Site")))
    ("D" "Deploy (make)" wm/zola-deploy)
    ("S" "Schedule deployment" wm/zola-schedule)])
+
 (keymap-global-set "C-c z" #'wm/zola)
