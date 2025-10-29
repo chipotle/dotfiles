@@ -4,6 +4,15 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
+<<<<<<< HEAD
+ '(org-agenda-files nil)
+ '(package-selected-packages nil)
+ '(safe-local-variable-values
+   '((indent-tab-mode . t) (web-mode-indent-style . 2)
+     (web-mode-block-padding . 2) (web-mode-script-padding . 2)
+     (web-mode-style-padding . 2)))
+ '(scalable-fonts-allowed t))
+=======
  '(package-selected-packages
    '(cape corfu dart-mode dashboard doom-modeline ef-themes eldoc-box
           embark-consult expand-region flutter flymake-dart
@@ -15,13 +24,14 @@
  '(package-vc-selected-packages
    '((flymake-dart :url "https://github.com/flymake/flymake-dart" :branch
                    "main")))
+>>>>>>> bf6e05540c3db7898832622767f7d85df09f599e
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(default ((t (:height 130 :family "MonoLisa"))))
- '(ef-themes-fixed-pitch ((t (:family "IBM Plex Mono" :height 0.9))) t)
- '(eldoc-box-body ((t (:family "SF Pro"))))
+ '(default ((t (:height 120 :family "IBM Plex Mono"))))
+ '(ef-themes-fixed-pitch ((t (:family "IBM Plex Mono"))) t)
+ '(eldoc-box-body ((t (:family "IBM Plex Sans"))))
  '(tab-line ((t (:inherit modus-themes-ui-variable-pitch :background "#e0d4ce"))))
- '(variable-pitch ((t (:height 120 :family "SF Pro")))))
+ '(variable-pitch ((t (:height 110 :family "Noto Sans")))))
