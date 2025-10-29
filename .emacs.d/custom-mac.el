@@ -16,6 +16,7 @@
  '(package-selected-packages
    '(cape corfu dart-mode dashboard doom-modeline ef-themes eldoc-box
           embark-consult expand-region flutter flymake-markdownlint
-          fountain-mode json-mode magit marginalia markdown-mode
-          orderless php-mode rainbow-delimiters swift-mode
-          typescript-mode vertico web-mode yaml-mode yasnippet)))
+          fountain-mode json-mode ligature magit marginalia
+          markdown-mode orderless php-mode rainbow-delimiters
+          swift-mode typescript-mode vertico web-mode yaml-mode
+          yasnippet)))
