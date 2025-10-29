@@ -72,7 +72,7 @@ function git_current_branch() {
 # Use bat (cat replacement) if present
 
 if [[ `command -v bat` ]]; then
-    export MANPAGER="sh -c 'col -bx | bat -l man -p'"
+    export MANPAGER="bat -l man -p"
     export BAT_THEME="Dracula"
     batdiff() {
         git diff --name-only --diff-filter=d | xargs bat --diff

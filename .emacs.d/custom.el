@@ -5,24 +5,19 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(org-agenda-files nil)
- '(package-selected-packages
-   '(cape corfu dashboard doom-modeline ef-themes eldoc-box
-          emacs-everywhere embark-consult expand-region
-          flymake-markdownlint fountain-mode json-mode magit
-          marginalia markdown-mode orderless outline-indent php-mode
-          rainbow-delimiters swift-mode typescript-mode ultra-scroll
-          vertico web-mode yaml-mode yasnippet))
+ '(package-selected-packages nil)
  '(safe-local-variable-values
    '((indent-tab-mode . t) (web-mode-indent-style . 2)
      (web-mode-block-padding . 2) (web-mode-script-padding . 2)
-     (web-mode-style-padding . 2))))
+     (web-mode-style-padding . 2)))
+ '(scalable-fonts-allowed t))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(default ((t (:height 130 :family "MonoLisa"))))
- '(ef-themes-fixed-pitch ((t (:family "IBM Plex Mono" :height 0.9))) t)
- '(eldoc-box-body ((t (:family "SF Pro"))))
+ '(default ((t (:height 120 :family "IBM Plex Mono"))))
+ '(ef-themes-fixed-pitch ((t (:family "IBM Plex Mono"))) t)
+ '(eldoc-box-body ((t (:family "IBM Plex Sans"))))
  '(tab-line ((t (:inherit modus-themes-ui-variable-pitch :background "#e0d4ce"))))
- '(variable-pitch ((t (:height 120 :family "SF Pro")))))
+ '(variable-pitch ((t (:height 110 :family "Noto Sans")))))
