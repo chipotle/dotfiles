@@ -44,8 +44,9 @@ PS1='${vcs_info_msg_0_}%{$fg[green]%}%m:%2~%#%{$reset_color%} '
 
 # export EDITOR=vim
 # export VISUAL=vim
-export EDITOR="/usr/local/bin/emacsclient -nw --alternate-editor=\"\""
-export VISUAL="/usr/local/bin/emacsclient -nw --alternate-editor=\"\""
+ec_path=`which emacsclient`
+export EDITOR="$ec_path -nw --alternate-editor=\"\""
+export VISUAL="$ec_path -nw --alternate-editor=\"\""
 
 alias ls="ls -FG"
 alias mct="mosh watts@coyotetracks.org -- tmux attach -d"
@@ -59,9 +60,9 @@ alias ect="emacsclient -nw"
 function editdiff() {
     if [ -n "$1" ]
     then
-        bbedit `git diff --name-only $1`
+        emacsclient `git diff --name-only $1`
     else
-        bbedit `git diff --name-only HEAD^1`
+        emacsclient `git diff --name-only HEAD^1`
     fi
 }
 
@@ -72,7 +73,8 @@ function git_current_branch() {
 # Use bat (cat replacement) if present
 
 if [[ `command -v bat` ]]; then
-    export MANPAGER="sh -c 'col -bx | bat -l man -p'"
+    # export MANPAGER="sh -c 'col -bx | bat -l man -p'"
+    export MANPAGER="col -bx | bat -l man -p"
     export BAT_THEME="Dracula"
     batdiff() {
         git diff --name-only --diff-filter=d | xargs bat --diff
