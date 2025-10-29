@@ -1,0 +1,65 @@
+# -*- mode: snippet -*-
+# name: Plot Template
+# key: plot
+# --
+* ${1:Untitled Story}
+
+/Write the synopsis here, focusing on a beginning, middle, and end state./
+
+* Characters
+
+** Main character
+
+*Name:* ${2:MC}
+*Context:*
+*(Initial) Problem:*
+
+*Problem-solving approach:* ${3:TK$(yas-choose-value '("action" "deliberation"))}
+*Problem-solving style:* ${4:TK$(yas-choose-value '("logical" "intuitive"))}
+
+At the end of the story, ${2} has ${5:TK$$(yas-choose-value '("changed" "remained steadfast"))} in a crucial belief they began with.
+
+*Description:*
+
+*Notes:*
+
+/Note that the main character is not always the protagonist: edit in a new block if necessary!/
+
+** Catalyst Character
+
+*Name:* ${7:CC}
+*Problem-solving approach:* ${3:$(cond ((equal yas-text "action") "deliberation") ((equal yas-text "deliberation") "action") (t "(select for MC)"))}
+*Problem-solving style:* ${4:$(cond ((equal yas-text "logical") "intuitive") ((equal yas-text "intuitive") "logical") (t "(select for MC)"))}
+*Change/steadfast:* ${5:$(cond ((equal yas-text "changed") "remained steadfast") ((equal yas-text "remained steadfast") "changed") (t "(select for MC)"))}
+
+*Description:*
+
+*Notes:*
+
+** Other characters
+
+* Arcs
+
+** Narrative Arc
+
+*Domain:* ${8:TK$$(yas-choose-value '("milieu" "inquiry" "character" "event"))}
+
+*Story goal (concern of all major characters):*
+
+*Inciting incident (action or decision):*
+
+*Success or failure:*
+
+** Thematic Arc
+
+Domain: ${8:$(cond ((equal yas-text "milieu") "character") ((equal yas-text "character") "milieu") ((equal yas-text "inquiry") "event") ((equal yas-text "event") "inquiry") (t "(select narrative arc)"))}
+
+** ${2}'s Arc
+
+Domain: ${9:TK$$(yas-choose-value '("milieu" "inquiry" "character" "event"))}
+
+*Better or worse place at end:*
+
+** ${7}'s Arc
+
+Domain: ${9:$(cond ((equal yas-text "milieu") "character") ((equal yas-text "character") "milieu") ((equal yas-text "inquiry") "event") ((equal yas-text "event") "inquiry") (t "(select MC arc)"))}
