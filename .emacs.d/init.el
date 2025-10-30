@@ -394,8 +394,10 @@
 (defun wm/zola-schedule ()
   (interactive)
   (shell-command
-   (concat "echo 'make deploy' | at "
-           (read-string "Schedule deploy at: "))))
+   (concat "cd " (project-root (project-current t))
+           "; at "
+           (read-string "Schedule deploy at: ")
+           " < schedule.sh")))
 
 (transient-define-prefix wm/zola ()
   ["Zola Tasks"
