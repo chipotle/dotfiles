@@ -350,6 +350,15 @@
 ;; Fountain
 (use-package fountain-mode)
 
+;; Org novelist
+;; (use-package org-novelist
+;;   :vc (:url "https://github.com/sympodius/org-novelist"
+;;             :branch "main"))
+
+;; imenu-list
+(use-package imenu-list
+  :custom (imenu-list-position 'left))
+
 ;; ligature support, for better or worse?
 (use-package ligature
   :config
