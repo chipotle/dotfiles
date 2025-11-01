@@ -297,9 +297,7 @@
 ;; doom-modeline
 (use-package nerd-icons)
 (use-package doom-modeline
-  :hook (after-init . doom-modeline-mode)
-  :custom
-  (doom-modeline-enable-word-count t))
+  :hook (after-init . doom-modeline-mode))
 
 ;; editorconfig
 (add-hook 'prog-mode-hook #'editorconfig-mode)
@@ -353,8 +351,20 @@
 ;; ox-pandoc
 (use-package ox-pandoc)
 
+;; wc-goal-mode
+(use-package wc-goal-mode
+  :custom
+  (wc-goal-modeline-format "(%W%w/%tw)")
+  :hook
+  (wc-goal-mode .
+                (lambda ()
+                  (setq-local global-mode-string
+                              '(:eval (wc-goal-mode-update))))))
+
 ;; org mode configuration
 (setq org-export-with-smart-quotes t)
+(setq org-export-backends '(ascii html icalendar latex md odt))
+(setq org-support-shift-select t)
 ;; Use UTF-8 smart quotes instead of HTML entities in HTML and Markdown export.
 (defun dcb/make-utf8-encoding-org-export (args)
   "Override the ARGS for smartquotes to make :html encoded entities use utf-8 instead."
