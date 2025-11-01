@@ -350,6 +350,22 @@
 ;; Fountain
 (use-package fountain-mode)
 
+;; ox-pandoc
+(use-package ox-pandoc)
+
+;; org mode configuration
+(setq org-export-with-smart-quotes t)
+;; Use UTF-8 smart quotes instead of HTML entities in HTML and Markdown export.
+(defun dcb/make-utf8-encoding-org-export (args)
+  "Override the ARGS for smartquotes to make :html encoded entities use utf-8 instead."
+  (if (eq (nth 1 args) :html) ;; if the encoding is html (which both md and gfm derive from)
+      (progn (setcar (nthcdr 1 args) :utf-8)
+             args)
+    args))
+
+(setq org-export-with-smart-quotes t) ;; Can be overridden with ':nil in the OPTIONS
+(advice-add 'org-export-activate-smart-quotes :filter-args 'dcb/make-utf8-encoding-org-export)
+
 ;; ligature support, for better or worse?
 (use-package ligature
   :config

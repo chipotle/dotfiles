@@ -17,6 +17,6 @@
    '(cape corfu dart-mode dashboard doom-modeline ef-themes eldoc-box
           embark-consult expand-region flutter flymake-markdownlint
           fountain-mode json-mode ligature magit marginalia
-          markdown-mode orderless php-mode rainbow-delimiters
-          swift-mode typescript-mode vertico web-mode yaml-mode
-          yasnippet)))
+          markdown-mode orderless ox-pandoc php-mode
+          rainbow-delimiters swift-mode typescript-mode vertico
+          web-mode yaml-mode yasnippet)))
