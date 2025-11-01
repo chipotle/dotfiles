@@ -1,0 +1,14 @@
+# -*- mode: snippet -*-
+# name: Character Template
+# key: character
+# --
+*** ${1:Name}
+
+*Role:* ${2:$$(yas-choose-value '("Protagonist" "Antagonist" "Contagonist" "Secondary"))}
+*Function:* ${3:$$(yas-choose-value '("Main Character" "Catalyst Character" "N/A"))}
+
+*Short Description:*
+$0
+
+*Notes:*
+

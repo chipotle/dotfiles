@@ -2,64 +2,56 @@
 # name: Plot Template
 # key: plot
 # --
-* ${1:Untitled Story}
+*** Setup
+*Main Character:* 
+*(Initial) Context:* 
+*(Initial) Problem:* 
 
-/Write the synopsis here, focusing on a beginning, middle, and end state./
+*Problem-solving approach:* (action or deliberation)
+*Problem-solving style:* (logical or intuitive)
 
-* Characters
+*Character end state:*
+#+ATTR_ORG: :radio t
+- [ ] change/start: develop a new attitude or approach
+- [ ] change/stop: grow out of an old attitude or approach
+- [ ] steadfast/start: hold out long enough for something new to begin
+- [ ] steadfast/stop: hold out long enough for something old to end
 
-** Main character
-
-*Name:* ${2:MC}
-*Context:*
-*(Initial) Problem:*
-
-*Problem-solving approach:* ${3:TK$(yas-choose-value '("action" "deliberation"))}
-*Problem-solving style:* ${4:TK$(yas-choose-value '("logical" "intuitive"))}
-
-At the end of the story, ${2} has ${5:TK$$(yas-choose-value '("changed" "remained steadfast"))} in a crucial belief they began with.
-
-*Description:*
-
-*Notes:*
-
-/Note that the main character is not always the protagonist: edit in a new block if necessary!/
-
-** Catalyst Character
-
-*Name:* ${7:CC}
-*Problem-solving approach:* ${3:$(cond ((equal yas-text "action") "deliberation") ((equal yas-text "deliberation") "action") (t "(select for MC)"))}
-*Problem-solving style:* ${4:$(cond ((equal yas-text "logical") "intuitive") ((equal yas-text "intuitive") "logical") (t "(select for MC)"))}
-*Change/steadfast:* ${5:$(cond ((equal yas-text "changed") "remained steadfast") ((equal yas-text "remained steadfast") "changed") (t "(select for MC)"))}
-
-*Description:*
-
-*Notes:*
-
-** Other characters
-
-* Arcs
-
-** Narrative Arc
-
-*Domain:* ${8:TK$$(yas-choose-value '("milieu" "inquiry" "character" "event"))}
+*Better or worse place at end?*
 
 *Story goal (concern of all major characters):*
-
 *Inciting incident (action or decision):*
+*Resolution:* (success or failure)
 
-*Success or failure:*
-
-** Thematic Arc
-
-Domain: ${8:$(cond ((equal yas-text "milieu") "character") ((equal yas-text "character") "milieu") ((equal yas-text "inquiry") "event") ((equal yas-text "event") "inquiry") (t "(select narrative arc)"))}
-
-** ${2}'s Arc
-
-Domain: ${9:TK$$(yas-choose-value '("milieu" "inquiry" "character" "event"))}
-
-*Better or worse place at end:*
-
-** ${7}'s Arc
-
-Domain: ${9:$(cond ((equal yas-text "milieu") "character") ((equal yas-text "character") "milieu") ((equal yas-text "inquiry") "event") ((equal yas-text "event") "inquiry") (t "(select MC arc)"))}
+*** Hook
+- Start of protagonist's character arc
+- Establish context
+*** Plot Turn 1
+- Inciting incident: status quo shaken up
+- Protagonist must engage, even if they initially refuse
+- Around the 25% mark
+*** Pinch Point 1
+- Protagonist uncomfortable in new role; makes missteps
+- Obstacles/Antagonist introduced
+- Protagonist survives and learns lessons
+- Around the 40% mark
+*** Midpoint
+- Major dramatic event (attack, knowledge, realization of true stakes)
+- Protagonist starts moving from reaction to action
+- Raises stakes in stopping Antagonist
+- Around the 50% mark
+*** Pinch Point 2
+- Protagonist has gained confidence, but faces major defeat here
+- Allies may be trapped, mentors killed, powers fail
+- Protagonist either finds own strength or revisits allies
+- Around the 60-65% mark
+*** Plot Turn 2
+- Heads into final act
+- Protag's confidence rebuilt, with new info or ability
+- Leads into final dramatic confrontation
+- Around the 75% mark
+*** Resolution
+- Arcs are concluded
+- Show the new status quo for the Protagonist
+- Often mirrors opening scene
+- Climax is around 90% mark

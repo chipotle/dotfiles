@@ -366,6 +366,15 @@
 (setq org-export-with-smart-quotes t) ;; Can be overridden with ':nil in the OPTIONS
 (advice-add 'org-export-activate-smart-quotes :filter-args 'dcb/make-utf8-encoding-org-export)
 
+;; Org novelist
+;; (use-package org-novelist
+;;   :vc (:url "https://github.com/sympodius/org-novelist"
+;;             :branch "main"))
+
+;; imenu-list
+(use-package imenu-list
+  :custom (imenu-list-position 'left))
+
 ;; ligature support, for better or worse?
 (use-package ligature
   :config
@@ -401,8 +410,10 @@
 (defun wm/zola-schedule ()
   (interactive)
   (shell-command
-   (concat "echo 'make deploy' | at "
-           (read-string "Schedule deploy at: "))))
+   (concat "cd " (project-root (project-current t))
+           "; at "
+           (read-string "Schedule deploy at: ")
+           " < schedule.sh")))
 
 (transient-define-prefix wm/zola ()
   ["Zola Tasks"
